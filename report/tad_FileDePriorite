@@ -1,0 +1,21 @@
+Nom: FileDePriorité
+Paramètre: Element
+Utilise: Naturel, Boolean
+Opérations: 
+    fileDePriorité -> FileDePriorité
+    inserer     FileDePriorité x Element x NaturelNonNul -> FileDePriorité
+    supprimerPremier    FileDePriorité -> FileDePriorité
+    supprimerDernier    FileDePriorité -> FileDePriorité
+    obtenirPremier      FileDePriorité -> Element
+    obtenirDernier      FileDePriorité -> Element
+    estVide             FileDePriorité -> Boolean
+    longueur            FileDePriorité -> Naturel
+Axiomes:
+    estVide(fileDePriorité())
+    non estVide(inserer(fileDePriorité(fileDePriorité(), el, 1)))
+    obtenirPremier(inserer(fileDePriorité(fileDePriorité(), el, 1))) = el
+    obtenirDernier(inserer(fileDePriorité(fileDePriorité(), el, 1))) = el
+    longueur(fileDePriorité) = 0
+    longueur(inserer(l, e, p)) = 1 + longueur(l)
+    supprimerDernier()
+
