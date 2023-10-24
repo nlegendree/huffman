@@ -1,0 +1,29 @@
+\usepackage{algorithmeUTF8}
+\begin{tad}
+    \tadNom{Octet}
+    %\tadParametres{}
+    \tadDependances{\booleen, Bit, 1..8}
+    \begin{tadOperations}{Octet}
+        \tadOperation{octet}%
+            {\tadHuitParams{Bit}{Bit}{Bit}{Bit}{Bit}{Bit}{Bit}{Bit}}%
+            {\tadUnParam{Octet}}
+        \tadOperation{sontEgaux}%
+            {\tadDeuxParams{Octet}{Octet}}%
+            {\tadUnParam{\booleen}}‰
+        \tadOperation{obtenirBit}%
+            {\tadDeuxParams{Octet}{1..8}}%
+            {\tadUnParam{Bit}}‰
+    \end{tadOperations}
+
+    \begin{tadSemantiques}{Octet}
+		\tadSemantique{octet}%
+			{Crée un octet avec les 8 bits spécifiés.}%
+        \tadSemantique{sontEgaux}%
+			{Vérifie si les deux octets sont égaux.}  
+        \tadSemantique{obtenirBit}%
+			{Obtient le bit à la position spécifiée dans l'octet (position de 1 à 8).}  
+    \end{tadSemantique}
+
+    \begin{tadAxiomes}
+        \tadAxiome{sontEgaux(octet1,octet1) = VRAI}
+\end{tad}
