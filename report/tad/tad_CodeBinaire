@@ -1,1 +1,17 @@
-Nom : CodeBianire
+Nom : CodeBinaire
+Utilise : Bit,  NaturelNonNul
+Opérations:
+    CodeBinaire : Bit -> CodeBinaire
+    ajouterUnBitFin : CodeBinaire x Bit -> CodeBinaire
+    ajouterUnBitDebut : CodeBinaire x Bit -> CodeBinaire
+    obtetnirCodeBinaire : CodeBinaire -> CodeBinaire
+    obtenirPremierBit : CodeBinaire -> Bit
+    obtenirDernierBit : CodeBinaire -> Bit
+    supprimerPremierBit : CodeBinaire -> CodeBinaire
+    supprimerDernierBit : CodeBinaire -> CodeBinaire
+    supprimerUnBit : CodeBinaire x NaturelNonNul -> CodeBinaire
+    modifierUnBit : CodeBinaire x NaturelNonNul x Bit -> CodeBinaire
+    longueurCodeBinaire : CodeBinaire -> NaturelNonNul
+    estVide : CodeBinaire -> Boolean
+    afficherCodeBinaire : CodeBinaire -> CodeBinaire
+    
