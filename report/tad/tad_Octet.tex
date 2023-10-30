@@ -5,7 +5,7 @@
 
     %\tadParametres{}
 
-    \tadDependances{\booleen, Bit, 0..7}
+    \tadDependances{\booleen, Bit, \natural}
 
     \begin{tadOperations}{Octet}
         \tadOperation{octet}%
@@ -15,7 +15,7 @@
             {\tadDeuxParams{Octet}{Octet}}%
             {\tadUnParam{\booleen}}
         \tadOperation{obtenirBit}%
-            {\tadDeuxParams{Octet}{0..7}}%
+            {\tadDeuxParams{Octet}{1..8}}%
             {\tadUnParam{Bit}}
     \end{tadOperations}
 
@@ -29,7 +29,8 @@
     \end{tadSemantiques}
 
     \begin{tadAxiomes}
-        \tadAxiome{estEgal (octet1,octet2) = (obtenirBit (octet1, {1..7}) = obtenirBit (octet2, {1..7}))}
+        \tadAxiome{obtenirBit (00000001, 1) = 1}
+        \tadAxiome{estEgal (octet1,octet2) = (obtenirBit (octet1, {1..8}) = obtenirBit (octet2, {1..8}))}
     \end{tadAxiomes}
 
 \end{tad}
