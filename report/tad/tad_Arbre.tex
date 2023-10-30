@@ -1,1 +1,51 @@
+\usepackage{algorithmeUTF8}
+\begin{tad}
+
+    \tadNom{ArbreHuffman}
+
+    \tadParametres{Element}
+
+    \tadDependances{\naturel, CodeBinaire}
+
+    \begin{tadOperations}{Octet}
+        \tadOperation{arbreHuffman}%
+            {\tadDeuxParams{Element}{\naturel}}%
+            {\tadUnParam{ArbreHuffman}}
+        \tadOperation{combiner}%
+            {\tadDeuxParams{ArbreHuffman}{ArbreHuffman}}%
+            {\tadUnParam{ArbreHuffman}}
+        \tadOperation{obtenirPondération}%
+            {\tadUnParams{ArbreHuffman}}%
+            {\tadUnParam{\naturel}}
+        \tadOperationAvecPreconditions{obtenirElement}%
+            {\tadUnParam{ArbreHuffman}}%
+            {\tadUnParam{Element}}
+        \tadOperation{estUneFeuille}%
+            {\tadUnParam{ArbreHuffman}}%
+            {\tadUnParam{Booleen}}
+        \tadOperationAvecPreconditions{obtenirArbreGauche}%
+            {\tadUnParam{ArbreHuffman}}%
+            {\tadUnParam{ArbreHuffman}}
+        \tadOperationAvecPreconditions{obtenirArbreDroit}%
+            {\tadUnParam{ArbreHuffman}}%
+            {\tadUnParam{ArbreHuffman}}
+    \end{tadOperations}
+
+    \begin{tadAxiomes}
+        \tadAxiome{obtenirElement (arbreHuffman(élément,pondération)) = élément}
+        \tadAxiome{obtenirPondération (arbreHuffman(élément,pondération)) = pondération}
+        \tadAxiome{obtenirPondération (combiner(arbreGauche,arbreDroit)) = obtenirPondération(arbreGauche)+obtenirPondération(arbreDroit)}
+        \tadAxiome{estUneFeuille (arbreHuffman(element,pondération)) = Vrai}
+        \tadAxiome{estUneFeuille (combiner(arbreGauche,arbreDroit)) = Faux}
+        \tadAxiome{obtenirArbreGauche (combiner(arbreGauche,arbreDroit)) = arbreGauche}
+        \tadAxiome{obtenirArbreDroit (combiner(arbreGauche,arbreDroit)) = arbreDroit}
+    \end{tadAxiomes}
+
+    \begin{tadPreconditions}
+        \tadPrecondition{obtenirElement(arbre)}{estUneFeuille(arbre)}
+        \tadPrecondition{obtenirArbreGauche(arbre)}{non estUneFeuille(arbre)}
+        \tadPrecondition{obtenirArbreDroit(arbre)}{non estUneFeuille(arbre)}
+    \end{tadPreconditions}
+
+\end{tad}
 
