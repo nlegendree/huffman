@@ -1,0 +1,110 @@
+%% LyX 2.3.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[landscape,french]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{luainputenc}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+% Backwards compatibility for LuaTeX < 0.90
+\@ifundefined{pageheight}{\let\pageheight\pdfpageheight}{}
+\@ifundefined{pagewidth}{\let\pagewidth\pdfpagewidth}{}
+\pageheight\paperheight
+\pagewidth\paperwidth
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{multicol}
+
+\makeatother
+
+\usepackage{babel}
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
+\makeatother
+\begin{document}
+
+\subsubsection*{Nom : }
+
+TableDeCodage
+
+\subsubsection*{Paramètres : }
+
+Element (caractère dans projet)
+
+\subsubsection*{Utilise :}
+
+- CodeBinaire
+
+\subsubsection*{Opérations :}
+
+- tableDeCodage : $\rightarrow$ TableDeCodage
+
+- estVide : TableDeCodage $\rightarrow$ Booleen
+
+- elementPresent : TableDeCodage $\times$ Element $\rightarrow$
+Booleen
+
+- codePresent : TableDeCodage $\times$ CodeBinaire $\rightarrow$
+Booleen
+
+- ajouterElement : TableDeCodage $\times$ Element $\nrightarrow$
+TableDeCodage
+
+- elementPossedeCode : TableDeCodage $\times$ Element $\nrightarrow$
+Booleen
+
+- assignerCodeElement : TableDeCodage $\times$ Element $\times$
+CodeBinaire $\nrightarrow$ TableDeCodage
+
+- obtenirCodeElement : TableDeCodage $\times$ Element $\nrightarrow$
+CodeBinaire
+
+- obtenirElementCode : TableDeCodage $\times$ CodeBinaire $\rightarrow$
+Element
+
+\subsubsection*{Axiomes :}
+
+- non(estVide(ajouterElement(table, elem)))
+
+- estPresent(ajouterElement(table, elem),elem)
+
+- elementPresent(ajouterElement(stat, elem), elem)
+
+- codePresent(assignerCodeElement(table, elem, code), code)
+
+- obtenirElemCode(assignerCodeElement(table, elem, code), code) =
+elem
+
+- obtenirCodeElem(assignerCodeElement(table, elem, code), elem) =
+code
+
+- non(codePresent(table, code)) $\Rightarrow$ obtenirElementCode(table,
+code) = NIL
+
+\subsubsection*{Préconditions :}
+
+- ajouterElement(table, elem) : non(elementPresent(table, elem))
+
+- elementPossedeCode(table, elem) : elementPresent(table, elem)
+
+- assignerCodeElement(table, elem, code) : non(codePresent(table,
+code)) ET elementPresent(table, elem)
+
+- obtenirCodeElement(table, elem) : elementPossedeCode(table, elem)
+ET elementPresent(table, elem)
+\end{document}
