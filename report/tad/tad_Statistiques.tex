@@ -1,0 +1,99 @@
+%% LyX 2.3.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[landscape,french]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{luainputenc}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+% Backwards compatibility for LuaTeX < 0.90
+\@ifundefined{pageheight}{\let\pageheight\pdfpageheight}{}
+\@ifundefined{pagewidth}{\let\pagewidth\pdfpagewidth}{}
+\pageheight\paperheight
+\pagewidth\paperwidth
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{multicol}
+
+\makeatother
+
+\usepackage{babel}
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
+\makeatother
+\begin{document}
+
+\subsubsection*{Nom : }
+
+Statistiques
+
+\subsubsection*{Paramètres : }
+
+Element (octet dans projet)
+
+\subsubsection*{Utilise :}
+
+- Naturel
+
+\subsubsection*{Opérations :}
+
+- statistiques : $\rightarrow$ Statistiques
+
+- estVide : Statistiques $\rightarrow$ Booleen
+
+- elementPresent : Statistiques $\times$ Element $\rightarrow$ Booleen
+
+- ajouterElement : Statistiques $\times$ Element $\rightarrow$ Statistiques
+
+- obtenirNombreElements : Statistiques $\rightarrow$ Naturel
+
+- incrementerOccurenceElement : Statistiques $\times$ Element $\nrightarrow$
+Statistiques
+
+- obtenirOccurenceElement : Statistiques $\times$ Element $\rightarrow$
+Naturel
+
+\subsubsection*{Axiomes :}
+
+- obtenirOccurenceElement(incrementerOccurenceElement(stat, elem)
+= obtenirOccurenceElement(stat, elem) + 1
+
+- elementPresent(stat, elem) = Faux $\Rightarrow$ obtenirOccurenceElement(stat,
+elem) = 0
+
+- estVide(stat) = Vrai $\Rightarrow$ obtenirNombreElement(stat) =
+0
+
+- elementPresent(ajouterElement(stat, elem), elem)
+
+- ajouterElement(stat,elem) et elementPresent(stat, elem) $\Rightarrow$
+obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat)
+
+- ajouterElement(stat,elem) et non(elementPresent(stat, elem)) $\Rightarrow$
+obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat)
++ 1
+
+\subsubsection*{Préconditions :}
+
+- incrementerOccurenceElement(stat, elem) : elementPresent(stat, elem)
+
+(on pourrait aussi faire en sorte d'ajouter automatiquement l'élément
+si il n'est pas présent, dans ce cas il faut le mettre dans les axiomes)
+
+
+\end{document}
