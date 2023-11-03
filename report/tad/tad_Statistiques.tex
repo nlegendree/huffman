@@ -58,7 +58,8 @@ Element (octet dans projet)
 
 - elementPresent : Statistiques $\times$ Element $\rightarrow$ Booleen
 
-- ajouterElement : Statistiques $\times$ Element $\rightarrow$ Statistiques
+- ajouterElement : Statistiques $\times$ Element $\nrightarrow$
+Statistiques
 
 - obtenirNombreElements : Statistiques $\rightarrow$ Naturel
 
@@ -81,19 +82,15 @@ elem) = 0
 
 - elementPresent(ajouterElement(stat, elem), elem)
 
-- ajouterElement(stat,elem) et elementPresent(stat, elem) $\Rightarrow$
-obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat)
-
-- ajouterElement(stat,elem) et non(elementPresent(stat, elem)) $\Rightarrow$
-obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat)
+- obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat)
 + 1
 
 \subsubsection*{Préconditions :}
+
+- ajouterElement(stat, elem) : non(elementPresent(stat, elem))
 
 - incrementerOccurenceElement(stat, elem) : elementPresent(stat, elem)
 
 (on pourrait aussi faire en sorte d'ajouter automatiquement l'élément
 si il n'est pas présent, dans ce cas il faut le mettre dans les axiomes)
-
-
 \end{document}
