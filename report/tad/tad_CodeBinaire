@@ -17,8 +17,9 @@ Opérations:
     estVide : CodeBinaire -> Boolean
     afficherCodeBinaire : CodeBinaire -> CodeBinaire
 Préconditions : 
-    obtenirIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire)
-    supprimerIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire)
-    obtetnirCodeBinaire : longueurCodeBinaire(CodeBinaire)>0
-    afficherCodeBinaire : longueurCodeBinaire(CodeBinaire)>0
+    obtenirIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire) et estVide(CodeBinaire)==FAUX
+    supprimerIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire) et estVide(CodeBinaire)==FAUX
+    modifierIemeBit : Le ième bit donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire) et estVide(CodeBinaire)==FAUX
+    obtetnirCodeBinaire : longueurCodeBinaire(CodeBinaire)>0 et estVide(CodeBinaire)==FAUX
+    afficherCodeBinaire : longueurCodeBinaire(CodeBinaire)>0 et estVide(CodeBinaire)==FAUX
     
