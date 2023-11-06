@@ -18,4 +18,8 @@ Axiomes:
     longueur(fileDePriorité) = 0
     longueur(inserer(l, e, p)) = 1 + longueur(l)
     supprimerDernier()
-
+Préconditions:
+    supprimerPremier(l):  non(estVide(l))
+    supprimerDernier(l):  non(estVide(l))
+    obtenirPremier(l): non(estVide(l))
+    obtenirDernier(l): non(estVide(l))
