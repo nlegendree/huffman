@@ -5,13 +5,20 @@ Opérations:
     ajouterUnBitFin : CodeBinaire x Bit -> CodeBinaire
     ajouterUnBitDebut : CodeBinaire x Bit -> CodeBinaire
     obtetnirCodeBinaire : CodeBinaire -> CodeBinaire
+    obtenirIemeBit : CodeBinaire x NaturelNonNul -> Bit
     obtenirPremierBit : CodeBinaire -> Bit
     obtenirDernierBit : CodeBinaire -> Bit
+    supprimerCodeBinaire : CodeBinaire -> None
     supprimerPremierBit : CodeBinaire -> CodeBinaire
     supprimerDernierBit : CodeBinaire -> CodeBinaire
-    supprimerUnBit : CodeBinaire x NaturelNonNul -> CodeBinaire
+    supprimerIemeBit : CodeBinaire x NaturelNonNul -> CodeBinaire
     modifierUnBit : CodeBinaire x NaturelNonNul x Bit -> CodeBinaire
     longueurCodeBinaire : CodeBinaire -> NaturelNonNul
     estVide : CodeBinaire -> Boolean
     afficherCodeBinaire : CodeBinaire -> CodeBinaire
+Préconditions : 
+    obtenirIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire)
+    supprimerIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire)
+    obtetnirCodeBinaire : longueurCodeBinaire(CodeBinaire)>0
+    afficherCodeBinaire : longueurCodeBinaire(CodeBinaire)>0
     
