@@ -31,8 +31,8 @@
 
     \begin{tadAxiomes}
         \tadAxiome{obtenirOccurenceElement(incrementerOccurenceElement(stat, elem) = obtenirOccurenceElement(stat, elem) + 1}
-        \tadAxiome{elementPresent(stat, elem) = Faux $\Rightarrow$ obtenirOccurenceElement(stat, elem) = 0}
-        \tadAxiome{estVide(stat) = Vrai $\Rightarrow$ obtenirNombreElement(stat) = 0}
+        \tadAxiome{elementPresent(stat, elem) = Faux $\iff$ obtenirOccurenceElement(stat, elem) = 0}
+        \tadAxiome{estVide(stat) = Vrai $\iff$ obtenirNombreElement(stat) = 0}
         \tadAxiome{elementPresent(ajouterElement(stat, elem), elem)}
         \tadAxiome{obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat) + 1}
     \end{tadAxiomes}
