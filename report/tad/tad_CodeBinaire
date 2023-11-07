@@ -2,6 +2,7 @@ Nom : CodeBinaire
 Utilise : Bit,  NaturelNonNul
 Opérations:
     CodeBinaire : Bit -> CodeBinaire
+    + : CodeBinaire x CodeBinaire -> CodeBinaire
     ajouterUnBitFin : CodeBinaire x Bit -> CodeBinaire
     ajouterUnBitDebut : CodeBinaire x Bit -> CodeBinaire
     obtetnirCodeBinaire : CodeBinaire -> CodeBinaire
@@ -13,13 +14,19 @@ Opérations:
     supprimerDernierBit : CodeBinaire -> CodeBinaire
     supprimerIemeBit : CodeBinaire x NaturelNonNul -> CodeBinaire
     modifierUnBit : CodeBinaire x NaturelNonNul x Bit -> CodeBinaire
-    longueurCodeBinaire : CodeBinaire -> NaturelNonNul
+    longueur : CodeBinaire -> NaturelNonNul
     estVide : CodeBinaire -> Boolean
     afficherCodeBinaire : CodeBinaire -> CodeBinaire
+Axiomes:
+    longueur(codeBinaire)=0
+    longueur(cb+ajouterUnBitDebut(b))=longueur(cb)+1
+    obtenirIemeBit(cb + ajouterUnBitFin(b),longueur + 1) = b
+    obtenirPremierBit(cb + ajouterUnBitDebut(b) ) = b
+    obtenirDernierBit(cb + ajouterUnBitFin(b) ) = b
 Préconditions : 
-    obtenirIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire) et estVide(CodeBinaire)==FAUX
-    supprimerIemeBit : Le ième bit existe donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire) et estVide(CodeBinaire)==FAUX
-    modifierIemeBit : Le ième bit donc NaturelNonNul<=longueurCodeBinaire(CodeBinaire) et estVide(CodeBinaire)==FAUX
-    obtetnirCodeBinaire : longueurCodeBinaire(CodeBinaire)>0 et estVide(CodeBinaire)==FAUX
-    afficherCodeBinaire : longueurCodeBinaire(CodeBinaire)>0 et estVide(CodeBinaire)==FAUX
+    obtenirIemeBit(cb,i) : 0 < i <= longueur(cb)
+    supprimerIemeBit(cb,i) : 0 < i <= longueur(cb)
+    modifierIemeBit(cb,i,b) : 0 < i <= longueur(cb)
+    obtetnirCodeBinaire(cb) : longueur(cb)>0 
+    afficherCodeBinaire : longueur(cb)>0
     
