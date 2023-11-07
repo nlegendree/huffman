@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+% Define the style for the TAD
+\newenvironment{tad}{\begin{tabbing}\hspace*{2cm}\=\hspace*{2.5cm}\=\hspace*{3.5cm}\=\hspace*{3cm}\=\kill}{\end{tabbing}}
+\newcommand{\tadNom}[1]{\textbf{TAD} #1\\}
+\newcommand{\tadParametres}[1]{\textbf{Paramètres:} #1\\}
+\newcommand{\tadDependances}[1]{\textbf{Utilise:} #1\\}
+\newcommand{\tadOperation}[4]{\>\textbf{\textsc{#1}}\>#2\>#3\>#4}
+\newcommand{\tadAxiome}[1]{\>\textbf{Axiome:} #1\\}
+\newcommand{\tadPrecondition}[2]{\>\textbf{Précondition:} \textsc{#1}\>#2\\}
+
+\begin{document}
+
+\begin{tad}
+    \tadNom{FileDePriorité}
+    \tadParametres{Element}
+    \tadDependances{Naturel, Boolean}
+
+    \tadOperation{fileDePriorité}{}{ $\rightarrow$ }{FileDePriorité}
+    \tadOperation{inserer}{FileDePriorité $\times$ Element $\times$ NaturelNonNul}{ $\rightarrow$ }{FileDePriorité}
+    \tadOperation{supprimerPremier}{FileDePriorité}{ $\rightarrow$ }{FileDePriorité}
+    \tadOperation{supprimerDernier}{FileDePriorité}{ $\rightarrow$ }{FileDePriorité}
+    \tadOperation{obtenirPremier}{FileDePriorité}{ $\rightarrow$ }{Element}
+    \tadOperation{obtenirDernier}{FileDePriorité}{ $\rightarrow$ }{Element}
+    \tadOperation{estVide}{FileDePriorité}{ $\rightarrow$ }{Boolean}
+    \tadOperation{longueur}{FileDePriorité}{ $\rightarrow$ }{Naturel}
+\end{tad}
+
+\begin{tad}
+    \tadAxiome{estVide(fileDePriorité())}
+    \tadAxiome{non estVide(inserer(fileDePriorité(), el, 1))}
+    \tadAxiome{obtenirPremier(inserer(fileDePriorité(), el, 1)) = el}
+    \tadAxiome{obtenirDernier(inserer(fileDePriorité(), el, 1)) = el}
+    \tadAxiome{longueur(fileDePriorité()) = 0}
+    \tadAxiome{longueur(inserer(l, e, p)) = 1 + longueur(l)}
+    \tadAxiome{supprimerDernier()}
+\end{tad}
+
+\begin{tad}
+    \tadPrecondition{supprimerPremier(l)}{non(estVide(l))}
+    \tadPrecondition{supprimerDernier(l)}{non(estVide(l))}
+    \tadPrecondition{obtenirPremier(l)}{non(estVide(l))}
+    \tadPrecondition{obtenirDernier(l)}{non(estVide(l))}
+\end{tad}
+
+\end{document}
