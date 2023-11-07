@@ -34,8 +34,8 @@
         \tadAxiome{obtenirElement (arbreDeHuffman(élément,pondération)) = élément}
         \tadAxiome{obtenirPondération (arbreDeHuffman(élément,pondération)) = pondération}
         \tadAxiome{obtenirPondération (combiner(arbreGauche,arbreDroit)) = obtenirPondération(arbreGauche)+obtenirPondération(arbreDroit)}
-        \tadAxiome{estUneFeuille (arbreDeHuffman(élément,pondération)) = Vrai}
-        \tadAxiome{estUneFeuille (combiner(arbreGauche,arbreDroit)) = Faux}
+        \tadAxiome{estUneFeuille (arbreDeHuffman(élément,pondération))}
+        \tadAxiome{non estUneFeuille (combiner(arbreGauche,arbreDroit))}
         \tadAxiome{obtenirArbreGauche (combiner(arbreGauche,arbreDroit)) = arbreGauche}
         \tadAxiome{obtenirArbreDroit (combiner(arbreGauche,arbreDroit)) = arbreDroit}
     \end{tadAxiomes}
