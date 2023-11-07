@@ -18,7 +18,7 @@ Opérations:
     estVide : CodeBinaire -> Boolean
     afficherCodeBinaire : CodeBinaire -> CodeBinaire
 Axiomes:
-    longueur(codeBinaire)=0
+    estVide(ajouterUnBitDebut(cb,b))==FAUX
     longueur(cb+ajouterUnBitDebut(b))=longueur(cb)+1
     obtenirIemeBit(cb + ajouterUnBitFin(b),longueur + 1) = b
     obtenirPremierBit(cb + ajouterUnBitDebut(b) ) = b
