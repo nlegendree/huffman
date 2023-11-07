@@ -1,96 +1,46 @@
-%% LyX 2.3.6 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[landscape,french]{article}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{luainputenc}
-\setlength{\parskip}{\smallskipamount}
-\setlength{\parindent}{0pt}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
+\begin{tad}
 
-\makeatletter
+    \tadNom{Statistiques}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-% Backwards compatibility for LuaTeX < 0.90
-\@ifundefined{pageheight}{\let\pageheight\pdfpageheight}{}
-\@ifundefined{pagewidth}{\let\pagewidth\pdfpagewidth}{}
-\pageheight\paperheight
-\pagewidth\paperwidth
+    \tadParametres{Element}
 
+    \tadDependances{\naturel, \booleen}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\numberwithin{equation}{section}
-\numberwithin{figure}{section}
+    \begin{tadOperations}{Statistiques}
+        \tadOperation{statistiques}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{estVide}%
+            {\tadUnParam{Statistiques}}%
+            {\tadUnParam{\booleen}}
+        \tadOperation{elementPresent}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{\booleen}}
+        \tadOperationAvecPreconditions{ajouterElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{obtenirNombreElement}%
+            {\tadUnParam{Statistiques}}%
+            {\tadUnParam{\naturel}}
+        \tadOperationAvecPreconditions{incrementerOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{obtenirOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{\naturel}}
+    \end{tadOperations}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage{multicol}
+    \begin{tadAxiomes}
+        \tadAxiome{obtenirOccurenceElement(incrementerOccurenceElement(stat, elem) = obtenirOccurenceElement(stat, elem) + 1}
+        \tadAxiome{elementPresent(stat, elem) = Faux $\Rightarrow$ obtenirOccurenceElement(stat, elem) = 0}
+        \tadAxiome{estVide(stat) = Vrai $\Rightarrow$ obtenirNombreElement(stat) = 0}
+        \tadAxiome{elementPresent(ajouterElement(stat, elem), elem)}
+        \tadAxiome{obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat) + 1}
+    \end{tadAxiomes}
 
-\makeatother
+    \begin{tadPreconditions}
+        \tadPrecondition{ajouterElement(stat, elem)}{non(elementPresent(stat, elem))}
+        \tadPrecondition{incrementerOccurenceElement(stat, elem)}{elementPresent(stat, elem)}
+    \end{tadPreconditions}%(on pourrait aussi faire en sorte d'ajouter automatiquement l'Ã©lÃ©ment si il n'est pas prÃ©sent, dans ce cas il faut le mettre dans les axiomes)
 
-\usepackage{babel}
-\makeatletter
-\addto\extrasfrench{%
-   \providecommand{\og}{\leavevmode\flqq~}%
-   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
-}
+\end{tad}
 
-\makeatother
-\begin{document}
-
-\subsubsection*{Nom : }
-
-Statistiques
-
-\subsubsection*{Paramètres : }
-
-Element (octet dans projet)
-
-\subsubsection*{Utilise :}
-
-- Naturel
-
-\subsubsection*{Opérations :}
-
-- statistiques : $\rightarrow$ Statistiques
-
-- estVide : Statistiques $\rightarrow$ Booleen
-
-- elementPresent : Statistiques $\times$ Element $\rightarrow$ Booleen
-
-- ajouterElement : Statistiques $\times$ Element $\nrightarrow$
-Statistiques
-
-- obtenirNombreElements : Statistiques $\rightarrow$ Naturel
-
-- incrementerOccurenceElement : Statistiques $\times$ Element $\nrightarrow$
-Statistiques
-
-- obtenirOccurenceElement : Statistiques $\times$ Element $\rightarrow$
-Naturel
-
-\subsubsection*{Axiomes :}
-
-- obtenirOccurenceElement(incrementerOccurenceElement(stat, elem)
-= obtenirOccurenceElement(stat, elem) + 1
-
-- elementPresent(stat, elem) = Faux $\Rightarrow$ obtenirOccurenceElement(stat,
-elem) = 0
-
-- estVide(stat) = Vrai $\Rightarrow$ obtenirNombreElement(stat) =
-0
-
-- elementPresent(ajouterElement(stat, elem), elem)
-
-- obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat)
-+ 1
-
-\subsubsection*{Préconditions :}
-
-- ajouterElement(stat, elem) : non(elementPresent(stat, elem))
-
-- incrementerOccurenceElement(stat, elem) : elementPresent(stat, elem)
-
-(on pourrait aussi faire en sorte d'ajouter automatiquement l'élément
-si il n'est pas présent, dans ce cas il faut le mettre dans les axiomes)
-\end{document}
