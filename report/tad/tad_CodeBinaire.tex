@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+\section*{Nom : CodeBinaire}
+\section*{Utilise : Bit, NaturelNonNul}
+\section*{Opérations:}
+
+\subsection*{CodeBinaire : Bit $\to$ CodeBinaire}
+\subsection*{+ : CodeBinaire $\times$ CodeBinaire $\to$ CodeBinaire}
+\subsection*{ajouterUnBitFin : CodeBinaire $\times$ Bit $\to$ CodeBinaire}
+\subsection*{ajouterUnBitDebut : CodeBinaire $\times$ Bit $\to$ CodeBinaire}
+\subsection*{obtetnirCodeBinaire : CodeBinaire $\to$ CodeBinaire}
+\subsection*{obtenirIemeBit : CodeBinaire $\times$ NaturelNonNul $\to$ Bit}
+\subsection*{obtenirPremierBit : CodeBinaire $\to$ Bit}
+\subsection*{obtenirDernierBit : CodeBinaire $\to$ Bit}
+\subsection*{supprimerCodeBinaire : CodeBinaire $\to$ None}
+\subsection*{supprimerPremierBit : CodeBinaire $\to$ CodeBinaire}
+\subsection*{supprimerDernierBit : CodeBinaire $\to$ CodeBinaire}
+\subsection*{supprimerIemeBit : CodeBinaire $\times$ NaturelNonNul $\to$ CodeBinaire}
+\subsection*{modifierUnBit : CodeBinaire $\times$ NaturelNonNul $\times$ Bit $\to$ CodeBinaire}
+\subsection*{longueur : CodeBinaire $\to$ NaturelNonNul}
+\subsection*{estVide : CodeBinaire $\to$ Boolean}
+\subsection*{afficherCodeBinaire : CodeBinaire $\to$ CodeBinaire}
+
+\section*{Axiomes:}
+\begin{align*}
+&\text{estVide}(ajouterUnBitDebut(cb, b)) = \text{FAUX} \\
+&\text{longueur}(cb + ajouterUnBitDebut(b)) = \text{longueur}(cb) + 1 \\
+&\text{obtenirIemeBit}(cb + ajouterUnBitFin(b), \text{longueur} + 1) = b \\
+&\text{obtenirPremierBit}(cb + ajouterUnBitDebut(b)) = b \\
+&\text{obtenirDernierBit}(cb + ajouterUnBitFin(b)) = b \\
+\end{align*}
+
+\section*{Préconditions:}
+\begin{align*}
+&\text{obtenirIemeBit}(cb, i) : 0 < i \leq \text{longueur}(cb) \\
+&\text{supprimerIemeBit}(cb, i) : 0 < i \leq \text{longueur}(cb) \\
+&\text{modifierIemeBit}(cb, i, b) : 0 < i \leq \text{longueur}(cb) \\
+&\text{obtetnirCodeBinaire}(cb) : \text{longueur}(cb) > 0 \\
+&\text{afficherCodeBinaire} : \text{longueur}(cb) > 0
+\end{align*}
+
+\end{document}
