@@ -3,8 +3,7 @@ Utilise : Bit,  NaturelNonNul
 Opérations:
     CodeBinaire : Bit -> CodeBinaire
     + : CodeBinaire x CodeBinaire -> CodeBinaire
-    ajouterUnBitFin : CodeBinaire x Bit -> CodeBinaire
-    ajouterUnBitDebut : CodeBinaire x Bit -> CodeBinaire
+    ajouterBit : CodeBinaire x Bit -> CodeBinaire
     obtetnirCodeBinaire : CodeBinaire -> CodeBinaire
     obtenirIemeBit : CodeBinaire x NaturelNonNul -> Bit
     obtenirPremierBit : CodeBinaire -> Bit
@@ -20,9 +19,8 @@ Opérations:
 Axiomes:
     estVide(ajouterUnBitDebut(cb,b))==FAUX
     longueur(cb+ajouterUnBitDebut(b))=longueur(cb)+1
-    obtenirIemeBit(cb + ajouterUnBitFin(b),longueur + 1) = b
-    obtenirPremierBit(cb + ajouterUnBitDebut(b) ) = b
-    obtenirDernierBit(cb + ajouterUnBitFin(b) ) = b
+    obtenirIemeBit(cb + ajouterBit(b),longueur + 1) = b
+    obtenirDernierBit(cb + ajouterBit(b) ) = b
 Préconditions : 
     obtenirIemeBit(cb,i) : 0 < i <= longueur(cb)
     supprimerIemeBit(cb,i) : 0 < i <= longueur(cb)
