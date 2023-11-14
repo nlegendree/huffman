@@ -8,26 +8,26 @@
 
     \begin{tadOperations}{ArbreDeHuffman}
         \tadOperation{arbreDeHuffman}%
-            {\tadDeuxParams{Element}{\naturel}}%
-            {\tadUnParam{ArbreDeHuffman}}
+            {\tadParams{Element, \naturel}}%
+            {\tadParams{ArbreDeHuffman}}
         \tadOperation{combiner}%
-            {\tadDeuxParams{ArbreDeHuffman}{ArbreDeHuffman}}%
-            {\tadUnParam{ArbreDeHuffman}}
+            {\tadParams{ArbreDeHuffman, ArbreDeHuffman}}%
+            {\tadParams{ArbreDeHuffman}}
         \tadOperation{obtenirPondération}%
-            {\tadUnParam{ArbreDeHuffman}}%
-            {\tadUnParam{\naturel}}
+            {\tadParams{ArbreDeHuffman}}%
+            {\tadParams{\naturel}}
         \tadOperationAvecPreconditions{obtenirElement}%
-            {\tadUnParam{ArbreDeHuffman}}%
-            {\tadUnParam{Element}}
+            {\tadParams{ArbreDeHuffman}}%
+            {\tadParams{Element}}
         \tadOperation{estUneFeuille}%
-            {\tadUnParam{ArbreDeHuffman}}%
-            {\tadUnParam{\booleen}}
+            {\tadParams{ArbreDeHuffman}}%
+            {\tadParams{\booleen}}
         \tadOperationAvecPreconditions{obtenirArbreGauche}%
-            {\tadUnParam{ArbreDeHuffman}}%
-            {\tadUnParam{ArbreDeHuffman}}
+            {\tadParams{ArbreDeHuffman}}%
+            {\tadParams{ArbreDeHuffman}}
         \tadOperationAvecPreconditions{obtenirArbreDroit}%
-            {\tadUnParam{ArbreDeHuffman}}%
-            {\tadUnParam{ArbreDeHuffman}}
+            {\tadParams{ArbreDeHuffman}}%
+            {\tadParams{ArbreDeHuffman}}
     \end{tadOperations}
 
     \begin{tadAxiomes}
