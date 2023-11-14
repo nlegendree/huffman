@@ -1,28 +1,36 @@
 \begin{tad}
     \tadNom{FileDePriorité}
+
     \tadParametres{Element}
-    \tadDependances{Naturel, Boolean}
 
-    \tadOperation{fileDePriorité}{}{ $\rightarrow$ }{FileDePriorité}
-    \tadOperation{inserer}{FileDePriorité $\times$ Element $\times$ NaturelNonNul}{ $\rightarrow$ }{FileDePriorité}
-    \tadOperation{supprimerPremier}{FileDePriorité}{ $\rightarrow$ }{FileDePriorité}
-    \tadOperation{supprimerDernier}{FileDePriorité}{ $\rightarrow$ }{FileDePriorité}
-    \tadOperation{obtenirPremier}{FileDePriorité}{ $\rightarrow$ }{Element}
-    \tadOperation{obtenirDernier}{FileDePriorité}{ $\rightarrow$ }{Element}
-    \tadOperation{estVide}{FileDePriorité}{ $\rightarrow$ }{Boolean}
-    \tadOperation{longueur}{FileDePriorité}{ $\rightarrow$ }{Naturel}
+    \tadDependances{\naturel, \booleen}
 
-    \tadAxiome{estVide(fileDePriorité())}
-    \tadAxiome{non estVide(inserer(fileDePriorité(), el, 1))}
-    \tadAxiome{obtenirPremier(inserer(fileDePriorité(), el, 1)) = el}
-    \tadAxiome{obtenirDernier(inserer(fileDePriorité(), el, 1)) = el}
-    \tadAxiome{longueur(fileDePriorité()) = 0}
-    \tadAxiome{longueur(inserer(l, e, p)) = 1 + longueur(l)}
-    \tadAxiome{supprimerDernier()}
+    \begin{tadOperations}{FileDePriorité}
+        \tadOperation{fileDePriorité}{}{\tadParams{FileDePriorité}}
+        \tadOperation{inserer}{\tadParams{FileDePriorité, Element,  NaturelNonNul}}{\tadParams{FileDePriorité}}
+        \tadOperation{supprimerPremier}{\tadParams{FileDePriorité}}{\tadParams{FileDePriorité}}
+        \tadOperation{supprimerDernier}{\tadParams{FileDePriorité}}{\tadParams{FileDePriorité}}
+        \tadOperation{obtenirPremier}{\tadParams{FileDePriorité}}{\tadParams{Element}}
+        \tadOperation{obtenirDernier}{{FileDePriorité}}{{Element}}
+        \tadOperation{estVide}{\tadParams{FileDePriorité}}{\tadParams{Boolean}}
+        \tadOperation{longueur}{\tadParams{FileDePriorité}}{\tadParams{Naturel}}
+    \end{tadOperations}
 
-    \tadPrecondition{supprimerPremier(l)}{non(estVide(l))}
-    \tadPrecondition{supprimerDernier(l)}{non(estVide(l))}
-    \tadPrecondition{obtenirPremier(l)}{non(estVide(l))}
-    \tadPrecondition{obtenirDernier(l)}{non(estVide(l))}
+    \begin{tadAxiomes}
+        \tadAxiome{estVide(fileDePriorité())}
+        \tadAxiome{non estVide(inserer(fileDePriorité(), el, 1))}
+        \tadAxiome{obtenirPremier(inserer(fileDePriorité(), el, 1)) = el}
+        \tadAxiome{obtenirDernier(inserer(fileDePriorité(), el, 1)) = el}
+        \tadAxiome{longueur(fileDePriorité()) = 0}
+        \tadAxiome{longueur(inserer(l, e, p)) = 1 + longueur(l)}
+        \tadAxiome{supprimerDernier()}
+    \end{tadAxiomes}
+
+    \begin{tadPreconditions}
+        \tadPrecondition{supprimerPremier(l)}{non(estVide(l))}
+        \tadPrecondition{supprimerDernier(l)}{non(estVide(l))}
+        \tadPrecondition{obtenirPremier(l)}{non(estVide(l))}
+        \tadPrecondition{obtenirDernier(l)}{non(estVide(l))}
+    \end{tadPreconditions}
 \end{tad}
 
