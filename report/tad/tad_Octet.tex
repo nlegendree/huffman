@@ -8,7 +8,7 @@
 
     \begin{tadOperations}{Octet}
         \tadOperation{octet}%
-            {\tadHuitParams{Bit}{Bit}{Bit}{Bit}{Bit}{Bit}{Bit}{Bit}}%
+            {\tadParams{}}%
             {\tadUnParam{Octet}}
         \tadOperation{estEgal}%
             {\tadDeuxParams{Octet}{Octet}}%
@@ -33,9 +33,9 @@
     \end{tadSemantiques}
 
     \begin{tadAxiomes}
-        \tadAxiome{obtenirIemeBit (00000001, 0) = 1}
-        \tadAxiome{fixerIemeBit (00000001, 0, 0) = 00000000}
-        \tadAxiome{estEgal (octet1,octet2) = (obtenirBit (octet1, {0..7}) = obtenirBit (octet2, {0..7}))}
+        \tadAxiome{obtenirIemeBit(octet(), 0) = 0}
+        \tadAxiome{fixerIemeBit(octet(), 0, 1) = 00000001}
+        \tadAxiome{estEgal(octet1,octet2) = (obtenirIemeBit(octet1, {0..7}) = obtenirBit(octet2, {0..7}))}
     \end{tadAxiomes}
 
 \end{tad}
