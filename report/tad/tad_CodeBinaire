@@ -5,17 +5,11 @@ Opérations:
     + : CodeBinaire x CodeBinaire -> CodeBinaire
     ajouterBit : CodeBinaire x Bit -> CodeBinaire
     obtetnirCodeBinaire : CodeBinaire -> CodeBinaire
-    obtenirIemeBit : CodeBinaire x NaturelNonNul -> Bit
-    obtenirPremierBit : CodeBinaire -> Bit
-    obtenirDernierBit : CodeBinaire -> Bit
     supprimerCodeBinaire : CodeBinaire -> None
-    supprimerPremierBit : CodeBinaire -> CodeBinaire
-    supprimerDernierBit : CodeBinaire -> CodeBinaire
     supprimerIemeBit : CodeBinaire x NaturelNonNul -> CodeBinaire
-    modifierUnBit : CodeBinaire x NaturelNonNul x Bit -> CodeBinaire
+    modifierBit : CodeBinaire x NaturelNonNul x Bit -> CodeBinaire
     longueur : CodeBinaire -> NaturelNonNul
     estVide : CodeBinaire -> Boolean
-    afficherCodeBinaire : CodeBinaire -> CodeBinaire
 Axiomes:
     estVide(ajouterUnBitDebut(cb,b))==FAUX
     longueur(cb+ajouterUnBitDebut(b))=longueur(cb)+1
