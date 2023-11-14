@@ -1,0 +1,30 @@
+\begin{tad}
+
+    \tadNom{Statistiques}
+
+    \tadParametres{Element}
+
+    \tadDependances{\naturel, \booleen, Ensemble}
+
+    \begin{tadOperations}{Statistiques}
+        \tadOperation{statistiques}%
+            {\tadUnParam{Ensemble d'Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{incrementerOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{obtenirOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{\naturel}}
+    \end{tadOperations}
+
+    \begin{tadAxiomes}
+        \tadAxiome{obtenirOccurenceElement(statistiques(set), elem) = 0}
+        \tadAxiome{obtenirOccurenceElement(incrementerOccurenceElement(stat, elem) = obtenirOccurenceElement(stat, elem) + 1}
+    \end{tadAxiomes}
+
+    \begin{tadPreconditions}
+    \end{tadPreconditions}
+
+\end{tad}
+
