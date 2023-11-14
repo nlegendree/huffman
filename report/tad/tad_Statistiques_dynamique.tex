@@ -1,0 +1,45 @@
+\begin{tad}
+
+    \tadNom{Statistiques}
+
+    \tadParametres{Element}
+
+    \tadDependances{\naturel, \booleen}
+
+    \begin{tadOperations}{Statistiques}
+        \tadOperation{statistiques}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{estVide}%
+            {\tadUnParam{Statistiques}}%
+            {\tadUnParam{\booleen}}
+        \tadOperation{elementPresent}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{\booleen}}
+        \tadOperationAvecPreconditions{ajouterElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{obtenirNombreElement}%
+            {\tadUnParam{Statistiques}}%
+            {\tadUnParam{\naturel}}
+        \tadOperationAvecPreconditions{incrementerOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{obtenirOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{\naturel}}
+    \end{tadOperations}
+
+    \begin{tadAxiomes}
+        \tadAxiome{obtenirOccurenceElement(incrementerOccurenceElement(stat, elem) = obtenirOccurenceElement(stat, elem) + 1}
+        \tadAxiome{elementPresent(stat, elem) = Faux $\iff$ obtenirOccurenceElement(stat, elem) = 0}
+        \tadAxiome{estVide(stat) = Vrai $\iff$ obtenirNombreElement(stat) = 0}
+        \tadAxiome{elementPresent(ajouterElement(stat, elem), elem)}
+        \tadAxiome{obtenirNombreElement(ajouterElement(stat, elem)) = obtenirNombreElement(stat) + 1}
+    \end{tadAxiomes}
+
+    \begin{tadPreconditions}
+        \tadPrecondition{ajouterElement(stat, elem)}{non(elementPresent(stat, elem))}
+        \tadPrecondition{incrementerOccurenceElement(stat, elem)}{elementPresent(stat, elem)}
+    \end{tadPreconditions}%(on pourrait aussi faire en sorte d'ajouter automatiquement l'élément si il n'est pas présent, dans ce cas il faut le mettre dans les axiomes)
+
+\end{tad}
