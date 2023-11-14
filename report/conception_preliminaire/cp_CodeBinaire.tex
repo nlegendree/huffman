@@ -6,4 +6,21 @@
     \signatureFonction{concatenerCodeBinaire}
     {codeBinaire1, codeBinaire2 : CodeBinaire}{CodeBinaire}
 
+    \signatureProcedure{ajouterBit}
+    {codeBinaire : CodeBinaire, bit : Bit}{CodeBinaire}
+
+    \signatureProcedure{ajoutValeur}
+    {\paramEntree{r : \reel}
+    \paramEntreeSortie{tab :
+    \tableauUneDimension{1..MAX}
+    {de}{\reel}}
+    \paramSortie{ajoutReussi : \booleen}}
+    {}
+
+    \signatureProcedure{obtenirCodeBinaire}
+    {codeBinaire : CodeBinaire}{CodeBinaire}
+
+    \signatureProcedure{supprimerCodeBinaire}
+    {codeBinaire : CodeBinaire}{}
+
 \end{algorithme}
