@@ -15,7 +15,7 @@
 
     \signatureProcedure{obtenirCodeBinaire}
     {\paramEntreeSortie{codeBinaire : CodeBinaire}}
-    {(longueur(codeBinaire) > 0)}
+    {(longueur(codeBinaire) $>$ 0)}
 
     \signatureProcedure{supprimerCodeBinaire}
     {\paramEntree{codeBinaire : CodeBinaire}}
@@ -23,12 +23,12 @@
     \signatureProcedure{supprimerIemeBit}
     {\paramEntreeSortie{codeBinaire : CodeBinaire}}
     {\paramEntree{positionIemeBit : \naturelNonNul}}
-    {(positionIemeBit $\leq$ longueur(codeBinaire)) et (positionIemeBit > 0)}
+    {(positionIemeBit $\leq$ longueur(codeBinaire)) et (positionIemeBit $>$ 0)}
 
     \signatureProcedure{modifierIemeBit}
     {\paramEntreeSortie{codeBinaire : CodeBinaire}}
     {\paramEntree{positionIemeBit : \naturelNonNul, bitAModifier : Bit}}
-    {(positionIemeBit $\leq$ longueur(codeBinaire)) et (positionIemeBit > 0)}
+    {(positionIemeBit $\leq$ longueur(codeBinaire)) et (positionIemeBit $>$ 0)}
 
     \signatureFonction{longueur}
     {codeBinaire : CodeBinaire}{\naturelNonNul}
