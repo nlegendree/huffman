@@ -9,16 +9,16 @@
     \begin{tadOperations}{Octet}
         \tadOperation{octet}%
             {\tadParams{}}%
-            {\tadUnParam{Octet}}
+            {\tadParams{Octet}}
         \tadOperation{estEgal}%
-            {\tadDeuxParams{Octet}{Octet}}%
-            {\tadUnParam{\booleen}}
+            {\tadParams{Octet, Octet}}%
+            {\tadParams{\booleen}}
         \tadOperation{obtenirIemeBit}%
-            {\tadDeuxParams{Octet}{0..7}}%
-            {\tadUnParam{Bit}}
+            {\tadParams{Octet, 0..7}}%
+            {\tadParams{Bit}}
         \tadOperation{fixerIemeBit}%
-            {\tadTroisParams{Octet}{0..7}{Bit}}%
-            {\tadUnParam{Octet}}
+            {\tadParams{Octet, 0..7, Bit}}%
+            {\tadParams{Octet}}
     \end{tadOperations}
 
     \begin{tadSemantiques}{Octet}
