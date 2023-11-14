@@ -3,3 +3,5 @@ bin/
 *.log
 *.fls
 *.toc
+*.pdf
+*.fdb_latexmk
