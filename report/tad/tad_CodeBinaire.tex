@@ -1,44 +1,68 @@
-\documentclass{article}
-\usepackage{amsmath}
+\begin{tad}
+    \tadNom{CodeBinaire}
+    \tadParametres{}
+    \tadDependances{Bit, \naturelNonNul}
+    \begin{tadOperations}{CodeBinaire}
+        \tadOperation{CodeBinaire}%
+            {\tadUnParam{Bit}}%
+            {\tadUnParam{CodeBinaire}}
+        \tadOperation{+}%
+            {\tadDeuxParams{CodeBinaire}{CodeBinaire}}%
+            {\tadUnParam{CodeBinaire}}
+        \tadOperation{ajouterBit}%
+            {\tadDeuxParams{CodeBinaire}{Bit}}%
+            {\tadUnParam{CodeBinaire}}
+        \tadOperation{obtenirCodeBinaire}%
+            {\tadUnParam{CodeBinaire}}%
+            {\tadUnParam{CodeBinaire}}
+        \tadOperationAvecPreconditions{obtenirIemeBit}%
+            {\tadDeuxParams{CodeBinaire}{Bit}}%
+            {\tadUnParam{Bit}}
+        \tadOperationAvecPreconditions{supprimerIemeBit}%
+            {\tadDeuxParams{CodeBinaire,Bit}}%
+            {\tadUnParam{CodeBinaire}}
+        \tadOperationAvecPreconditions{modifierIemeBit}%
+            {\tadTroisParams{CodeBinaire,\naturelNonNul,Bit}}%
+            {\tadUnParam{CodeBinaire}}
+        \tadOperation{obtenirLongueur}%
+            {\tadUnParam{CodeBinaire}}%
+            {\tadUnParam{\naturelNonNul}}
+        \tadOperation{estVide}%
+            {\tadUnParam{CodeBinaire}}%
+            {\tadUnParam{\booleen}}
+    \end{tadOperations}
 
-\begin{document}
-\section*{Nom : CodeBinaire}
-\section*{Utilise : Bit, NaturelNonNul}
-\section*{Opérations:}
+    \begin{tadSemantiques}
+        \tadSemantique{CodeBinaire}%
+            {Un code binaire est une suite de bits}%
+        \tadSemantique{+}%
+            {Concaténation de deux codes binaires}
+        \tadSemantique{ajouterBit}%
+            {Ajoute un bit à la fin du code binaire}
+        \tadSemantique{obtenirCodeBinaire}%
+            {Retourne le code binaire}
+        \tadSemantique{obtenirIemeBit}%
+            {Retourne le ième bit du code binaire}
+        \tadSemantique{supprimerIemeBit}%
+            {Supprime le ième bit du code binaire}
+        \tadSemantique{modifierIemeBit}%
+            {Modifie le ième bit du code binaire}
+        \tadSemantique{obtenirLongueur}%
+            {Retourne la longueur du code binaire}
+        \tadSemantique{estVide}%
+            {Retourne vrai si le code binaire est vide}
+    \end{tadSemantiques}
 
-\subsection*{CodeBinaire : Bit $\to$ CodeBinaire}
-\subsection*{+ : CodeBinaire $\times$ CodeBinaire $\to$ CodeBinaire}
-\subsection*{ajouterUnBitFin : CodeBinaire $\times$ Bit $\to$ CodeBinaire}
-\subsection*{ajouterUnBitDebut : CodeBinaire $\times$ Bit $\to$ CodeBinaire}
-\subsection*{obtetnirCodeBinaire : CodeBinaire $\to$ CodeBinaire}
-\subsection*{obtenirIemeBit : CodeBinaire $\times$ NaturelNonNul $\to$ Bit}
-\subsection*{obtenirPremierBit : CodeBinaire $\to$ Bit}
-\subsection*{obtenirDernierBit : CodeBinaire $\to$ Bit}
-\subsection*{supprimerCodeBinaire : CodeBinaire $\to$ None}
-\subsection*{supprimerPremierBit : CodeBinaire $\to$ CodeBinaire}
-\subsection*{supprimerDernierBit : CodeBinaire $\to$ CodeBinaire}
-\subsection*{supprimerIemeBit : CodeBinaire $\times$ NaturelNonNul $\to$ CodeBinaire}
-\subsection*{modifierUnBit : CodeBinaire $\times$ NaturelNonNul $\times$ Bit $\to$ CodeBinaire}
-\subsection*{longueur : CodeBinaire $\to$ NaturelNonNul}
-\subsection*{estVide : CodeBinaire $\to$ Boolean}
-\subsection*{afficherCodeBinaire : CodeBinaire $\to$ CodeBinaire}
+    \begin{tadAxiomes}
+        \tadAxiome{estVide(ajouterUnBitDebut(cb,b))==FAUX}
+        \tadAxiome{longueur(cb+ajouterUnBitDebut(b))=longueur(cb)+1}
+        \tadAxiome{obtenirIemeBit(cb + ajouterBit(b),longueur + 1) = b}
+    \end{tadAxiomes}
 
-\section*{Axiomes:}
-\begin{align*}
-&\text{estVide}(ajouterUnBitDebut(cb, b)) = \text{FAUX} \\
-&\text{longueur}(cb + ajouterUnBitDebut(b)) = \text{longueur}(cb) + 1 \\
-&\text{obtenirIemeBit}(cb + ajouterUnBitFin(b), \text{longueur} + 1) = b \\
-&\text{obtenirPremierBit}(cb + ajouterUnBitDebut(b)) = b \\
-&\text{obtenirDernierBit}(cb + ajouterUnBitFin(b)) = b \\
-\end{align*}
+    \begin{tadPreconditions}
+        \tadPrecondition{supprimerIemeBit(cb,i)}{i <= longueur(cb)}
+        \tadPrecondition{modifierIemeBit(cb,i,b)}{i <= longueur(cb)}
+        \tadPrecondition{obtenirLongueur(cb)}{non(estVide(cb))}
+    \end{tadPreconditions}
 
-\section*{Préconditions:}
-\begin{align*}
-&\text{obtenirIemeBit}(cb, i) : 0 < i \leq \text{longueur}(cb) \\
-&\text{supprimerIemeBit}(cb, i) : 0 < i \leq \text{longueur}(cb) \\
-&\text{modifierIemeBit}(cb, i, b) : 0 < i \leq \text{longueur}(cb) \\
-&\text{obtetnirCodeBinaire}(cb) : \text{longueur}(cb) > 0 \\
-&\text{afficherCodeBinaire} : \text{longueur}(cb) > 0
-\end{align*}
-
-\end{document}
+\end{tad}
