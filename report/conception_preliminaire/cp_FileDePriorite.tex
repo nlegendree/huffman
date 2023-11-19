@@ -1,0 +1,31 @@
+\begin{algorithme}
+    \signatureFonction{fileDePrioriteVide}
+    {}{FileDePriorite}
+
+    \signatureProcedure{ajouterElement}
+    {\paramEntreeSortie{file : FileDePriorite}}
+    {\paramEntree{element : Element,indice : \naturelNonNul}}
+
+    \signatureProcedure{supprimerPremier}
+    {\paramEntreeSortie{file : FileDePriorite}}
+    {(non(estVide(file)))}
+
+    \signatureProcedure{supprimerdDernier}
+    {\paramEntreeSortie{file : FileDePriorite}}
+    {(non(estVide(file)))}
+
+    \signatureFonction{obtenirPremier}
+    {file : FileDePriorite}{Element}
+    {(non(estVide(file)))}
+
+    \signatureFonction{obtenirDernier}
+    {file : FileDePriorite}{Element}
+    {(non(estVide(file)))}
+
+    \signatureFonction{estVide}
+    {file : FileDePriorite}{\booleen}
+
+    \signatureFonction{longueur}
+    {file : FileDePriorite}{\naturelNonNul}
+
+\end{algorithme}
