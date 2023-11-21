@@ -1,0 +1,22 @@
+\begin{algorithme}
+    \fonction{statistiques}
+    {element : Element}{Statistiques}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \fonction{obtenirOccurenceElement}
+    {statistiques : Statistiques, element : Element}{\naturel}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \procedure{ajoutValeur}{
+        \paramEntreeSortie{statistiques : Statistiques, element : Element}
+    {}{}
+    { \affecter{ajoutReussi}{faux}
+    \sialors{taille $\leq$MAX}{
+        \affecter{taille}{taille+1}
+        \affecter{tab[taille]}{r}
+        \affecter{ajoutReussi}{vrai}}}
+\end{algorithme}

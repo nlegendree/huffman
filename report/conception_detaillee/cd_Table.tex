@@ -1,0 +1,63 @@
+\begin{algorithme}
+
+    \fonction{tableDeCodage}
+    {}{TableDeCodage}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \fonction{estVide}
+    {table : TableDeCodage}{\booleen}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \fonction{elementPresent}
+    {table : TableDeCodage, element : Element}{\booleen}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \fonction{elementPresent}
+    {table : TableDeCodage, code : CodeBinaire}{\booleen}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \procedure{ajoutElement}{
+        \paramEntreeSortie{table : TableDeCodage, element : Element}}
+    {}{}
+    { \affecter{ajoutReussi}{faux}
+    \sialors{taille $\leq$MAX}{
+        \affecter{taille}{taille+1}
+        \affecter{tab[taille]}{r}
+        \affecter{ajoutReussi}{vrai}}}
+
+    \fonction{elementPossedeCode}
+    {table : TableDeCodage, element : Element}{\booleen}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \procedure{assignerCodeElement}{
+        \paramEntree{r : \reel}
+        \paramEntreeSortie{table : TableDeCodage, element : Element, code : CodeBinaire}}
+    {}{}
+    { \affecter{ajoutReussi}{faux}
+    \sialors{taille $\leq$MAX}{
+        \affecter{taille}{taille+1}
+        \affecter{tab[taille]}{r}
+        \affecter{ajoutReussi}{vrai}}}
+
+    \fonction{obtenirCodeElement}
+    {table : TableDeCodage, element : Element}{CodeBinaire}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+
+    \fonction{obtenirElementCode}
+    {table : TableDeCodage, code : CodeBinaire}{Element}
+    {}{}
+    {b $\geq$0}{}
+    {\retourner{a/b}}
+\end{algorithme}
