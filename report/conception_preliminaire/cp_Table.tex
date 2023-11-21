@@ -6,14 +6,18 @@
 	{table : TableDeCodage, element: Element}{\booleen}
 \signatureFonction{codePresent}
 	{table : TableDeCodage, code: CodeBinaire }{\booleen}
-\signatureProcedure{ajouterElement} % TODO: ajouter les préconditions
+\signatureProcedure{ajouterElement} 
 	{E/S table : TableDeCodage, element: Element}
-\signatureFonction{elementPossedeCode} % TODO: ajouter les préconditions
+	{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
+\signatureFonction{elementPossedeCode} 
 	{table : TableDeCodage, element: Element}{\booleen}
-\signatureProcedure{assignerCodeElement} % TODO: ajouter les préconditions
+	{elementPresent(table, elem)}
+\signatureProcedure{assignerCodeElement}
 	{E/S table : TableDeCodage, element: Element, code: CodeBinaire}
-\signatureFonction{obtenirCodeElement} % TODO: ajouter les préconditions
+	{non(codePresent(table, code)) ET elementPresent(table, elem)}
+\signatureFonction{obtenirCodeElement}
 	{table : TableDeCodage, element: Element }{CodeBinaire}
-\signatureFonction{obtenirElementCode} % TODO: ajouter les préconditions
+\signatureFonction{obtenirElementCode}
 	{table : TableDeCodage, code: CodeBinaire }{Element}
+	{elementPossedeCode(table, elem) ET elementPresent(table, elem)}
 
