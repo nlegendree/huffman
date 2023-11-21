@@ -10,9 +10,6 @@
         \tadOperation{octet}%
             {\tadParams{}}%
             {\tadParams{Octet}}
-        \tadOperation{estEgal}%
-            {\tadParams{Octet, Octet}}%
-            {\tadParams{\booleen}}
         \tadOperation{obtenirIemeBit}%
             {\tadParams{Octet, 0..7}}%
             {\tadParams{Bit}}
@@ -23,9 +20,7 @@
 
     \begin{tadSemantiques}{Octet}
 		\tadSemantique{octet}%
-			{Crée un octet avec les 8 bits spécifiés.}%
-        \tadSemantique{estEgal}%
-			{Vérifie si les deux octets sont égaux.}  
+			{Crée un octet avec les 8 bits spécifiés.}% 
         \tadSemantique{obtenirIemeBit}%
 			{Obtient le bit à la position spécifiée dans l'octet (position de 0 à 7).}
         \tadSemantique{fixerIemeBit}%
@@ -33,9 +28,8 @@
     \end{tadSemantiques}
 
     \begin{tadAxiomes}
-        \tadAxiome{obtenirIemeBit(octet(), 0) = 0}
-        \tadAxiome{fixerIemeBit(octet(), 0, 1) = 00000001}
-        \tadAxiome{estEgal(octet1,octet2) = (obtenirIemeBit(octet1, {0..7}) = obtenirBit(octet2, {0..7}))}
+        \tadAxiome{obtenirIemeBit(octet(), i) = }
+        \tadAxiome{fixerIemeBit(octet(), i, bit) = }
     \end{tadAxiomes}
 
 \end{tad}
