@@ -1,4 +1,11 @@
 \begin{algorithme}
+
+    \begin{enregistrement}{Statistiques}
+        \champEnregistrement{taille}{\naturel}
+        \champEnregistrement{element}{Element} $occurences de l'élément$
+        \champEnregistrement{code}{Code}
+    \end{enregistrement}
+
     \fonction{statistiques}
     {element : Element}{Statistiques}
     {}{}
@@ -8,15 +15,20 @@
     \fonction{obtenirOccurenceElement}
     {statistiques : Statistiques, element : Element}{\naturel}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    \pourChaque{statistiques.element}{statistiques}{
+        \sialors{statistiques.element = element}
+            {\retourner occurence}}
+    {\retourner{0}}
 
-    \procedure{ajoutValeur}{
-        \paramEntreeSortie{statistiques : Statistiques, element : Element}
+    \procedure{incrementerOccurenceElement}{
+        \paramEntree{element : Element}
+        \paramEntreeSortie{statistiques : Statistiques}}
     {}{}
-    { \affecter{ajoutReussi}{faux}
-    \sialors{taille $\leq$MAX}{
-        \affecter{taille}{taille+1}
-        \affecter{tab[taille]}{r}
-        \affecter{ajoutReussi}{vrai}}}
+    {
+    \pourChaque{statistiques.element}{statistiques}{
+        \sialors{statistiques.element = element}
+            {\affecter{occurence}{occurence + 1}}
+        }
+    }
+
 \end{algorithme}
