@@ -1,5 +1,11 @@
 \begin{algorithme}
 
+    \begin{enregistrement}{TableDeCodage}
+        \champEnregistrement{taille}{\naturel}
+        \champEnregistrement{element}{Element}
+        \champEnregistrement{code}{Code}
+    \end{enregistrement}
+
     \fonction{tableDeCodage}
     {}{TableDeCodage}
     {}{}
@@ -9,55 +15,65 @@
     \fonction{estVide}
     {table : TableDeCodage}{\booleen}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    {\retourner{table.taille = 0}}
 
     \fonction{elementPresent}
     {table : TableDeCodage, element : Element}{\booleen}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    \pourChaque{table.element}{table}{
+        \sialors{table.cle = element}
+        {\retourner{vrai}}
+        }
+    {\retourner{faux}}
 
-    \fonction{elementPresent}
+    \fonction{codePresent}
     {table : TableDeCodage, code : CodeBinaire}{\booleen}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    \pourChaque{table.element}{table}{
+        \sialors{table.code = code}
+        {\retourner{vrai}}
+        }
+    {\retourner{faux}}
 
-    \procedure{ajoutElement}{
+    \procedure{ajouterElement}{
         \paramEntreeSortie{table : TableDeCodage, element : Element}}
     {}{}
-    { \affecter{ajoutReussi}{faux}
-    \sialors{taille $\leq$MAX}{
-        \affecter{taille}{taille+1}
-        \affecter{tab[taille]}{r}
-        \affecter{ajoutReussi}{vrai}}}
+    {\sialors{non(elementPresent(table, element))}{
+        \affecter{table.element}{element}}}
 
     \fonction{elementPossedeCode}
     {table : TableDeCodage, element : Element}{\booleen}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    \pourChaque{table.element}{table}{
+        \sialors{(table.element = code) et (codePresent(table, table.code))}
+        {\retourner{vrai}}
+        }
+    {\retourner{faux}}
 
     \procedure{assignerCodeElement}{
         \paramEntree{r : \reel}
         \paramEntreeSortie{table : TableDeCodage, element : Element, code : CodeBinaire}}
     {}{}
-    { \affecter{ajoutReussi}{faux}
-    \sialors{taille $\leq$MAX}{
-        \affecter{taille}{taille+1}
-        \affecter{tab[taille]}{r}
-        \affecter{ajoutReussi}{vrai}}}
+    {\sialors{non(codePresent(table, code)) et (elementPresent(table, element))}{
+        \pourChaque(table.element){table}
+            \sialors{table.element = element}    
+                \affecter{table.element}{code}} $à revoir en fonction du type$
+    }
 
     \fonction{obtenirCodeElement}
     {table : TableDeCodage, element : Element}{CodeBinaire}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    \pourChaque{table.element}{table}{
+        \sialors{(table.element = element) et (codePresent(table, code))}
+        {\retourner{code associé à élément}}
+        }
+    {\retourner{faux}}
 
     \fonction{obtenirElementCode}
     {table : TableDeCodage, code : CodeBinaire}{Element}
     {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+    \pourChaque{table.element}{table}{
+        \sialors{(table.element = element) et (codePresent(table, code))}
+        {\retourner{table.element}}
+        }
 \end{algorithme}
