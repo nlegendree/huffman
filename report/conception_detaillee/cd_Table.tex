@@ -1,79 +1,117 @@
 \begin{algorithme}
 
+
     \begin{enregistrement}{TableDeCodage}
-        \champEnregistrement{taille}{\naturel}
-        \champEnregistrement{element}{Element}
-        \champEnregistrement{code}{Code}
+        \champEnregistrement{nbElements}{\naturel}
+        \champEnregistrement{lesElements}{Table}
     \end{enregistrement}
 
+    \begin{enregistrement}{Table}
+        \champEnregistrement{elements}{\tableau{1..MAX}{de}{Element}}
+        \champEnregistrement{codes}{\tableau{1..MAX}{de}{CodeBinaire}}
+    \end{enregistrement}
+
+
     \fonction{tableDeCodage}
-    {}{TableDeCodage}
-    {}{}
-    {b $\geq$0}{}
-    {\retourner{a/b}}
+        {}{TableDeCodage}
+        {}{resultat : TableDeCodage}
+
+        {\affecter{resultat.nbElements}{0}}
+    {\retourner{resultat}}
+
 
     \fonction{estVide}
-    {table : TableDeCodage}{\booleen}
-    {}{}
-    {\retourner{table.taille = 0}}
+        {table : TableDeCodage}{\booleen}
+        {}{}
+    {\retourner{table.nbElements = 0}}
+
 
     \fonction{elementPresent}
-    {table : TableDeCodage, element : Element}{\booleen}
-    {}{}
-    \pourChaque{table.element}{table}{
-        \sialors{table.cle = element}
-        {\retourner{vrai}}
+        {table : TableDeCodage, element : Element}{\booleen}
+        {}{}
+    {
+        \pourChaque{table.lesElements.elements}{table}{
+            \sialors{element = table.lesElements.elements}{
+                {\retourner{vrai}}
+            }
         }
+    }
     {\retourner{faux}}
+
 
     \fonction{codePresent}
-    {table : TableDeCodage, code : CodeBinaire}{\booleen}
-    {}{}
-    \pourChaque{table.element}{table}{
-        \sialors{table.code = code}
-        {\retourner{vrai}}
+        {table : TableDeCodage, code : CodeBinaire}{\booleen}
+        {}{}
+    {
+        \pourChaque{table.lesElements}{table}{
+            \sialors{table.lesElements.codes = code}{
+            {\retourner{vrai}}
+            }
         }
+    }
     {\retourner{faux}}
+
 
     \procedure{ajouterElement}{
-        \paramEntreeSortie{table : TableDeCodage, element : Element}}
-    {}{}
-    {\sialors{non(elementPresent(table, element))}{
-        \affecter{table.element}{element}}}
-
-    \fonction{elementPossedeCode}
-    {table : TableDeCodage, element : Element}{\booleen}
-    {}{}
-    \pourChaque{table.element}{table}{
-        \sialors{(table.element = code) et (codePresent(table, table.code))}
-        {\retourner{vrai}}
-        }
-    {\retourner{faux}}
-
-    \procedure{assignerCodeElement}{
-        \paramEntree{r : \reel}
-        \paramEntreeSortie{table : TableDeCodage, element : Element, code : CodeBinaire}}
-    {}{}
-    {\sialors{non(codePresent(table, code)) et (elementPresent(table, element))}{
-        \pourChaque(table.element){table}
-            \sialors{table.element = element}    
-                \affecter{table.element}{code}} $à revoir en fonction du type$
+        \paramEntree{element : Element}
+        \paramEntreeSortie{table : TableDeCodage}}
+        {}{}
+    {
+        \sialors{non(elementPresent(table, element))}{
+            \affecter{table.nbElements}{table.nbElements + 1}
+            \affecter{table.lesElements.elements}{element}
+            }
     }
 
-    \fonction{obtenirCodeElement}
-    {table : TableDeCodage, element : Element}{CodeBinaire}
-    {}{}
-    \pourChaque{table.element}{table}{
-        \sialors{(table.element = element) et (codePresent(table, code))}
-        {\retourner{code associé à élément}}
+
+    \fonction{elementPossedeCode}
+        {table : TableDeCodage, element : Element}{\booleen}
+        {}{}
+    {
+        \pourChaque{table.lesElements}{table}{
+            \sialors{obtenirCodeElement(table, element) = table.lesElements.codes[element]}{
+            {\retourner{vrai}}
+            }
         }
+    }
     {\retourner{faux}}
 
-    \fonction{obtenirElementCode}
-    {table : TableDeCodage, code : CodeBinaire}{Element}
-    {}{}
-    \pourChaque{table.element}{table}{
-        \sialors{(table.element = element) et (codePresent(table, code))}
-        {\retourner{table.element}}
+
+    \procedure{assignerCodeElement}{
+        \paramEntree{element : Element, code : CodeBinaire}
+        \paramEntreeSortie{table : TableDeCodage}}
+        {}{}
+    {
+        \sialors{non(codePresent(table, code)) et (elementPresent(table, element))}{
+            \pourChaque(table.lesElements.elements){table}{
+                \sialors{table.lesElements.elements = element}{
+                    {\affecter{table.lesElements.codes[element]}{code}}
+                }
+            }
         }
+    }
+
+
+    \fonction{obtenirCodeElement}
+        {table : TableDeCodage, element : Element}{CodeBinaire}
+        {}{}
+    {
+        \pourChaque{table.lesElements.elements}{table}{
+            \sialors{(table.lesElements.elements = element) et (codePresent(table, table.lesElements.codes[element]))}{
+                {\retourner{table.lesElements.codes[element]}}
+            }
+        }
+    }
+
+    \fonction{obtenirElementCode}
+        {table : TableDeCodage, code : CodeBinaire}{Element}
+        {}{}
+    {
+        \pourChaque{table.element}{table}{
+            \sialors{(table.lesElements.elements[code] = element) et (codePresent(table, code))}{
+            {\retourner{table.lesElements.elements[code]}}
+            }
+        }
+    }
+
 \end{algorithme}
