@@ -1,6 +1,6 @@
 \begin{algorithme}
-\begin{enregistrement}{FileDePriorité} %nom du type
-    \champEnregistrement{file}{\tableauUneDimension{1..MAX}{de}{Element}} %contenu
+\begin{enregistrement}{FileDePriorite} %nom du type
+    \champEnregistrement{tab}{\tableauUneDimension{1..TAILLEMAXELEMENT}{de}{Element}} %contenu
     \champEnregistrement{tailleActuelle}{\naturel}
 \end{enregistrement}
 \end{algorithme}
@@ -8,7 +8,10 @@
 \begin{algorithme}
 \fonction{fileDePrioriteVide} %nom de la fonction
     {}{FileDePriorite} %param entree, param sortie
-{} %contenue
+    {} %precond
+    {temp : FileDePriorite} %var locales
+{\affecter{temp.tailleActuelle}{0}
+\retourner{temp}} %contenue
 \end{algorithme}
 
 \begin{algorithme}
@@ -30,28 +33,32 @@
 
 \begin{algorithme}
 \fonction{obtenirPremier} %nom de la fonction
-    {}{} %param entree, param sortie
+    {file : FileDePriorite}{Element} %param entree, param sortie
     {non(estVide(file))} %precond
-{} %contenue
+    {} %var locales
+{\retourner{file.tab[1]}} %contenue
 \end{algorithme}
 
 \begin{algorithme}
 \fonction{obtenirDernier} %nom de la fonction
-    {}{} %param entree, param sortie
+    {file : FileDePriorite}{Element} %param entree, param sortie
     {non(estVide(file))} %precond
-{} %contenue
+    {} %var locales
+{\retourner{file.tab[file.tailleActuelle]}} %contenue
 \end{algorithme}
 
 \begin{algorithme}
 \fonction{estVide} %nom de la fonction
-    {}{} %param entree, param sortie
+    {file : FileDePriorite}{\booleen} %param entree, param sortie
     {} %precond
-{} %contenue
+    {} %var locales
+{\retourner{file.tailleActuelle = 0}} %contenue
 \end{algorithme}
 
 \begin{algorithme}
 \fonction{longueur} %nom de la fonction
-    {}{} %param entree, param sortie
+    {file : FileDePriorite}{\naturel} %param entree, param sortie
     {} %precond
-{} %contenue
+    {} %var locales
+{\retourner{file.tailleActuelle} %contenue
 \end{algorithme}
