@@ -1,0 +1,72 @@
+\begin{algorithme}
+
+\begin{enregistrement}{ArbreDeHuffman}
+    \champEnregistrement{element}{Element}
+    \champEnregistrement{ponderation}{\naturel}
+    \champEnregistrement{filsGauche}{\pointeur{ArbreDeHuffman}}
+    \champEnregistrement{filsDroit}{\pointeur{ArbreDeHuffman}}
+\end{enregistrement}
+
+\fonction{arbreDeHuffman}
+    {element : Element ; ponderation : \naturel}{arbreDeHuffman}
+    {
+        \declaration{arbre : ArbreDeHuffman}
+        \affecter{\pointeur{arbre.filsGauche}}{pointeurNULL}
+        \affecter{\pointeur{arbre.filsDroit}}{pointeurNULL}
+        \affecter{arbre.element}{element}
+        \affecter{arbre.ponderation}{ponderation}
+        {\retourner{arbre}}
+    }
+
+\fonction{combiner}
+    {arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
+    {arbre : ArbreDeHuffman}
+    {
+        \declaration{arbre : ArbreDeHuffman}
+        \affecter{\pointeur{arbre.filsGauche}}{arbreGauche}
+        \affecter{\pointeur{arbre.filsDroit}}{arbreDroit}
+        \affecter{arbre.ponderation}{obtenirPondération(arbreGauche) + obtenirPondération(arbreDroit)}
+        {\retourner{arbre}}
+    }
+
+\fonction{obtenirPondération}
+    {arbre : ArbreDeHuffman}
+    {\naturel}
+    {
+        {\retourner{{\champ{arbre}{ponderation}}}}
+    }
+
+\fonction{obtenirElement}
+    {arbre : ArbreDeHuffman}{Element}
+    {estUneFeuille(arbre)}
+    {
+        {\retourner{{\champ{arbre}{element}}}}
+    }
+
+\fonction{estUneFeuille}
+    {arbre : ArbreDeHuffman}{\booleen}
+    {
+        {\retourner{{\champ{arbre}{filsGauche} = pointeurNULL} et {\champ{arbre}{filsDroit} = pointeurNULL}}}
+    }
+
+\fonction{obtenirArbreGauche}
+    {arbre : ArbreDeHuffman}{ArbreDeHuffman}
+    {non estUneFeuille(arbre)}
+    {
+        {\retourner{\champ{arbre}{filsGauche}}}
+    }
+
+\fonction{obtenirArbreDroit}
+    {arbre : ArbreDeHuffman}{ArbreDeHuffman}
+    {non estUneFeuille(arbre)}
+    {
+        {\retourner{\champ{arbre}{filsDroit}}}
+    }
+
+\fonction{estVide}
+    {arbre : ArbreDeHuffman}{\booleen}
+    {
+        \retourner{{\champ{ponderation}{arbre} = 0}}
+    }
+
+\end{algorithme}
