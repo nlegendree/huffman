@@ -8,12 +8,13 @@
 
 
     \fonction{statistiques}
-        {ensemble : ensemble<Element>}{Statistiques}
+        {ensemble : ensemble$<$Element$>$}{Statistiques}
         {}{resultat : Statistiques}
     {
         {\affecter{resultat.nbElements}{cardinalite(ensemble)}}
+        \retourner{resultat}
     }
-    {\retourner{resultat}}
+
 
 
     \fonction{obtenirOccurenceElement}
@@ -25,8 +26,9 @@
                 {\affecter{occurences}{occurences + 1}}
             }
         }
+        \retourner{occurences}
     }
-    {\retourner{occurences}}
+
 
 
     \procedure{incrementerOccurenceElement}{

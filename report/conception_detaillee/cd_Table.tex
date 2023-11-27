@@ -15,9 +15,10 @@
     \fonction{tableDeCodage}
         {}{TableDeCodage}
         {}{resultat : TableDeCodage}
-
-        {\affecter{resultat.nbElements}{0}}
-    {\retourner{resultat}}
+    {
+        \affecter{resultat.nbElements}{0}
+        \retourner{resultat}
+    }
 
 
     \fonction{estVide}
@@ -35,8 +36,8 @@
                 {\retourner{vrai}}
             }
         }
+        \retourner{faux}
     }
-    {\retourner{faux}}
 
 
     \fonction{codePresent}
@@ -48,8 +49,8 @@
             {\retourner{vrai}}
             }
         }
+        \retourner{faux}
     }
-    {\retourner{faux}}
 
 
     \procedure{ajouterElement}{
@@ -73,8 +74,8 @@
             {\retourner{vrai}}
             }
         }
+        \retourner{faux}
     }
-    {\retourner{faux}}
 
 
     \procedure{assignerCodeElement}{
@@ -83,7 +84,7 @@
         {}{}
     {
         \sialors{non(codePresent(table, code)) et (elementPresent(table, element))}{
-            \pourChaque(table.lesElements.elements){table}{
+            \pourChaque{table.lesElements.elements}{table}{
                 \sialors{table.lesElements.elements = element}{
                     {\affecter{table.lesElements.codes[element]}{code}}
                 }
