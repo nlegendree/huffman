@@ -3,12 +3,12 @@
 
     \begin{enregistrement}{TableDeCodage}
         \champEnregistrement{nbElements}{\naturel}
-        \champEnregistrement{lesElements}{Table}
+        \champEnregistrement{Table}{\tableau{0..255}{de}{Donnees}}
     \end{enregistrement}
 
-    \begin{enregistrement}{Table}
-        \champEnregistrement{elements}{\tableau{1..256}{de}{Element}}
-        \champEnregistrement{codes}{\tableau{1..256}{de}{CodeBinaire}}
+    \begin{enregistrement}{Donnees}
+        \champEnregistrement{element}{Octet}
+        \champEnregistrement{code}{CodeBinaire}
     \end{enregistrement}
 
 
@@ -31,8 +31,8 @@
         {table : TableDeCodage, element : Element}{\booleen}
         {}{}
     {
-        \pourChaque{table.lesElements.elements}{table}{
-            \sialors{element = table.lesElements.elements}{
+        \pourChaque{table.Table.elements}{table}{
+            \sialors{element = table.Table.element}{
                 {\retourner{vrai}}
             }
         }
@@ -44,8 +44,8 @@
         {table : TableDeCodage, code : CodeBinaire}{\booleen}
         {}{}
     {
-        \pourChaque{table.lesElements}{table}{
-            \sialors{table.lesElements.codes = code}{
+        \pourChaque{table.Table.element}{table}{
+            \sialors{table.Table.code = code}{
             {\retourner{vrai}}
             }
         }
@@ -56,23 +56,23 @@
     \procedure{ajouterElement}{
         \paramEntree{element : Element}
         \paramEntreeSortie{table : TableDeCodage}}
-        {ajouterElement(table, elem) et non(elementPresent(table, elem))}
+        {ajouterElement(table, element) et non(elementPresent(table, element))}
         {}
     {
         \sialors{non(elementPresent(table, element))}{
             \affecter{table.nbElements}{table.nbElements + 1}
-            \affecter{table.lesElements.elements}{element}
+            \affecter{table.Table}{element}
             }
     }
 
 
     \fonction{elementPossedeCode}
         {table : TableDeCodage, element : Element}{\booleen}
-        {elementPresent(table, elem)}
+        {elementPresent(table, element)}
         {}
     {
-        \pourChaque{table.lesElements}{table}{
-            \sialors{obtenirCodeElement(table, element) = table.lesElements.codes[element]}{
+        \pourChaque{table.Table.elements}{table}{
+            \sialors{obtenirCodeElement(table.Table, element) = table.lesElements.element}{
             {\retourner{vrai}}
             }
         }
@@ -83,13 +83,13 @@
     \procedure{assignerCodeElement}{
         \paramEntree{element : Element, code : CodeBinaire}
         \paramEntreeSortie{table : TableDeCodage}}
-        {non(codePresent(table, code)) et elementPresent(table, elem)}
+        {non(codePresent(table, code)) et elementPresent(table, element)}
         {}
     {
-        \sialors{non(codePresent(table, code)) et (elementPresent(table, element))}{
-            \pourChaque{table.lesElements.elements}{table}{
-                \sialors{table.lesElements.elements = element}{
-                    {\affecter{table.lesElements.codes[element]}{code}}
+        \sialors{non(codePresent(table.Table, code)) et (elementPresent(table.Table, element))}{
+            \pourChaque{table.Table.elements}{table}{
+                \sialors{table.Table.elements = element}{
+                    {\affecter{table.Table.element}{code}}
                 }
             }
         }
@@ -100,9 +100,9 @@
         {table : TableDeCodage, element : Element}{CodeBinaire}
         {}{}
     {
-        \pourChaque{table.lesElements.elements}{table}{
-            \sialors{(table.lesElements.elements = element) et (codePresent(table, table.lesElements.codes[element]))}{
-                {\retourner{table.lesElements.codes[element]}}
+        \pourChaque{table.Table.elements}{table}{
+            \sialors{(table.Table.elements = element) et (codePresent(table.Table, table.Table.element))}{
+                {\retourner{table.Table.element}}
             }
         }
     }
@@ -110,12 +110,12 @@
 
     \fonction{obtenirElementCode}
         {table : TableDeCodage, code : CodeBinaire}{Element}
-        {elementPossedeCode(table, elem) et elementPresent(table, elem)}
+        {elementPossedeCode(table, element) et elementPresent(table, element)}
         {}
     {
-        \pourChaque{table.element}{table}{
-            \sialors{(table.lesElements.elements[code] = element) et (codePresent(table, code))}{
-            {\retourner{table.lesElements.elements[code]}}
+        \pourChaque{table.Table.elements}{table}{
+            \sialors{(table.Table.elements = element) et (codePresent(table.Table, code))}{
+            {\retourner{table.Table.code}}
             }
         }
     }
