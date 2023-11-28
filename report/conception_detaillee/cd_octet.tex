@@ -1,13 +1,13 @@
 \begin{algorithme}
 \begin{enregistrement}{Octet}{
-    \champEnregistrement{octet}{Nombre8Bits}
+    \champEnregistrement{octet}{Naturel8Bits}
 }
 \end{enregistrement}
 
-\fonction{octet}{}{Octet}{}{
+\fonction{octet}{\paramEntree{nombre: Naturel8Bits}}{Octet}{}{
     sortie: Octet
 }{
-    \affecter{sortie.octet}{0}
+    \affecter{sortie.octet}{nombre}
     \retourner{sortie}
 }
 
