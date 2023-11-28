@@ -1,0 +1,46 @@
+type Octet = structure
+    octet: Char
+fin
+
+type Bit = structure
+    etat: boolean
+fin
+
+fonction octet(): Octet 
+Déclaration
+    sortie: Octet
+début
+    retourner Octet
+fin
+
+procédure obtenirIemeBit(E octet: Octet, i : NNN): Bit
+Déclaration
+    estUn: boolean
+début
+    estUn <- octet.octet &  (1 << (i-1))
+    retourner bit(estUn)
+fin
+
+procédure fixerIemeBit(E/S octet: Octet, i : NNN, bit: Bit): Bit
+Déclaration
+    estHaut: boolean
+    sortie: Bit
+début
+    si estUn(bit) alors
+        octet.octet <- octet.octet | (1 << (i-1))
+    sinon
+        octet.octet <- octet.octet & !obtenirIemeBit(octet, i)
+fin
+
+
+fonction bit(etat: boolean): Bit 
+Déclaration
+    sortie: Bit
+début
+    bit.etat <- etat
+fin
+
+fonction estUn(bit: Bit): boolean 
+début
+    retourner bit.etat
+fin
