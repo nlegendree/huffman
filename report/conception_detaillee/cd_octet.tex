@@ -1,0 +1,54 @@
+\begin{algorithme}
+\type{Octet}{structure}{
+    \champ{octet}{Char}
+}
+
+\fonction{octet}{}{Octet}{
+    \Declaration sortie: Octet
+}{
+    \Debut
+    \Retourner{Octet}
+    \Fin
+}
+
+\procedure{obtenirIemeBit}{\paramEntree{octet: Octet, i: NNN}}{\paramSortie{Bit}}{
+    \Declaration estUn: boolean
+}{
+    \Debut
+    estUn \Affectation octet.octet \Et (1 \DecalageGauche (i-1))
+    \Retourner{bit(estUn)}
+    \Fin
+}
+
+\procedure{fixerIemeBit}{\paramEntreeSortie{octet: Octet}\paramEntree{i: NNN, bit: Bit}}{}{
+    \Declaration estHaut: boolean
+    \Declaration sortie: Bit
+}{
+    \Debut
+    \Si{estUn(bit)}{
+        octet.octet \Affectation octet.octet \Ou (1 \DecalageGauche (i-1))
+    }
+    \Sinon{
+        octet.octet \Affectation octet.octet \Et \Negation{obtenirIemeBit(octet, i)}
+    }
+    \Fin
+}
+
+\type{Bit}{structure}{
+    \champ{etat}{boolean}
+}
+
+\fonction{bit}{etat: boolean}{Bit}{
+    \Declaration sortie: Bit
+}{
+    \Debut
+    bit.etat \Affectation etat
+    \Fin
+}
+
+\fonction{estUn}{bit: Bit}{boolean}{
+    \Debut
+    \Retourner{bit.etat}
+    \Fin
+}
+\end{algorithme}
