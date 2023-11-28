@@ -2,10 +2,6 @@ type Octet = structure
     octet: Char
 fin
 
-type Bit = structure
-    etat: boolean
-fin
-
 fonction octet(): Octet 
 Déclaration
     sortie: Octet
@@ -32,6 +28,9 @@ début
         octet.octet <- octet.octet & !obtenirIemeBit(octet, i)
 fin
 
+type Bit = structure
+    etat: boolean
+fin
 
 fonction bit(etat: boolean): Bit 
 Déclaration
