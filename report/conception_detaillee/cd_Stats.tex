@@ -1,0 +1,47 @@
+\begin{algorithme}
+
+
+    \begin{enregistrement}{Statistiques}
+        \champEnregistrement{nbElements}{\naturel}
+        \champEnregistrement{lesElements}{\tableau{1..MAX}{de}{Element}}
+    \end{enregistrement}
+
+
+    \fonction{statistiques}
+        {ensemble : ensemble$<$Element$>$}{Statistiques}
+        {}{resultat : Statistiques}
+    {
+        {\affecter{resultat.nbElements}{cardinalite(ensemble)}}
+        \retourner{resultat}
+    }
+
+
+
+    \fonction{obtenirOccurenceElement}
+        {statistiques : Statistiques, element : Element}{\naturel}
+        {}{occurences : \naturel}
+    {
+        \pourChaque{statistiques.lesElements}{statistiques}{
+            \sialors{statistiques.lesElements = element}{
+                {\affecter{occurences}{occurences + 1}}
+            }
+        }
+        \retourner{occurences}
+    }
+
+
+
+    \procedure{incrementerOccurenceElement}{
+        \paramEntree{element : Element}
+        \paramEntreeSortie{statistiques : Statistiques}}
+    {}{}
+    {
+        \pourChaque{statistiques.lesElements}{statistiques}{
+            \sialors{statistiques.lesElements = element}{
+                {\affecter{occurences}{occurences + 1}}
+            }
+        }
+    }
+
+
+\end{algorithme}
