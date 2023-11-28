@@ -1,0 +1,59 @@
+\begin{algorithme}
+\begin{enregistrement}{FileDePriorite} %nom du type
+    \champEnregistrement{tab}{\tableauUneDimension{1..NOMBRE_MAX_ELEMENT}{de}{Element}} %contenu %en C attention aux indices qui commencent à 0
+    \champEnregistrement{tailleActuelle}{\naturel}
+\end{enregistrement}
+\end{algorithme}
+
+\begin{algorithme}
+\fonction{fileDePrioriteVide} %nom de la fonction
+    {}{FileDePriorite} %param entree, param sortie
+    {} %precond
+    {temp : FileDePriorite} %var locales
+{   \affecter{temp.tailleActuelle}{0}
+    \retourner{temp}} %contenue
+\end{algorithme}
+
+\begin{algorithme}
+\procedure{ajouterElement}{
+    \paramEntree{element : Element, indice : \naturelNonNul}
+    \paramEntreeSortie{file : FileDePriorite}}
+{} %precond
+{i : \naturelNonNul} %var locales (i à placer)
+{   \affecter{file.tailleActuelle}{file.tailleActuelle + 1}
+    \pour{i}{file.tailleActuelle}{indice+1}{-1}{
+        \affecter{file.tab[i]}{file.tab[i-1]}}
+    \affecter{file.tab[indice]}{element}} %contenue
+\end{algorithme}
+
+\begin{algorithme}
+\procedure{supprimerdDernier}{
+    \paramEntreeSortie{file : FileDePriorite}}
+{non(estVide(file))} %precond
+{} %var locales
+{   \affecter{file.tailleActuelle}{file.tailleActuelle - 1}} %contenue
+\end{algorithme} %on laisse le dernier élément dans le tableau mais on ne s'en occupe plus, il sera écraser ou ignoré si besoin gràce à la taille diminuée
+
+\begin{algorithme}
+\fonction{obtenirDernier} %nom de la fonction
+    {file : FileDePriorite}{Element} %param entree, param sortie
+    {non(estVide(file))} %precond
+    {} %var locales
+{   \retourner{file.tab[file.tailleActuelle]}} %contenue
+\end{algorithme}
+
+\begin{algorithme}
+\fonction{estVide} %nom de la fonction
+    {file : FileDePriorite}{\booleen} %param entree, param sortie
+    {} %precond
+    {} %var locales
+{   \retourner{file.tailleActuelle = 0}} %contenue
+\end{algorithme}
+
+\begin{algorithme}
+\fonction{longueur} %nom de la fonction
+    {file : FileDePriorite}{\naturel} %param entree, param sortie
+    {} %precond
+    {} %var locales
+{   \retourner{file.tailleActuelle}} %contenue
+\end{algorithme}
