@@ -56,7 +56,8 @@
     \procedure{ajouterElement}{
         \paramEntree{element : Element}
         \paramEntreeSortie{table : TableDeCodage}}
-        {}{}
+        {ajouterElement(table, elem) et non(elementPresent(table, elem))}
+        {}
     {
         \sialors{non(elementPresent(table, element))}{
             \affecter{table.nbElements}{table.nbElements + 1}
@@ -67,7 +68,8 @@
 
     \fonction{elementPossedeCode}
         {table : TableDeCodage, element : Element}{\booleen}
-        {}{}
+        {elementPresent(table, elem)}
+        {}
     {
         \pourChaque{table.lesElements}{table}{
             \sialors{obtenirCodeElement(table, element) = table.lesElements.codes[element]}{
@@ -81,7 +83,8 @@
     \procedure{assignerCodeElement}{
         \paramEntree{element : Element, code : CodeBinaire}
         \paramEntreeSortie{table : TableDeCodage}}
-        {}{}
+        {non(codePresent(table, code)) et elementPresent(table, elem)}
+        {}
     {
         \sialors{non(codePresent(table, code)) et (elementPresent(table, element))}{
             \pourChaque{table.lesElements.elements}{table}{
@@ -104,9 +107,11 @@
         }
     }
 
+
     \fonction{obtenirElementCode}
         {table : TableDeCodage, code : CodeBinaire}{Element}
-        {}{}
+        {elementPossedeCode(table, elem) et elementPresent(table, elem)}
+        {}
     {
         \pourChaque{table.element}{table}{
             \sialors{(table.lesElements.elements[code] = element) et (codePresent(table, code))}{
@@ -114,5 +119,6 @@
             }
         }
     }
+    
 
 \end{algorithme}
