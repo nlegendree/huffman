@@ -5,12 +5,22 @@
     \champEnregistrement{bits}{\tableau{1..MAX}{de}{Bit}}
 \end{enregistrement}
 \function{codeBinaire}{b:Bit}{CodeBinaire}{}{cB:CodeBinaire}%
-{\affect{\champ{cB}{nbBits}}{1}
-\affect{\champ{cB}{bits}}{b}
-\retourner{cB}}
+{
+    \affect{\champ{cB}{nbBits}}{1}
+    \affect{\champ{cB}{bits}}{b}
+    \retourner{cB}
+}
 \procedure{ajouterBit}{\paramEntreeSortie{cB:codeBinaire}\paramEntree{b:Bit}}{obtenirLongueur(cB)\le MAX}{}%
-{\affect{\champ{cB}{nbBits}}{\champ{cB}{nbBits}+1}
-\affect{\champ{cB}{bits}[\champ{cB}{bits}]}{b}}
-\fonction{obtenirIemeBit}{cB:CodeBinaire,ind:\naturelNonNul}{ind\le}
-
+{
+    \affect{\champ{cB}{nbBits}}{\champ{cB}{nbBits}+1}
+    \affect{\champ{cB}{bits}[\champ{cB}{bits}]}{b}
+}
+\fonction{obtenirLongueur}{cB:CodeBinaire}{\naturelNonNul}{}{}%
+{
+    \retourner{\champ{cB}{nbBits}}
+}
+\fonction{obtenirIemeBit}{cB:CodeBinaire,ind:\naturelNonNul}{Bit}{ind\le obtenirLongueur(cB)}{}%
+{
+    \retourner{\champ{cB}{bits}[ind]}
+}
 \end{algorithme}
