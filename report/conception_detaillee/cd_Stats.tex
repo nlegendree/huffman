@@ -1,21 +1,35 @@
 \begin{algorithme}
 
 
+    \begin{enregistrement}{UneStatistique}
+        \champEnregistrement{nbOccurence}{\naturel}
+        \champEnregistrement{element}{Element}
+    \end{enregistrement}
+
     \begin{enregistrement}{Statistiques}
-        \champEnregistrement{nbElements}{\naturel}
-        \champEnregistrement{lesElements}{\tableau{1..MAX}{de}{Element}}
+        \champEnregistrement{nbOccurenceTotale}{\naturel}
+        \champEnregistrement{lesStatistiques}{\tableau{1..MAX}{de}{UneStatistique}}
     \end{enregistrement}
 
 
     \fonction{statistiques}
         {ensemble : ensemble$<$Element$>$}{Statistiques}
-        {}{resultat : Statistiques}
+        {}
+        {resultat : Statistiques
+        elem : Element
+        i : \naturel}
     {
-        {\affecter{resultat.nbElements}{cardinalite(ensemble)}}
+        \affecter{i}{1}
+        \affecter{resultat.nbOccurenceTotale}{0}
+        \pourChaque{elem}{ensemble}{
+            affecter{resultat.lesStatistiques[i].nbOccurence}{0}
+            affecter{resultat.lesStatistiques[i].lesStatistiques}{elem}
+            affecter{i}{i+1}
+        }
         \retourner{resultat}
     }
 
-
+a corriger à partir de là
 
     \fonction{obtenirOccurenceElement}
         {statistiques : Statistiques, element : Element}{\naturel}
