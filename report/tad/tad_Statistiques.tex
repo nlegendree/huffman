@@ -10,18 +10,21 @@
         \tadOperation{statistiques}%
             {\tadUnParam{Ensemble d'Element}}%
             {\tadUnParam{Statistiques}}
-        \tadOperation{incrementerOccurenceElement}%
-            {\tadDeuxParams{Statistiques}{Element}}%
-            {\tadUnParam{Statistiques}}
         \tadOperation{obtenirOccurenceElement}%
             {\tadDeuxParams{Statistiques}{Element}}%
             {\tadUnParam{\naturel}}
+        \tadOperation{incrementerOccurenceElement}%
+            {\tadDeuxParams{Statistiques}{Element}}%
+            {\tadUnParam{Statistiques}}
+        \tadOperation{fixerOccurenceElement}%
+            {\tadTroisParams{Element}{\naturel}{Statistiques}}%
+            {\tadUnParam{Statistiques}}
         \tadOperation{obtenirTotalOccurence}%
             {\tadUnParam{Statistiques}}%
             {\tadUnParam{\naturel}}
     \end{tadOperations}
 
-    \begin{tadAxiomes}
+    \begin{tadAxiomes} %a recompléter ou faire en sémantique
         \tadAxiome{obtenirOccurenceElement(statistiques(set), elem) = 0}
         \tadAxiome{obtenirOccurenceElement(incrementerOccurenceElement(stat, elem) = obtenirOccurenceElement(stat, elem) + 1}
     \end{tadAxiomes}
