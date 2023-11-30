@@ -1,6 +1,7 @@
 \begin{algorithme}
 
-    \remarque{Cette présentation est générique, dans le cadre du problème les éléments de l'ensemble sont des octets, or un octet va être associé à un caractère mais code aussi un entier. Ainsi, lors de l'implémentation, plutôt que de placer à un indice i dans le tableau, il est plus pertinent dans le cadre du projet de placer un octet à l'indice de l'entier lui correspondant, l'octet devient donc à la fois une partie de l'élément mais aussi la clé (en voyant les choses comme un dictionnaire) lui correspondant. Cela permet une complexité de certaines fonctions en O(1) plutôt qu'en O(n). Des commentaires sur ce pseudo code indiqueront des modifications pertinentes à l'implémentation sur ce sujet}
+    \remarque{Cette présentation est générique, dans le cadre du problème les éléments de l'ensemble sont des octets, or un octet va être associé à un caractère mais peut aussi coder un entier. Ainsi, lors de l'implémentation, plutôt que de placer à un indice i dans le tableau, il est plus pertinent dans le cadre du projet de placer un octet à l'indice de l'entier lui correspondant, l'octet devient donc à la fois une partie de l'élément mais aussi la clé (en voyant les choses comme un dictionnaire) lui correspondant. Cela permet une complexité de certaines fonctions en O(1) plutôt qu'en O(n). Des commentaires sur ce pseudo code indiqueront des modifications pertinentes à l'implémentation sur ce sujet}
+    \remarque{il faudra donc peut-être coder une foction de transtypage pour passer d'un octet à l'entier lui correspondant}
 
     \begin{enregistrement}{UneStatistique}
         \champEnregistrement{nbOccurence}{\naturel}
