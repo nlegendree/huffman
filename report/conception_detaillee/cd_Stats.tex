@@ -18,14 +18,18 @@
         {}
         {resultat : Statistiques
         elem : Element
-        i : \naturel}
+        i : \naturel
+        \commentaire{inutile à l'implémentation}} 
     {
         \affecter{i}{1}
+        \commentaire{inutile à l'implémentation}
         \affecter{resultat.nbOccurenceTotale}{0}
         \pourChaque{elem}{ensemble}{
             affecter{resultat.lesStatistiques[i].nbOccurence}{0}
+            \commentaire{entier codé par l'octet à l'implémentation au lieu de i}
             affecter{resultat.lesStatistiques[i].lesStatistiques}{elem}
             affecter{i}{i+1}
+            \commentaire{inutile à l'implémentation}
         }
         \retourner{resultat}
     }
