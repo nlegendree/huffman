@@ -1,8 +1,21 @@
 \signatureFonction{statistiques}
 	{Ensemble d'Element}{Statistiques}
-\signatureProcedure{incrementerOccurenceElement}
-	{E/S statistiques : Statistiques, element: Element}
+	{}
+
 \signatureFonction{obtenirOccurenceElement}
 	{statistiques : Statistiques, element: Element}{\naturel}
+	{}
+
+\procedure{incrementerOccurenceElement}
+    {\paramEntree{element : Element}
+    \paramEntreeSortie{statistiques : Statistiques}}
+	{}
+
+\procedure{fixerOccurenceElement}
+    {\paramEntree{element : Element, nbOccurence : \naturel}
+    \paramEntreeSortie{statistiques : Statistiques}}
+	{}
+
 \signatureFonction{obtenirTotalOccurence}
 	{statistiques : Statistiques}{\naturel}
+	{}
