@@ -1,16 +1,16 @@
 \begin{algorithme}
 
-\begin{enregistrement}{ArbreDeHuffman}
+\begin{enregistrement}{Noeud}
     \champEnregistrement{element}{Element}
     \champEnregistrement{ponderation}{\naturel}
-    \champEnregistrement{filsGauche}{\pointeur{ArbreDeHuffman}}
-    \champEnregistrement{filsDroit}{\pointeur{ArbreDeHuffman}}
+    \champEnregistrement{filsGauche}{\pointeur{Noeud}}
+    \champEnregistrement{filsDroit}{\pointeur{Noeud}}
 \end{enregistrement}
 
 \fonction{arbreDeHuffman}
     {element : Element ; ponderation : \naturel}{arbreDeHuffman}
     {
-        \declaration{arbre : ArbreDeHuffman}
+        \declaration{arbre : Noeud}
         \affecter{\pointeur{arbre.filsGauche}}{pointeurNULL}
         \affecter{\pointeur{arbre.filsDroit}}{pointeurNULL}
         \affecter{arbre.element}{element}
