@@ -26,13 +26,13 @@
     \paramEntree{elem : Element, prio : \naturelNonNul}
     \paramEntreeSortie{file : FileDePriorite}}
 {} %precond
-{i : \naturelNonNul} %var locales (i à placer)
+{i : \naturelNonNul} %var locales
 {   \affecter{file.tailleActuelle}{file.tailleActuelle + 1}
     \affecter{i}{file.tailleActuelle}
     \tantque{file.tab[i].priorite $\leq$ prio}{
         \affecter{file.tab[i]}{file.tab[i-1]}}
-    \affecter{file.tab[indice].element}{elem}}
-    \affecter{file.tab[indice].priorite}{prio} %contenue
+    \affecter{file.tab[i].element}{elem}}
+    \affecter{file.tab[i].priorite}{prio} %contenue
 \end{algorithme}
 
 \begin{algorithme}
