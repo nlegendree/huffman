@@ -1,6 +1,13 @@
 \begin{algorithme}
+\begin{enregistrement}{ElementFile} %nom du type
+    \champEnregistrement{element}{Element} %contenu %en C attention aux indices qui commencent à 0
+    \champEnregistrement{priorite}{\naturel}
+\end{enregistrement}
+\end{algorithme}
+
+\begin{algorithme}
 \begin{enregistrement}{FileDePriorite} %nom du type
-    \champEnregistrement{tab}{\tableauUneDimension{1..NOMBRE_MAX_ELEMENT}{de}{Element}} %contenu %en C attention aux indices qui commencent à 0
+    \champEnregistrement{tab}{ElementFile} %contenu %en C attention aux indices qui commencent à 0
     \champEnregistrement{tailleActuelle}{\naturel}
 \end{enregistrement}
 \end{algorithme}
@@ -16,14 +23,16 @@
 
 \begin{algorithme}
 \procedure{ajouterElement}{
-    \paramEntree{element : Element, indice : \naturelNonNul}
+    \paramEntree{elem : Element, prio : \naturelNonNul}
     \paramEntreeSortie{file : FileDePriorite}}
 {} %precond
 {i : \naturelNonNul} %var locales (i à placer)
 {   \affecter{file.tailleActuelle}{file.tailleActuelle + 1}
-    \pour{i}{file.tailleActuelle}{indice+1}{-1}{
+    \affecter{i}{file.tailleActuelle}
+    \tantque{file.tab[i].priorite $\leq$ prio}{
         \affecter{file.tab[i]}{file.tab[i-1]}}
-    \affecter{file.tab[indice]}{element}} %contenue
+    \affecter{file.tab[indice].element}{elem}}
+    \affecter{file.tab[indice].priorite}{prio} %contenue
 \end{algorithme}
 
 \begin{algorithme}
@@ -31,8 +40,9 @@
     \paramEntreeSortie{file : FileDePriorite}}
 {non(estVide(file))} %precond
 {} %var locales
-{   \affecter{file.tailleActuelle}{file.tailleActuelle - 1}} %contenue
-\end{algorithme} %on laisse le dernier élément dans le tableau mais on ne s'en occupe plus, il sera écraser ou ignoré si besoin gràce à la taille diminuée
+{   \affecter{file.tailleActuelle}{file.tailleActuelle - 1}
+    \affecter{file.ElementFile.priorite}{0}} %contenue
+\end{algorithme} %on laisse le dernier élément dans le tableau mais on ne s'en occupe plus, il sera écraser ou ignoré si besoin gràce à la taille diminuée, sa priorité passe à 0 pour ne pas géner
 
 \begin{algorithme}
 \fonction{obtenirDernier} %nom de la fonction
