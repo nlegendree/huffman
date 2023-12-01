@@ -1,47 +1,95 @@
 \begin{algorithme}
 
+    \remarque{Cette présentation est générique, dans le cadre du problème les éléments de l'ensemble sont des octets, or un octet va être associé à un caractère mais peut aussi coder un entier. Ainsi, lors de l'implémentation, plutôt que de placer à un indice i dans le tableau, il est plus pertinent dans le cadre du projet de placer (dans un tableau) un octet à l'indice de l'entier lui correspondant, l'octet devient donc à la fois une partie de l'élément mais aussi la clé (en voyant les choses comme un dictionnaire) lui correspondant. Cela permet une complexité de certaines fonctions en O(1) plutôt qu'en O(n). Des commentaires sur ce pseudo code indiqueront des modifications pertinentes à l'implémentation sur ce sujet}
+    \remarque{selon les type existants en c, il faut donc peut-être coder une foction de transtypage pour passer d'un octet à l'entier lui correspondant}
+
+
+    \begin{enregistrement}{UneStatistique}
+        \champEnregistrement{occurence}{\naturel}
+        \champEnregistrement{element}{Element}
+    \end{enregistrement}
+
 
     \begin{enregistrement}{Statistiques}
-        \champEnregistrement{nbElements}{\naturel}
-        \champEnregistrement{lesElements}{\tableau{1..MAX}{de}{Element}}
+        \champEnregistrement{nbOccurenceTotale}{\naturel}
+        \champEnregistrement{lesStatistiques}{\tableau{1..MAX}{de}{UneStatistique}}
     \end{enregistrement}
 
 
     \fonction{statistiques}
         {ensemble : ensemble$<$Element$>$}{Statistiques}
-        {}{resultat : Statistiques}
+        {}
+        {resultat : Statistiques
+        elem : Element
+        i : \naturel
+        \commentaire{inutile à l'implémentation}} 
     {
-        {\affecter{resultat.nbElements}{cardinalite(ensemble)}}
+        \affecter{i}{1}
+        \commentaire{inutile à l'implémentation}
+        \affecter{resultat.nbOccurenceTotale}{0}
+        \pourChaque{elem}{ensemble}{
+            affecter{resultat.lesStatistiques[i].occurence}{0}
+            \commentaire{remplacer i par entier codé par l'octet à l'implémentation}
+            affecter{resultat.lesStatistiques[i].element}{elem}
+            affecter{i}{i+1}
+            \commentaire{inutile à l'implémentation}
+        }
         \retourner{resultat}
     }
 
 
-
     \fonction{obtenirOccurenceElement}
-        {statistiques : Statistiques, element : Element}{\naturel}
-        {}{occurences : \naturel}
+        {statistiques : Statistiques, elem : Element}{\naturel}
+        {}
+        {i : \naturel
+        \commentaire{inutile à l'implémentation}}
     {
-        \pourChaque{statistiques.lesElements}{statistiques}{
-            \sialors{statistiques.lesElements = element}{
-                {\affecter{occurences}{occurences + 1}}
-            }
+        \affecter{i}{1}
+        \tantque{statistiques.lesStatistiques[i].element $\neq$ elem}{
+            \affecter{i}{i + 1}
         }
-        \retourner{occurences}
+        \retourner{statistiques.lesStatistiques[i].occurences}
+        \remarque{remplacer i par entier codé par l'octet correspondant à element à l'implémentation : complexité O(1), on se passe donc de ce qu'il y a avant le retourner (complexité O(n))}
     }
-
 
 
     \procedure{incrementerOccurenceElement}{
         \paramEntree{element : Element}
         \paramEntreeSortie{statistiques : Statistiques}}
-    {}{}
+    {}
+    {i : \naturel
+    \commentaire{inutile à l'implémentation}}
     {
-        \pourChaque{statistiques.lesElements}{statistiques}{
-            \sialors{statistiques.lesElements = element}{
-                {\affecter{occurences}{occurences + 1}}
-            }
+        \affecter{i}{1}
+        \tantque{statistiques.lesStatistiques[i].element $\neq$ elem}{
+            \affecter{i}{i + 1}
         }
+        \affecter{statistiques.lesStatistiques[i].occurences}{statistiques.lesStatistiques[i].occurences + 1}
+        \affecter{statistiques.nbOccurenceTotale}{statistiques.nbOccurenceTotale + 1}
+        \remarque{remplacer i par entier codé par l'octet correspondant à element à l'implémentation : complexité O(1), on se passe donc de ce qu'il y a avant les 2 dernières affectations (complexité O(n))}
     }
 
+    \procedure{fixerOccurenceElement}{
+        \paramEntree{element : Element, nbOccurence : \naturel}
+        \paramEntreeSortie{statistiques : Statistiques}}
+    {}
+    {i : \naturel
+    \commentaire{inutile à l'implémentation}}
+    {
+        \affecter{i}{1}
+        \tantque{statistiques.lesStatistiques[i].element $\neq$ elem}{
+            \affecter{i}{i + 1}
+        }
+        \affecter{statistiques.lesStatistiques[i].occurences}{nbOccurence}
+        \affecter{statistiques.nbOccurenceTotale}{statistiques.nbOccurenceTotale + nbOccurence}
+        \remarque{remplacer i par entier codé par l'octet correspondant à element à l'implémentation : complexité O(1), on se passe donc de ce qu'il y a avant les 2 dernières affectations (complexité O(n))}
+    }
 
+    \fonction{obtenirTotalOccurence}
+        {statistiques : Statistiques}{\naturel}
+        {}
+        {}
+    {
+        \retourner{statistiques.nbOccurenceTotale}
+    }
 \end{algorithme}
