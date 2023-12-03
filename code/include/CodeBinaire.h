@@ -1,18 +1,22 @@
 #ifndef  __CODEBINAIRE__
 #define __CODEBINAIRE__
 
-struct CodeBinaire
+#define NBMAXBIT 7
+
+typedef enum {bitA0 = 0, bitA1 = 1} Bit; /*ça sera aussi dans le main je suppose*/
+
+typedef struct CodeBinaire
 {
-    long int nbBits;
-    long int bits[];
-};
+    short int nbBits;
+    Bit bits[NBMAXBIT];
+} CodeBinaire;
 
-CodeBinaire codeBinaire();
+CodeBinaire codeBinaire(Bit bit);
 
-void ajouterBit();
+void ajouterBit(CodeBinaire* cB, Bit bit);
 
-long int obtenirLongueur();
+short int obtenirLongueur(CodeBinaire cB);
 
-Bit obtenirIemeBit();
+Bit obtenirIemeBit(CodeBinaire cB, short int ind);
 
 #endif
