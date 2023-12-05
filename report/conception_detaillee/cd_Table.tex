@@ -3,7 +3,7 @@
 
     \begin{enregistrement}{TableDeCodage}
         \champEnregistrement{nbElements}{\naturel}
-        \champEnregistrement{Table}{\tableau{0..255}{de}{Donnees}}
+        \champEnregistrement{table}{\tableau{0..255}{de}{Donnees}}
     \end{enregistrement}
 
     \begin{enregistrement}{Donnees}
@@ -29,10 +29,10 @@
 
     \fonction{elementPresent}
         {table : TableDeCodage, octet : Octet}{\booleen}
-        {}{}
+        {}{i:\naturelNonNul}
     {
-        \pourChaque{table.Table.elements}{table}{
-            \sialors{octet = table.Table.octet}{
+        \pour{i}{1}{table.nbElements}{}{
+            \sialors{octet = table.table[i].octet}{
                 {\retourner{vrai}}
             }
         }
@@ -42,11 +42,11 @@
 
     \fonction{codePresent}
         {table : TableDeCodage, code : CodeBinaire}{\booleen}
-        {}{}
+        {}{i:\naturelNonNul}
     {
-        \pourChaque{table.Table.octet}{table}{
-            \sialors{table.Table.code = code}{
-            {\retourner{vrai}}
+        \pour{i}{1}{table.nbElements}{}{
+            \sialors{code = table.table[i].code}{
+                {\retourner{vrai}}
             }
         }
         \retourner{faux}
@@ -54,55 +54,25 @@
 
 
     \procedure{ajouterElement}{
-        \paramEntree{octet : Octet}
+        \paramEntree{octet : Octet, code : CodeBInaire}
         \paramEntreeSortie{table : TableDeCodage}}
         {ajouterElement(table, octet) et non(elementPresent(table, octet))}
         {}
     {
         \sialors{non(elementPresent(table, octet))}{
             \affecter{table.nbElements}{table.nbElements + 1}
-            \affecter{table.Table}{octet}
+            \affecter{table.table[nbElements]}{octet}
+            \affecter{table.table[nbElements]}{code}
             }
     }
 
-
-    \fonction{elementPossedeCode}
-        {table : TableDeCodage, octet : Octet}{\booleen}
-        {elementPresent(table, octet)}
-        {}
-    {
-        \pourChaque{table.Table.octet}{table}{
-            \sialors{obtenirCodeElement(table.Table, octet) = table.lesElements.octet}{
-            {\retourner{vrai}}
-            }
-        }
-        \retourner{faux}
-    }
-
-
-    \procedure{assignerCodeElement}{
-        \paramEntree{octet : Octet, code : CodeBinaire}
-        \paramEntreeSortie{table : TableDeCodage}}
-        {non(codePresent(table, code)) et elementPresent(table, octet)}
-        {}
-    {
-        \sialors{non(codePresent(table.Table, code)) et (elementPresent(table.Table, octet))}{
-            \pourChaque{table.Table.octet}{table}{
-                \sialors{table.Table.octet = octet}{
-                    {\affecter{table.Table.octet}{code}}
-                }
-            }
-        }
-    }
-
-
-    \fonction{obtenirCodeElement}
+    \fonction{obtenirCodeOctet}
         {table : TableDeCodage, octet : Octet}{CodeBinaire}
-        {}{}
+        {octetPresent(table, octet)}{i:\naturelNonNul}
     {
-        \pourChaque{table.Table.octet}{table}{
-            \sialors{(table.Table.octet = octet) et (codePresent(table.Table, table.Table.octet))}{
-                {\retourner{table.Table.octet}}
+        \pour{i}{1}{table.nbElements}{}{
+            \sialors{(table.table[i].octet = octet)}{
+                {\retourner{table.table.codeBinaire}}
             }
         }
     }
@@ -110,12 +80,12 @@
 
     \fonction{obtenirElementCode}
         {table : TableDeCodage, code : CodeBinaire}{Octet}
-        {elementPossedeCode(table, octet) et elementPresent(table, octet)}
-        {}
+        {elementPresent(table, element)}
+        {i:\naturelNonNul}
     {
-        \pourChaque{table.Table.octet}{table}{
-            \sialors{(table.Table.octet = octet) et (codePresent(table.Table, code))}{
-            {\retourner{table.Table.code}}
+        \pour{i}{1}{table.nbElements}{}{
+            \sialors{(table.table[i].code = code)}{
+            {\retourner{table.table[i].octet}}
             }
         }
     }
