@@ -2,10 +2,10 @@
 #define __FILDEPRIORITE__
 
 FileDePriorite fileDePrioriteVide();
-void ajouterElement(Element element, unsigned int indice, FileDePriorite file);
-void supprimerDernier(FileDePriorite file);
-Element obtenirDernier(FileDePriorite file);
-bool estVide(FileDePriorite file);
-int longueur(FileDePriorite file);
+void FP_ajouterElement(Octet octet, unsigned int indice, FileDePriorite file);
+void FP_supprimerDernier(FileDePriorite file);
+Octet FP_obtenirDernier(FileDePriorite file);
+bool FP_estVide(FileDePriorite file);
+int FP_longueur(FileDePriorite file);
 
 #endif
