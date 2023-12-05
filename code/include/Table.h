@@ -26,9 +26,7 @@ int TDC_codePresent(TableDeCodage tableDeCodage, CodeBinaire codeBinaire);
 
 int TDC_octetPossedeCode(TableDeCodage tableDeCodage, Octet octet);
 
-void TDC_ajouterOctet(TableDeCodage* pTableDeCodage, Octet octet);
-
-void TDC_assignerCodeOctet(TableDeCodage* pTableDeCodage, CodeBinaire codeBinaire, Octet octet);
+void TDC_ajouterOctet(TableDeCodage* pTableDeCodage, Octet octet, CodeBinaire codeBinaire);
 
 CodeBinaire TDC_obtenireCodeOctet(TableDeCodage tableDeCodage, Octet octet);
 
