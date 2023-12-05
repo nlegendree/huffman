@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include "Octet.h"
 
+#define FP_MAX_TAILLE = 255
+
 // Définition de la structure ElementFile
 typedef struct {
     Octet octet;
@@ -10,7 +12,7 @@ typedef struct {
 
 // Définition de la structure FileDePriorite
 typedef struct {
-    ElementFile tab[MAX_TAILLE]; // Remplacer MAX_TAILLE par la taille maximale souhaitée
+    ElementFile tab[FP_MAX_TAILLE]; // Remplacer MAX_TAILLE par la taille maximale souhaitée
     unsigned int tailleActuelle;
 } FileDePriorite;
 
@@ -22,13 +24,13 @@ FileDePriorite FP_fileDePrioriteVide() {
 }
 
 // Procédure pour ajouter un élément à la file de priorité
-void FP_ajouterElement(Octet octet, unsigned int prio, FileDePriorite *file) {
+void FP_ajouterElement(Octet octet, unsigned int prio, FileDePriorite *pfile) {
     unsigned int i > 0;
-    file->tailleActuelle++;
-    i = file->tailleActuelle;
+    pfile->tailleActuelle++;
+    i = pfile->tailleActuelle;
 
-    while (i > 1 && file->tab[i - 1].priorite <= prio) {
-        file->tab[i] = file->tab[i - 1];
+    while (i > 1 && pfile->tab[i - 1].priorite <= prio) {
+        pfile->tab[i] = pfile->tab[i - 1];
         i--;
     }
 
