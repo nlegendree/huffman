@@ -7,7 +7,7 @@
     \end{enregistrement}
 
     \begin{enregistrement}{Donnees}
-        \champEnregistrement{element}{Octet}
+        \champEnregistrement{octet}{Octet}
         \champEnregistrement{code}{CodeBinaire}
     \end{enregistrement}
 
@@ -28,11 +28,11 @@
 
 
     \fonction{elementPresent}
-        {table : TableDeCodage, element : Element}{\booleen}
+        {table : TableDeCodage, octet : Octet}{\booleen}
         {}{}
     {
         \pourChaque{table.Table.elements}{table}{
-            \sialors{element = table.Table.element}{
+            \sialors{octet = table.Table.octet}{
                 {\retourner{vrai}}
             }
         }
@@ -44,7 +44,7 @@
         {table : TableDeCodage, code : CodeBinaire}{\booleen}
         {}{}
     {
-        \pourChaque{table.Table.element}{table}{
+        \pourChaque{table.Table.octet}{table}{
             \sialors{table.Table.code = code}{
             {\retourner{vrai}}
             }
@@ -54,25 +54,25 @@
 
 
     \procedure{ajouterElement}{
-        \paramEntree{element : Element}
+        \paramEntree{octet : Octet}
         \paramEntreeSortie{table : TableDeCodage}}
-        {ajouterElement(table, element) et non(elementPresent(table, element))}
+        {ajouterElement(table, octet) et non(elementPresent(table, octet))}
         {}
     {
-        \sialors{non(elementPresent(table, element))}{
+        \sialors{non(elementPresent(table, octet))}{
             \affecter{table.nbElements}{table.nbElements + 1}
-            \affecter{table.Table}{element}
+            \affecter{table.Table}{octet}
             }
     }
 
 
     \fonction{elementPossedeCode}
-        {table : TableDeCodage, element : Element}{\booleen}
-        {elementPresent(table, element)}
+        {table : TableDeCodage, octet : Octet}{\booleen}
+        {elementPresent(table, octet)}
         {}
     {
-        \pourChaque{table.Table.elements}{table}{
-            \sialors{obtenirCodeElement(table.Table, element) = table.lesElements.element}{
+        \pourChaque{table.Table.octet}{table}{
+            \sialors{obtenirCodeElement(table.Table, octet) = table.lesElements.octet}{
             {\retourner{vrai}}
             }
         }
@@ -81,15 +81,15 @@
 
 
     \procedure{assignerCodeElement}{
-        \paramEntree{element : Element, code : CodeBinaire}
+        \paramEntree{octet : Octet, code : CodeBinaire}
         \paramEntreeSortie{table : TableDeCodage}}
-        {non(codePresent(table, code)) et elementPresent(table, element)}
+        {non(codePresent(table, code)) et elementPresent(table, octet)}
         {}
     {
-        \sialors{non(codePresent(table.Table, code)) et (elementPresent(table.Table, element))}{
-            \pourChaque{table.Table.elements}{table}{
-                \sialors{table.Table.elements = element}{
-                    {\affecter{table.Table.element}{code}}
+        \sialors{non(codePresent(table.Table, code)) et (elementPresent(table.Table, octet))}{
+            \pourChaque{table.Table.octet}{table}{
+                \sialors{table.Table.octet = octet}{
+                    {\affecter{table.Table.octet}{code}}
                 }
             }
         }
@@ -97,24 +97,24 @@
 
 
     \fonction{obtenirCodeElement}
-        {table : TableDeCodage, element : Element}{CodeBinaire}
+        {table : TableDeCodage, octet : Octet}{CodeBinaire}
         {}{}
     {
-        \pourChaque{table.Table.elements}{table}{
-            \sialors{(table.Table.elements = element) et (codePresent(table.Table, table.Table.element))}{
-                {\retourner{table.Table.element}}
+        \pourChaque{table.Table.octet}{table}{
+            \sialors{(table.Table.octet = octet) et (codePresent(table.Table, table.Table.octet))}{
+                {\retourner{table.Table.octet}}
             }
         }
     }
 
 
     \fonction{obtenirElementCode}
-        {table : TableDeCodage, code : CodeBinaire}{Element}
-        {elementPossedeCode(table, element) et elementPresent(table, element)}
+        {table : TableDeCodage, code : CodeBinaire}{Octet}
+        {elementPossedeCode(table, octet) et elementPresent(table, octet)}
         {}
     {
-        \pourChaque{table.Table.elements}{table}{
-            \sialors{(table.Table.elements = element) et (codePresent(table.Table, code))}{
+        \pourChaque{table.Table.octet}{table}{
+            \sialors{(table.Table.octet = octet) et (codePresent(table.Table, code))}{
             {\retourner{table.Table.code}}
             }
         }
