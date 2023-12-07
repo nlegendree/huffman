@@ -1,31 +1,28 @@
-\begin{algorithme}
-
-	\signatureFonction{arbreDeHuffman}
+\signatureFonction{arbreDeHuffman}
 	{element : Element; pondération : \naturel}{ArbreDeHuffman}
 
-	\signatureFonction{combiner}
+\signatureFonction{combiner}
 	{arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
 
-	\signatureProcedure{fixerPonderation}
+\signatureProcedure{fixerPonderation}
 	{\paramEntreeSortie{arbre : ArbreDeHuffman}}
 	{\paramEntree{pondération : \naturel}}
 
-	\signatureFonction{obtenirPondération}
+\signatureFonction{obtenirPondération}
 	{arbre : ArbreDeHuffman}{\naturel}
 
-	\signatureFonction{obtenirElement}
+\signatureFonction{obtenirElement}
 	{arbre : ArbreDeHuffman}{Element}
 	{estUneFeuille(arbre)}
 
-	\signatureFonction{estUneFeuille}
+\signatureFonction{estUneFeuille}
 	{arbre : ArbreDeHuffman}{\booleen}
 
-	\signatureFonction{obtenirArbreGauche}
+\signatureFonction{obtenirArbreGauche}
+	{arbre : ArbreDeHuffman}{ArbreDeHuffman}
+	{non estUneFeuille(arbre)}
+	
+\signatureFonction{obtenirArbreDroit}
 	{arbre : ArbreDeHuffman}{ArbreDeHuffman}
 	{non estUneFeuille(arbre)}
 
-	\signatureFonction{obtenirArbreDroit}
-	{arbre : ArbreDeHuffman}{ArbreDeHuffman}
-	{non estUneFeuille(arbre)}
-
-\end{algorithme}
