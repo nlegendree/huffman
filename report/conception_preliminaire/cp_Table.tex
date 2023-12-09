@@ -1,23 +1,35 @@
-\signatureFonction{tableDeCodage}
-	{}{TableDeCodage}
-\signatureFonction{estVide}
-	{table : TableDeCodage}{\boolean}
-\signatureFonction{elementPresent}
-	{table : TableDeCodage, element: Element}{\booleen}
-\signatureFonction{codePresent}
-	{table : TableDeCodage, code: CodeBinaire }{\booleen}
-\signatureProcedure{ajouterElement} 
-	{E/S table : TableDeCodage, element: Element}
-	{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
-\signatureFonction{elementPossedeCode} 
-	{table : TableDeCodage, element: Element}{\booleen}
-	{elementPresent(table, elem)}
-\signatureProcedure{assignerCodeElement}
-	{E/S table : TableDeCodage, element: Element, code: CodeBinaire}
-	{non(codePresent(table, code)) ET elementPresent(table, elem)}
-\signatureFonction{obtenirCodeElement}
-	{table : TableDeCodage, element: Element }{CodeBinaire}
-\signatureFonction{obtenirElementCode}
-	{table : TableDeCodage, code: CodeBinaire }{Element}
-	{elementPossedeCode(table, elem) ET elementPresent(table, elem)}
+\begin{algorithme}
+
+	\signatureFonction{tableDeCodage}
+		{}{TableDeCodage}
+
+	\signatureFonction{estVide}
+		{table : TableDeCodage}{\booleen}
+
+	\signatureFonction{elementPresent}
+		{table : TableDeCodage, element: Element}{\booleen}
+
+	\signatureFonction{codePresent}
+		{table : TableDeCodage, code: CodeBinaire }{\booleen}
+
+	\signatureProcedure{ajouterElement} 
+		{E/S table : TableDeCodage, element: Element}
+		{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
+
+	\signatureFonction{elementPossedeCode} 
+		{table : TableDeCodage, element: Element}{\booleen}
+		{elementPresent(table, elem)}
+
+	\signatureProcedure{assignerCodeElement}
+		{E/S table : TableDeCodage, element: Element, code: CodeBinaire}
+		{non(codePresent(table, code)) ET elementPresent(table, elem)}
+
+	\signatureFonction{obtenirCodeElement}
+		{table : TableDeCodage, element: Element }{CodeBinaire}
+
+	\signatureFonction{obtenirElementCode}
+		{table : TableDeCodage, code: CodeBinaire }{Element}
+		{elementPossedeCode(table, elem) ET elementPresent(table, elem)}
+	
+\end{algorithme}
 

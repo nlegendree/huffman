@@ -42,10 +42,10 @@
         \tadAxiome{codePresent(assignerCodeElement(table, elem, code), code)}
         \tadAxiome{obtenirElemCode(assignerCodeElement(table, elem, code), code) = elem}
         \tadAxiome{obtenirCodeElem(assignerCodeElement(table, elem, code), elem) = code}
-        \tadAxiome{non(codePresent(table, code)) $\Rightarrow$ obtenirElementCode(table, code) = NIL}
+        \tadAxiome{non(codePresent(table, code)) \Rightarrow obtenirElementCode(table, code) = NIL}
     \end{tadAxiomes}
 
-    \begin{tadPreconditions}
+    \begin{tadPreconditions}{}
         \tadPrecondition{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
         \tadPrecondition{elementPossedeCode(table, elem)}{elementPresent(table, elem)}
         \tadPrecondition{assignerCodeElement(table, elem, code)}{non(codePresent(table, code)) ET elementPresent(table, elem)}

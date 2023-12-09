@@ -8,21 +8,19 @@
 \end{enregistrement}
 
 \fonction{arbreDeHuffman}
-    {element : Element ; ponderation : \naturel}{arbreDeHuffman}
+    {element : Element ; ponderation : \naturel}{arbreDeHuffman}{}{arbre : Noeud}
     {
-        \declaration{arbre : Noeud}
         \affecter{\pointeur{arbre.filsGauche}}{pointeurNULL}
         \affecter{\pointeur{arbre.filsDroit}}{pointeurNULL}
         \affecter{arbre.element}{element}
         \affecter{arbre.ponderation}{ponderation}
-        {\retourner{arbre}}
+        \retourner{arbre}
     }
 
 \fonction{combiner}
     {arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
-    {arbre : ArbreDeHuffman}
+    {}{arbre : ArbreDeHuffman}
     {
-        \declaration{arbre : ArbreDeHuffman}
         \affecter{\pointeur{arbre.filsGauche}}{arbreGauche}
         \affecter{\pointeur{arbre.filsDroit}}{arbreDroit}
         \affecter{arbre.ponderation}{obtenirPondération(arbreGauche) + obtenirPondération(arbreDroit)}
@@ -31,36 +29,36 @@
 
 \fonction{obtenirPondération}
     {arbre : ArbreDeHuffman}
-    {\naturel}
+    {\naturel}{}{}
     {
-        {\retourner{{\champ{arbre}{ponderation}}}}
+        \retourner{{\champ{arbre}{ponderation}}}
     }
 
 \fonction{obtenirElement}
     {arbre : ArbreDeHuffman}{Element}
-    {estUneFeuille(arbre)}
+    {estUneFeuille(arbre)}{}
     {
-        {\retourner{{\champ{arbre}{element}}}}
+        \retourner{{\champ{arbre}{element}}}
     }
 
 \fonction{estUneFeuille}
-    {arbre : ArbreDeHuffman}{\booleen}
+    {arbre : ArbreDeHuffman}{\booleen}{}{}
     {
-        {\retourner{{\champ{arbre}{filsGauche} <> pointeurNULL} ou {\champ{arbre}{filsDroit} <> pointeurNULL}}}
+        \retourner{\champ{arbre}{filsGauche} <> pointeurNULL ou \champ{arbre}{filsDroit} <> pointeurNULL}
     }
 
 \fonction{obtenirArbreGauche}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
-    {non estUneFeuille(arbre)}
+    {non estUneFeuille(arbre)}{}
     {
-        {\retourner{\champ{arbre}{filsGauche}}}
+        \retourner{\champ{arbre}{filsGauche}}
     }
 
 \fonction{obtenirArbreDroit}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
-    {non estUneFeuille(arbre)}
+    {non estUneFeuille(arbre)}{}
     {
-        {\retourner{\champ{arbre}{filsDroit}}}
+        \retourner{\champ{arbre}{filsDroit}}
     }
 
 \end{algorithme}
