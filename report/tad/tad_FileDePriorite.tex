@@ -17,16 +17,16 @@
     \end{tadOperations}
 
     \begin{tadAxiomes}
-        \tadAxiome{estVide(fileDePriorité())}
-        \tadAxiome{non estVide(inserer(fileDePriorité(), el, 1))}
-        \tadAxiome{obtenirPremier(inserer(fileDePriorité(), el, 1)) = el}
-        \tadAxiome{obtenirDernier(inserer(fileDePriorité(), el, 1)) = el}
-        \tadAxiome{longueur(fileDePriorité()) = 0}
+        \tadAxiome{estVide(fileDePriorite())}
+        \tadAxiome{non estVide(inserer(fileDePriorite(), el, 1))}
+        \tadAxiome{obtenirPremier(inserer(fileDePriorite(), el, 1)) = el}
+        \tadAxiome{obtenirDernier(inserer(fileDePriorite(), el, 1)) = el}
+        \tadAxiome{longueur(fileDePriorite()) = 0}
         \tadAxiome{longueur(inserer(l, e, p)) = 1 + longueur(l)}
         \tadAxiome{supprimerDernier()}
     \end{tadAxiomes}
 
-    \begin{tadPreconditions}
+    \begin{tadPreconditions}{}
         \tadPrecondition{supprimerPremier(l)}{non(estVide(l))}
         \tadPrecondition{supprimerDernier(l)}{non(estVide(l))}
         \tadPrecondition{obtenirPremier(l)}{non(estVide(l))}

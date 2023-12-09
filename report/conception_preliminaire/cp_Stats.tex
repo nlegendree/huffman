@@ -1,21 +1,20 @@
-\signatureFonction{statistiques}
-	{Ensemble d'Element}{Statistiques}
-	{}
+\begin{algorithme}
 
-\signatureFonction{obtenirOccurenceElement}
-	{statistiques : Statistiques, element: Element}{\naturel}
-	{}
+	\signatureFonction{statistiques}
+		{Ensemble d'Element}{Statistiques}
 
-\procedure{incrementerOccurenceElement}
-    {\paramEntree{element : Element}
-    \paramEntreeSortie{statistiques : Statistiques}}
-	{}
+	\signatureFonction{obtenirOccurenceElement}
+		{statistiques : Statistiques, element: Element}{\naturel}
 
-\procedure{fixerOccurenceElement}
-    {\paramEntree{element : Element, nbOccurence : \naturel}
-    \paramEntreeSortie{statistiques : Statistiques}}
-	{}
+	\signatureProcedure{incrementerOccurenceElement}
+		{\paramEntree{element : Element}
+		\paramEntreeSortie{statistiques : Statistiques}}
 
-\signatureFonction{obtenirTotalOccurence}
-	{statistiques : Statistiques}{\naturel}
-	{}
+	\signatureProcedure{fixerOccurenceElement}
+		{\paramEntree{element : Element, nbOccurence : \naturel}
+		\paramEntreeSortie{statistiques : Statistiques}}
+
+	\signatureFonction{obtenirTotalOccurence}
+		{statistiques : Statistiques}{\naturel}
+
+\end{algorithme}
