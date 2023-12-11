@@ -28,8 +28,7 @@
     \end{tadSemantiques}
 
     \begin{tadAxiomes}
-        \tadAxiome{obtenirIemeBit(octet(), i) = }
-        \tadAxiome{fixerIemeBit(octet(), i, bit) = }
+        \tadAxiome{obtenirIemeBit(fixerIemeBit(octet(), i, bit), i) = bit}
     \end{tadAxiomes}
 
 \end{tad}
