@@ -6,5 +6,6 @@ bin/
 *.pdf
 *.fdb_latexmk
 *.aux
+*.o
 .gitignore
 report/Rapport.synctex.gz
