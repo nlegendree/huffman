@@ -1,0 +1,26 @@
+\begin{algorithme}
+
+    \signatureFonction{compresser}
+    {nom : \chaine}{\naturel}
+
+    \signatureFonction{calculerStatistiques}
+    {nom : \chaien}{Statistiques$<$Octet$>$}
+
+    \signatureFonction{creerArbre}
+    {stats : Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}
+
+    \signatureFonction{codage}
+    {arbre : ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}
+
+    \signatureProcedure{descendreArbre}
+    {\paramEntreeSortie{table : TableDeCodage$<$Octet$>$}}
+    {\paramEntree{arbre : ArbreDeHuffman$<$Octet$>$, code : CodeBinaire}}
+
+    \signatureProcedure{compresserFichier}
+    {\paramEntree{nom : \chaine, table : tableDeCodage$<$Octet$>$, stats : Statistiques$<$Octets$>$}}
+
+    \signatureProcedure{ecrireCodeBinaire}
+    {\paramEntree{codeBinaire : CodeBinaire}}
+    {\paramEntreeSortie{fichier : FichierBinaire}}
+
+\end{algorithme}
