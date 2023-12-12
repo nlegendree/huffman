@@ -1,4 +1,6 @@
 #include "octet.h"
+#ifndef __ARBRE__
+
 typedef struct 
 {
     struct Noeud *gauche;
@@ -23,3 +25,5 @@ Octet ARB_obtenirOctet(ArbreDeHuffman arbre);
 bool ARB_estUneFeuille(ArbreDeHuffman arbre);
 ArbreDeHuffman ARB_obtenirFilsGauche(ArbreDeHuffman arbre);
 ArbreDeHuffman ARB_obtenirFilsDroit(ArbreDeHuffman arbre);
+
+#endif // !__ARBRE__
