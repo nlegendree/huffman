@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <CUnit/Basic.h>
-#include "Arbre.h"
+#include "arbre.h"
 
 int init_suite_success(void) { 
   return 0; 
