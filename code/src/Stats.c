@@ -1,4 +1,4 @@
-#include "Octet.h"
+#include "octet.h"
 #include "Stats.h"
 
 Statistiques statistiques(){

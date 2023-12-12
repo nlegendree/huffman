@@ -1,7 +1,7 @@
 #ifndef  __STATS__
 #define __STATS__
 
-#include "Octet.h"
+#include "octet.h"
 
 #TYPEDEF struct Statistiques
 {

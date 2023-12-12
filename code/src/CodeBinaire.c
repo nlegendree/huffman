@@ -1,4 +1,4 @@
-#include "CodeBinaire.h"
+#include "codeBinaire.h"
 
 CB_CodeBinaire CB_codeBinaire(Bit bit){
     CB_CodeBinaire temp;

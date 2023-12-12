@@ -1,5 +1,5 @@
-#include "Octet.h"
-#include "CodeBinaire.h"
+#include "octet.h"
+#include "codeBinaire.h"
 #include <assert.h>
 TableDeCodage TDC_tableDeCodage(){
     TableDeCodage tableDeCodage;

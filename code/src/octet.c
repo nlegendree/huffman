@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Octet octet(Naturel8Bits octet)
+O_Octet octet(Naturel8Bits octet)
 {
-    Octet o;
+    O_Octet o;
     o.octet = octet;
     return o;
 }
 
-Bit obtenirIemeBit(Octet octet, int i)
+Bit obtenirIemeBit(O_Octet octet, int i)
 {
     if (i < 0 || i > 7)
     {
@@ -20,7 +20,7 @@ Bit obtenirIemeBit(Octet octet, int i)
     return (octet.octet >> i) & 1;
 }
 
-void fixerIemeBit(Octet* octet, int i, Bit bit) {
+void fixerIemeBit(O_Octet* octet, int i, Bit bit) {
     if (i < 0 || i > 7) {
         printf("erreur : l'indice i doit être compris entre 0 et 7\n");
         exit(1);

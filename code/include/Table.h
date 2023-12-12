@@ -1,36 +1,36 @@
 #ifndef  __TABLE__
 #define __TABLE__
 
-#include "Octet.h"
-#include "CodeBinaire.h"
+#include "octet.h"
+#include "codeBinaire.h"
 
-#TYPEDEF struct TableDeCodage
+typedef struct TDC_TableDeCodage
 {
     long int nbElements;
     long int table[255];
 };
 
-#TYPEDEF struct Donnees
+typedef struct Donnees
 {
     Octet octet;
-    CodeBinaire code;
+    CB_CodeBinaire code;
 }
 
-TableDeCodage TDC_tableDeCodage();
+TDC_TableDeCodage TDC_tableDeCodage();
 
-int TDC_estVide(TableDeCodage tableDeCodage);
+int TDC_estVide(TDC_TableDeCodage tableDeCodage);
 
-int TDC_octetPresent(TableDeCodage tableDeCodage, Octet octet);
+int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, Octet octet);
 
-int TDC_codePresent(TableDeCodage tableDeCodage, CodeBinaire codeBinaire);
+int TDC_codePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
-int TDC_octetPossedeCode(TableDeCodage tableDeCodage, Octet octet);
+int TDC_octetPossedeCode(TDC_TableDeCodage tableDeCodage, Octet octet);
 
-void TDC_ajouterOctet(TableDeCodage* pTableDeCodage, Octet octet, CodeBinaire codeBinaire);
+void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, Octet octet, CB_CodeBinaire codeBinaire);
 
-CodeBinaire TDC_obtenireCodeOctet(TableDeCodage tableDeCodage, Octet octet);
+CB_CodeBinaire TDC_obtenireCodeOctet(TDC_TableDeCodage tableDeCodage, Octet octet);
 
-Octet TDC_obtenirOctetCode(TableDeCodage tableDeCodage, CodeBinaire codeBinaire);
+Octet TDC_obtenirOctetCode(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
 #endif
 

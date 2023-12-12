@@ -1,6 +1,6 @@
 #ifndef  __FILDEPRIORITE__
 #define __FILDEPRIORITE__
-#include "Arbre.h"
+#include "arbre.h"
 
 FileDePriorite FP_fileDePriorite();
 void FP_ajouterElement(ArbreDeHuffman arbre, unsigned int priorite, FileDePriorite *pfile);
