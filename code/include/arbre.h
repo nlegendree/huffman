@@ -19,7 +19,7 @@ void ARB_detruireArbre(ArbreDeHuffman arbre);
 // Copie l'arbre 
 ArbreDeHuffman ARB_copierArbre(ArbreDeHuffman arbre);
 // Combine les deux arbres et retourne le nouvel arbre
-ArbreDeHuffman ARB_combiner(abreDroit: ArbreDeHuffman, arbreGauche: ArbreDeHuffman);
+ArbreDeHuffman ARB_combiner(arbreDroit: ArbreDeHuffman, arbreGauche: ArbreDeHuffman);
 unsigned int ARB_obtenirPonderation(ArbreDeHuffman arbre);
 Octet ARB_obtenirOctet(ArbreDeHuffman arbre);
 bool ARB_estUneFeuille(ArbreDeHuffman arbre);
