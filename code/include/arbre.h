@@ -1,5 +1,4 @@
 #include "octet.h"
-
 typedef struct 
 {
     struct Noeud *gauche;
@@ -12,16 +11,15 @@ typedef struct
 typedef Noeud* ArbreDeHuffman;
 
 // Constructeur 
-ArbreDeHuffman arbreDeHuffman(Octet octet, unsigned int ponderation);
+ArbreDeHuffman* ARB_arbreDeHuffman(Octet octet, unsigned int ponderation);
 // Destructeur
-void detruireArbre(ArbreDeHuffman arbre);
+void ARB_detruireArbre(ArbreDeHuffman arbre);
 // Copie l'arbre 
-ArbreDeHuffman copierArbre(ArbreDeHuffman arbre);
+ArbreDeHuffman ARB_copierArbre(ArbreDeHuffman arbre);
 // Combine les deux arbres et retourne le nouvel arbre
-ArbreDeHuffman combiner(abreDroit: ArbreDeHuffman, arbreGauche: ArbreDeHuffman);
-unsigned int obtenirPonderation(ArbreDeHuffman arbre);
-Octet obtenirOctet(ArbreDeHuffman arbre);
-bool estUneFeuille(ArbreDeHuffman arbre);
-ArbreDeHuffman obtenirFilsGauche(ArbreDeHuffman arbre);
-ArbreDeHuffman obtenirFilsDroit(ArbreDeHuffman arbre);
-
+ArbreDeHuffman ARB_combiner(abreDroit: ArbreDeHuffman, arbreGauche: ArbreDeHuffman);
+unsigned int ARB_obtenirPonderation(ArbreDeHuffman arbre);
+Octet ARB_obtenirOctet(ArbreDeHuffman arbre);
+bool ARB_estUneFeuille(ArbreDeHuffman arbre);
+ArbreDeHuffman ARB_obtenirFilsGauche(ArbreDeHuffman arbre);
+ArbreDeHuffman ARB_obtenirFilsDroit(ArbreDeHuffman arbre);
