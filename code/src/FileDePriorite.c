@@ -3,7 +3,7 @@
 #include "FileDePriorite.h"
 #include "Arbre.h"
 
-#define FP_MAX_TAILLE = 255
+#define FP_MAX_TAILLE = 0xFF
 
 
 typedef struct {
