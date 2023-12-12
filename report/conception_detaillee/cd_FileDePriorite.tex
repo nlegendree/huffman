@@ -25,8 +25,7 @@
     \tantque{obtenirPondération(\champ{file}{arbre}[i]) $\leq$ prio}{
         \affecter{\champ{file}{arbre}[i]}{\champ{file}{arbre}[i-1]}}
         \affecter{i}{i-1}
-    \affecter{\champ{file}{arbre}[i]}{arbre}
-    \affecter{fixerPonderation(\champ{file}{arbre}[\champ{file}{tailleActuelle}], prio)}} %ligne plus ou moins inutile, surement redondant en c %contenue %
+    \affecter{\champ{file}{arbre}[i]}{arbre}}
 \end{algorithme}
 
 \begin{algorithme}
@@ -34,8 +33,7 @@
     \paramEntreeSortie{file : FileDePriorite}}
 {non(estVide(file))} %precond
 {} %var locales
-{   \instruction{fixerPonderation(\champ{file}{arbre}[\champ{file}{tailleActuelle}], 0)}
-    \affecter{\champ{file}{tailleActuelle}}{\champ{file}{tailleActuelle} - 1}} %contenue
+{   \affecter{\champ{file}{tailleActuelle}}{\champ{file}{tailleActuelle} - 1}} %contenue
 \end{algorithme} %on laisse le dernier élément dans le tableau mais on ne s'en occupe plus, il sera écraser ou ignoré si besoin gràce à la taille diminuée, sa priorité passe à 0 pour ne pas géner
 
 \begin{algorithme}
