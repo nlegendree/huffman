@@ -1,11 +1,10 @@
 \begin{algorithme}
-    \fonction{compresser}{nom:\chaine}{\naturel}{}{erreur:\naturel,stats:Statistiques$<$Octet$>$,arbre:ArbreDeHuffman$<$Octet$>$}%
+    \fonction{compresser}{nom:\chaine}{}{}{stats:Statistiques$<$Octet$>$,arbre:ArbreDeHuffman$<$Octet$>$}%
     {
-        \affecter{stats,erreur}{calculerStatistiques(nom)}
+        \affecter{stats}{calculerStatistiques(nom)}
         \affecter{arbre}{creerArbre(stats)}
-        \affecter{table}{codage(table)}
-        \affecter{erreur}{erreur+compresserFichier(source,table,stats)}
-        \retourner{erreur}
+        \affecter{table}{codage(arbre)}
+        \instruction{compresserFichier(source,table,stats)}
     }
     \fonction{calculerStatistiques}{nom:\chaine}{Statistiques$<$Octet$>$}{}{fichier:FichierBinaire,stats:Statistiques$<$Octet$>$}%
     {
@@ -17,7 +16,7 @@
             \instruction{incrementerOccurenceElement(stats,lireOctet(fichier))}
         }
         \instruction{fermer(fichier)}
-        \retourner{stats,erreur}
+        \retourner{stats}
     }
 
     \fonction{creerArbre}{stats:Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}{i:\naturel , file:FileDePriorité$<$ArbreDeHuffmann$>$}
