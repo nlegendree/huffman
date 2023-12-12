@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "FileDePriorite.h"
 #include "Arbre.h"
 
 #define FP_MAX_TAILLE = 255
