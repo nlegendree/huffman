@@ -16,10 +16,25 @@
         \tadOperation{fixerIemeBit}%
             {\tadParams{Octet, 0..7, Bit}}%
             {\tadParams{Octet}}
+        \tadOperation{octetEnNaturel}%
+            {\tadParams{Octet, 0..7, Bit}}%
+            {\tadParams{\naturel}}
     \end{tadOperations}
-    
+
+    \begin{tadSemantiques}{Octet}
+		\tadSemantique{octet}%
+			{Crée un octet avec les 8 bits spécifiés.}% 
+        \tadSemantique{obtenirIemeBit}%
+			{Obtient le bit à la position spécifiée dans l'octet (position de 0 à 7).}
+        \tadSemantique{fixerIemeBit}%
+			{Fixe un bit à la position spécifiée dans l'octet (position de 0 à 7).}
+        \tadSemantique{octetEnNaturel}%
+            {transtype un octet en un naturel}
+    \end{tadSemantiques}
+
     \begin{tadAxiomes}
-        \tadAxiome{obtenirIemeBit(fixerIemeBit(octet(), i, bit), i) = bit}
+        \tadAxiome{obtenirIemeBit(octet(), i) = }
+        \tadAxiome{fixerIemeBit(octet(), i, bit) = }
     \end{tadAxiomes}
 
 \end{tad}
