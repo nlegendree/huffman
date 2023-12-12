@@ -1,34 +1,35 @@
 \begin{algorithme}
 
     \signatureFonction{compresser}
-    {nom : \chaine}{\naturel}
+    {nom : \chaine}{\naturel}{}
 
     \signatureFonction{calculerStatistiques}
-    {nom : \chaine}{Statistiques$<$Octet$>$}
+    {nom : \chaine}{Statistiques$<$Octet$>$}{}
 
     \signatureFonction{creerArbre}
-    {stats : Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}
+    {stats : Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}
 
     \signatureFonction{codage}
-    {arbre : ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}
+    {arbre : ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}{}
 
     \signatureProcedure{descendreArbre}
-    {\paramEntreeSortie{table : TableDeCodage$<$Octet$>$}}
-    {\paramEntree{arbre : ArbreDeHuffman$<$Octet$>$, code : CodeBinaire}}
+    {\paramEntreeSortie{table : TableDeCodage$<$Octet$>$}
+    \paramEntree{arbre : ArbreDeHuffman$<$Octet$>$, code : CodeBinaire}}
+    {}
 
     \signatureProcedure{compresserFichier}
-    {\paramEntree{nom : \chaine, table : tableDeCodage$<$Octet$>$, stats : Statistiques$<$Octets$>$}}
+    {\paramEntree{nom : \chaine, table : tableDeCodage$<$Octet$>$, stats : Statistiques$<$Octets$>$}}{}
 
     \signatureFonction{decompresser}
-    {nom : \chaine}{\naturel}
+    {nom : \chaine}{\naturel}{}
 
     \signatureFonction{estUnFichierCompresse}
-    {nom : \chaine}{\booleen}
+    {nom : \chaine}{\booleen}{}
 
     \signatureFonction{obtenirStatistiques}
-    {nom : \chaine}{Statistiques$<$Octet$>$}
+    {nom : \chaine}{Statistiques$<$Octet$>$}{}
 
     \signatureProcedure{decompresserFichier}
-    {\paramEntree{nom : \chaine, arbre : ArbreDeHuffman$<$Octet$>$}}
+    {\paramEntree{nom : \chaine, arbre : ArbreDeHuffman$<$Octet$>$}}{}
 
 \end{algorithme}

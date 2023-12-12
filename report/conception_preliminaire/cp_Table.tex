@@ -1,19 +1,19 @@
 \begin{algorithme}
 
 	\signatureFonction{tableDeCodage}
-		{}{TableDeCodage}
+		{}{TableDeCodage}{}
 
 	\signatureFonction{estVide}
-		{table : TableDeCodage}{\booleen}
+		{table : TableDeCodage}{\booleen}{}
 
 	\signatureFonction{elementPresent}
-		{table : TableDeCodage, element: Element}{\booleen}
+		{table : TableDeCodage, element: Element}{\booleen}{}
 
 	\signatureFonction{codePresent}
-		{table : TableDeCodage, code: CodeBinaire }{\booleen}
+		{table : TableDeCodage, code: CodeBinaire }{\booleen}{}
 
 	\signatureProcedure{ajouterElement} 
-		{E/S table : TableDeCodage, element: Element}
+		{\paramEntreeSortie{table : TableDeCodage, element: Element}}
 		{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
 
 	\signatureFonction{elementPossedeCode} 
@@ -21,15 +21,14 @@
 		{elementPresent(table, elem)}
 
 	\signatureProcedure{assignerCodeElement}
-		{E/S table : TableDeCodage, element: Element, code: CodeBinaire}
+		{\paramEntreeSortie{table : TableDeCodage, element: Element, code: CodeBinaire}}
 		{non(codePresent(table, code)) ET elementPresent(table, elem)}
 
 	\signatureFonction{obtenirCodeElement}
-		{table : TableDeCodage, element: Element }{CodeBinaire}
+		{table : TableDeCodage, element: Element }{CodeBinaire}{}
 
 	\signatureFonction{obtenirElementCode}
 		{table : TableDeCodage, code: CodeBinaire }{Element}
 		{elementPossedeCode(table, elem) ET elementPresent(table, elem)}
 	
 \end{algorithme}
-

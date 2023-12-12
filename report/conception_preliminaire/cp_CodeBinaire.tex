@@ -1,36 +1,36 @@
 \begin{algorithme}
 
     \signatureFonction{codeBinaire}
-    {}{CodeBinaire}
+    {}{CodeBinaire}{}
 
     \signatureFonction{concatenerCodeBinaire}
-    {codeBinaire1, codeBinaire2 : CodeBinaire}{CodeBinaire}
+    {codeBinaire1, codeBinaire2 : CodeBinaire}{CodeBinaire}{}
 
     \signatureProcedure{ajoutBit}
-    {\paramEntreeSortie{codeBinaire : CodeBinaire}}
-    {\paramEntree{bit : Bit}}
+    {\paramEntreeSortie{codeBinaire : CodeBinaire}
+    \paramEntree{bit : Bit}}{}
 
     \signatureProcedure{obtenirCodeBinaire}
     {\paramEntreeSortie{codeBinaire : CodeBinaire}}
     {(longueur(codeBinaire) $>$ 0)}
 
     \signatureProcedure{supprimerCodeBinaire}
-    {\paramEntree{codeBinaire : CodeBinaire}}
+    {\paramEntree{codeBinaire : CodeBinaire}}{}
 
     \signatureProcedure{supprimerIemeBit}
-    {\paramEntreeSortie{codeBinaire : CodeBinaire}}
-    {\paramEntree{positionIemeBit : \naturelNonNul}}
+    {\paramEntreeSortie{codeBinaire : CodeBinaire}
+    \paramEntree{positionIemeBit : \naturelNonNul}}
     {(positionIemeBit $\leq$ longueur(codeBinaire)) et (positionIemeBit $>$ 0)}
 
     \signatureProcedure{modifierIemeBit}
-    {\paramEntreeSortie{codeBinaire : CodeBinaire}}
-    {\paramEntree{positionIemeBit : \naturelNonNul, bitAModifier : Bit}}
+    {\paramEntreeSortie{codeBinaire : CodeBinaire}
+    \paramEntree{positionIemeBit : \naturelNonNul, bitAModifier : Bit}}
     {(positionIemeBit $\leq$ longueur(codeBinaire)) et (positionIemeBit $>$ 0)}
 
     \signatureFonction{longueur}
-    {codeBinaire : CodeBinaire}{\naturelNonNul}
+    {codeBinaire : CodeBinaire}{\naturelNonNul}{}
 
     \signatureFonction{estVide}
-    {codeBinaire : CodeBinaire}{\booleen}
+    {codeBinaire : CodeBinaire}{\booleen}{}
 
 \end{algorithme}
