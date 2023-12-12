@@ -1,5 +1,7 @@
 \begin{algorithme}
 
+\type{ArbreDeHuffman}{\pointeur{Noeud}}
+
 \begin{enregistrement}{Noeud}
     \champEnregistrement{element}{Element}
     \champEnregistrement{ponderation}{\naturel}
@@ -7,58 +9,71 @@
     \champEnregistrement{filsDroit}{\pointeur{Noeud}}
 \end{enregistrement}
 
-\fonction{arbreDeHuffman}
-    {element : Element ; ponderation : \naturel}{arbreDeHuffman}{}{arbre : Noeud}
+
+
+\fonction{ArbreDeHuffman}
+    {element : Element ; ponderation : \naturel}{ArbreDeHuffman}
+    {arbre : Noeud}
     {
-        \affecter{\pointeur{arbre.filsGauche}}{pointeurNULL}
-        \affecter{\pointeur{arbre.filsDroit}}{pointeurNULL}
-        \affecter{arbre.element}{element}
-        \affecter{arbre.ponderation}{ponderation}
-        \retourner{arbre}
+        \affecter{\champ{arbre}{ponderation}}{ponderation}
+        \affecter{\champ{arbre}{element}}{element}
+        \affecter{\champ{arbre}{filsGauche}}{pointeurNULL}
+        \affecter{\champ{arbre}{filsDroit}}{pointeurNULL}
+        {\retourner{arbre}}
     }
 
 \fonction{combiner}
     {arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
-    {}{arbre : ArbreDeHuffman}
+    {arbre : ArbreDeHuffman}
     {
-        \affecter{\pointeur{arbre.filsGauche}}{arbreGauche}
-        \affecter{\pointeur{arbre.filsDroit}}{arbreDroit}
-        \affecter{arbre.ponderation}{obtenirPondération(arbreGauche) + obtenirPondération(arbreDroit)}
+        \affecter{\champ{arbre}{ponderation}}{\champ{arbreGauche}{ponderation} + \champ{arbreDroit}{ponderation}}
+        \affecter{\champ{arbre}{filsGauche}}{arbreGauche}
+        \affecter{\champ{arbre}{filsDroit}}{arbreDroit}
         {\retourner{arbre}}
     }
 
+
+
 \fonction{obtenirPondération}
-    {arbre : ArbreDeHuffman}
-    {\naturel}{}{}
+    {arbre : ArbreDeHuffman}{\naturel}
     {
-        \retourner{{\champ{arbre}{ponderation}}}
+        {\retourner{\champ{arbre}{ponderation}}}
     }
 
 \fonction{obtenirElement}
     {arbre : ArbreDeHuffman}{Element}
-    {estUneFeuille(arbre)}{}
+    {estUneFeuille(arbre)}
     {
-        \retourner{{\champ{arbre}{element}}}
+        {\retourner{{\champ{arbre}{element}}}}
     }
 
 \fonction{estUneFeuille}
-    {arbre : ArbreDeHuffman}{\booleen}{}{}
+    {arbre : ArbreDeHuffman}{\booleen}
     {
-        \retourner{\champ{arbre}{filsGauche} <> pointeurNULL ou \champ{arbre}{filsDroit} <> pointeurNULL}
+        {\retourner{{\champ{arbre}{filsGauche} = NULL et {arbre}{filsGauche} = NULL }}}
     }
 
 \fonction{obtenirArbreGauche}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
-    {non estUneFeuille(arbre)}{}
+    {non estUneFeuille(arbre)}
     {
-        \retourner{\champ{arbre}{filsGauche}}
+        {\retourner{\champ{arbre}{filsGauche}}}
     }
 
 \fonction{obtenirArbreDroit}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
-    {non estUneFeuille(arbre)}{}
+    {non estUneFeuille(arbre)}
     {
-        \retourner{\champ{arbre}{filsDroit}}
+        {\retourner{\champ{arbre}{filsDroit}}}
     }
 
 \end{algorithme}
+
+\signatureProcedure{fixerPonderation}
+{\paramEntreeSortie{arbre : ArbreDeHuffman} \paramEntree{ponderation : \naturel}}
+{}{}
+{
+    \affecter{\champ{arbre}{ponderation}}{ponderation}
+}
+
+
