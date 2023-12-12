@@ -4,7 +4,7 @@
     {nom : \chaine}{\naturel}
 
     \signatureFonction{calculerStatistiques}
-    {nom : \chaien}{Statistiques$<$Octet$>$}
+    {nom : \chaine}{Statistiques$<$Octet$>$}
 
     \signatureFonction{creerArbre}
     {stats : Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}
@@ -22,5 +22,17 @@
     \signatureProcedure{ecrireCodeBinaire}
     {\paramEntree{codeBinaire : CodeBinaire}}
     {\paramEntreeSortie{fichier : FichierBinaire}}
+
+    \signatureFonction{decompresser}
+    {nom : \chaine}{\naturel}
+
+    \signatureFonction{estUnFichierCompresse}
+    {nom : \chaine}{\booleen}
+
+    \signatureFonction{obtenirStatistiques}
+    {nom : \chaine}{Statistiques$<$Octet$>$}
+
+    \signatureProcedure{decompresserFichier}
+    {\paramEntree{nom : \chaine, arbre : ArbreDeHuffman$<$Octet$>$}}
 
 \end{algorithme}
