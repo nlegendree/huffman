@@ -12,25 +12,25 @@ typedef struct TDC_TableDeCodage
 
 typedef struct Donnees
 {
-    Octet octet;
+    O_Octet octet;
     CB_CodeBinaire code;
-}
+};
 
 TDC_TableDeCodage TDC_tableDeCodage();
 
 int TDC_estVide(TDC_TableDeCodage tableDeCodage);
 
-int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, Octet octet);
+int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
 int TDC_codePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
-int TDC_octetPossedeCode(TDC_TableDeCodage tableDeCodage, Octet octet);
+int TDC_octetPossedeCode(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
-void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, Octet octet, CB_CodeBinaire codeBinaire);
+void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeBinaire codeBinaire);
 
-CB_CodeBinaire TDC_obtenireCodeOctet(TDC_TableDeCodage tableDeCodage, Octet octet);
+CB_CodeBinaire TDC_obtenireCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
-Octet TDC_obtenirOctetCode(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
+O_Octet TDC_obtenirOctetCode(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
 #endif
 

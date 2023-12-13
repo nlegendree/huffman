@@ -3,19 +3,21 @@
 
 #include "octet.h"
 
-#TYPEDEF struct Statistiques
+#define MAX 0x100
+
+typedef struct Statistiques
 {
     long int nbOccurenceTotal;
     long int lesStatistiques[MAX];
-}
+};
 
 Statistiques statistiques();
 
-long int obtenirOccurenceOctet(Statistique statistiques,Octet octet);
+long int obtenirOccurenceOctet(Statistique statistiques,O_Octet octet);
 
-void incrementerOccurenceOctet(Octet octet,Statistiques* pstatistiques);
+void incrementerOccurenceOctet(O_Octet octet, Statistiques* pstatistiques);
 
-void fixerOccurenceOctet(Octet octet, long int nbOccurence, Statistiques* pstatistiques);
+void fixerOccurenceOctet(O_Octet octet, long int nbOccurence, Statistiques* pstatistiques);
 
 long int obtenirTotalOccurence(Statistiques statistiques);
 
