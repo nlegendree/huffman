@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "FileDePriorite.h"
-#include "Arbre.h"
+#include "fileDePriorite.h"
+#include "arbre.h"
 
 #define FP_MAX_TAILLE = 0xFF
 
