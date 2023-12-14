@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "codebinaire.h": "c",
+        "assert.h": "c"
+    }
+}
