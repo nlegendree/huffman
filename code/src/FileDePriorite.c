@@ -3,17 +3,9 @@
 #include "fileDePriorite.h"
 #include "arbre.h"
 
-#define FP_MAX_TAILLE = 0xFF
-
 
 typedef struct {
-    ArbreDeHuffman arbre;
-    unsigned int priorite;
-} ElementFile;
-
-
-typedef struct {
-    ElementFile tab[FP_MAX_TAILLE];
+    ArbreDeHuffman arbre[255];
     unsigned int tailleActuelle;
 } FileDePriorite;
 
@@ -29,26 +21,24 @@ void FP_ajouterElement(ArbreDeHuffman arbre, unsigned int priorite, FileDePriori
     unsigned int i;
     pfile->tailleActuelle++;
     i = pfile->tailleActuelle;
-    while (i > 1 && pfile->tab[i].priorite <= priorite) {
-        pfile->tab[i] = pfile->tab[i - 1];
+    while (i > 1 && ARB_obtenirPonderation(arbre[i]) <= priorite) {
+        pfile->arbre[i] = pfile->arbre[i - 1];
         i--;
     }
     pfile->tab[i].arbre = arbre;
-    pfile->tab[i].priorite = priorite;
 }
 
 
 void FP_supprimerDernier(FileDePriorite *pfile) {
     if (!estVide(*pfile)) {
         pfile->tailleActuelle--;
-        pfile->tab[pfile->tailleActuelle - 1].priorite = 0;
     }
 }
 
 
 ArbreDeHuffman FP_obtenirDernier(FileDePriorite *pfile) {
-    if (!estVide(pfile)) {
-        return pfile->tab[pfile->tailleActuelle - 1];
+    if (!estVide(*pfile)) {
+        return pfile->arbre[pfile->tailleActuelle];
     }
 }
 
