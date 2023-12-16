@@ -32,3 +32,7 @@ void fixerIemeBit(O_Octet* octet, int i, Bit bit) {
     */
     octet->octet = (octet->octet & ~(1 << i)) | (bit << i);
 }
+
+Naturel8Bits O_obtenirNaturel8bits(O_Octet octet) {
+    return (Naturel8Bits)octet.octet;
+}
