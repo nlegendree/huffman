@@ -9,6 +9,8 @@
 #include "codeBinaire.h"
 #include "bit.h"
 
+#define CLE 0x0B1213D2ul
+
 Bit bit0 = ZERO;
 Bit bit1 = UN;
 
@@ -112,7 +114,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     }
 
     // Écrire la clé et le nombre d'éléments
-    fwrite(&CLE, sizeof(CLE), 1, fichierDestination);
+    fwrite(CLE, sizeof(unsigned long), 1, fichierDestination);
     fwrite(&nbElement(stats), sizeof(nbElement(stats)), 1, fichierDestination);
 
     // Écrire les statistiques
@@ -126,7 +128,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     while (!feof(fichierSource)) {
         octet = O_octet((Naturel8Bits)fgetc(fichierSource));
 
-        ecrireCodeBinaire(fichierDestination, TDC_obtenirCodeElement(table, octet));
+        ecrireCodeBinaire(fichierDestination, TDC_obtenireCodeOctet(table, octet));
     }
 
     fclose(fichierSource);
