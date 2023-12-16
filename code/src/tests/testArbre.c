@@ -10,10 +10,10 @@ int clean_suite_success(void) {
   return 0; 
 }
 
-ArbreDeHuffman arbre = AH_arbreDeHuffman('A', 5);
-ArbreDeHuffman arbreGauche = AH_arbreDeHuffman('B', 3);
-ArbreDeHuffman arbreDroit = AH_arbreDeHuffman('C', 2);
-ArbreDeHuffman combinaison = AH_combiner(arbreGauche, arbreDroit);
+ABR_ArbreDeHuffman arbre = ARB_arbreDeHuffman('A', 5);
+ABR_ArbreDeHuffman arbreGauche = ARB_arbreDeHuffman('B', 3);
+ABR_ArbreDeHuffman arbreDroit = ARB_arbreDeHuffman('C', 2);
+ABR_ArbreDeHuffman combinaison = ARB_combiner(arbreGauche, arbreDroit);
 
 void test_AH_obtenirElement(void) {
     CU_ASSERT_TRUE(AH_obtenirElement(arbre)=='A');
