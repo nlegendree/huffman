@@ -1,5 +1,5 @@
 #include "octet.h"
-#include "Stats.h"
+#include "stats.h"
 
 ST_Statistiques ST_statistiques(){
     ST_Statistiques stats;

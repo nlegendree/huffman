@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "octet.h"
-#include "Stats.h"
+#include "stats.h"
 #include "arbre.h"
-#include "Table.h"
-#include "FileDePriorite.h"
+#include "table.h"
+#include "fileDePriorite.h"
 #include "CodeBinaire.h"
 #include "bit.h"
 
@@ -11,13 +11,13 @@ Bit bit0 = ZERO;
 Bit bit1 = UN;
 
 void compresser(char *nom) {
-    S_Statistiques stats = calculerStatistiques(nom);
-    ArbreDeHuffman arbre = creerArbre(stats);
+    ST_Statistiques stats = calculerStatistiques(nom);
+    ARB_ArbreDeHuffman arbre = creerArbre(stats);
     TDC_TableDeCodage table = codage(arbre);
     compresserFichier(nom, table, stats);
 }
 
-Statistiques calculerStatistiques(char *nom) {
+ST_Statistiques calculerStatistiques(char *nom) {
     FILE *fichier;
 
     fichier = fopen(nom, "rb");
@@ -26,7 +26,7 @@ Statistiques calculerStatistiques(char *nom) {
         exit(EXIT_FAILURE);
     }
 
-    S_Statistiques stats = ST_statistiques();
+    ST_Statistiques stats = ST_statistiques();
 
     O_Octet octetLu;
     while (fread(&octetLu, sizeof(O_Octet), 1, fichier) == 1) { //à modifier
@@ -39,7 +39,7 @@ Statistiques calculerStatistiques(char *nom) {
 }
 
 
-ABR_ArbreDeHuffman creerArbre(S_Statistiques stats) {
+ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
     FP_FileDePriorite file = FP_fileDePriorite();
 
     for (int i = 0; i < 256; ++i) {
