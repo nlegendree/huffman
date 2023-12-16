@@ -24,24 +24,24 @@ void FP_ajouterElement(ArbreDeHuffman arbre, FP_FileDePriorite *pfile) {
 
 
 void FP_supprimerDernier(FP_FileDePriorite *pfile) {
-    if (!estVide(*pfile)) {
+    if (!FP_estVide(*pfile)) {
         pfile->tailleActuelle--;
     }
 }
 
 
 ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite *pfile) {
-    if (!estVide(*pfile)) {
+    if (!FP_estVide(*pfile)) {
         return pfile->arbre[pfile->tailleActuelle];
     }
 }
 
 
-bool FP_estVide(FP_FileDePriorite *pfile) {
-    return (pfile->tailleActuelle == 0);
+bool FP_estVide(FP_FileDePriorite pfile) {
+    return (pfile.tailleActuelle == 0);
 }
 
 
-unsigned int FP_longueur(FP_FileDePriorite *pfile) {
-    return pfile->tailleActuelle;
+unsigned int FP_longueur(FP_FileDePriorite pfile) {
+    return pfile.tailleActuelle;
 }
