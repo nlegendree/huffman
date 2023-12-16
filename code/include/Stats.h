@@ -5,21 +5,21 @@
 
 #define MAX 0x100
 
-typedef struct Statistiques
+typedef struct ST_Statistiques
 {
     long int nbOccurenceTotal;
     long int lesStatistiques[MAX];
-};
+} ST_Statistiques;
 
-Statistiques statistiques();
+ST_Statistiques ST_statistiques();
 
-long int obtenirOccurenceOctet(Statistique statistiques,O_Octet octet);
+long int ST_obtenirOccurenceOctet(ST_Statistiques statistiques,O_Octet octet);
 
-void incrementerOccurenceOctet(O_Octet octet, Statistiques* pstatistiques);
+void ST_incrementerOccurenceOctet(O_Octet octet, ST_Statistiques* pstatistiques);
 
-void fixerOccurenceOctet(O_Octet octet, long int nbOccurence, Statistiques* pstatistiques);
+void ST_fixerOccurenceOctet(O_Octet octet, long int nbOccurence, ST_Statistiques* pstatistiques);
 
-long int obtenirTotalOccurence(Statistiques statistiques);
+long int ST_obtenirTotalOccurence(ST_Statistiques statistiques);
 
 #endif
 

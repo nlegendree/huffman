@@ -4,20 +4,14 @@
 #include "arbre.h"
 
 
-typedef struct {
-    ArbreDeHuffman arbre[255];
-    unsigned int tailleActuelle;
-} FileDePriorite;
-
-
-FileDePriorite FP_fileDePriorite() {
-    FileDePriorite temp;
+FP_FileDePriorite FP_fileDePriorite() {
+    FP_FileDePriorite temp;
     temp.tailleActuelle = 0;
     return temp;
 }
 
 
-void FP_ajouterElement(ArbreDeHuffman arbre, FileDePriorite *pfile) {
+void FP_ajouterElement(ArbreDeHuffman arbre, FP_FileDePriorite *pfile) {
     unsigned int i;
     pfile->tailleActuelle++;
     i = pfile->tailleActuelle;
@@ -29,25 +23,25 @@ void FP_ajouterElement(ArbreDeHuffman arbre, FileDePriorite *pfile) {
 }
 
 
-void FP_supprimerDernier(FileDePriorite *pfile) {
+void FP_supprimerDernier(FP_FileDePriorite *pfile) {
     if (!estVide(*pfile)) {
         pfile->tailleActuelle--;
     }
 }
 
 
-ArbreDeHuffman FP_obtenirDernier(FileDePriorite *pfile) {
+ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite *pfile) {
     if (!estVide(*pfile)) {
         return pfile->arbre[pfile->tailleActuelle];
     }
 }
 
 
-bool FP_estVide(FileDePriorite *pfile) {
+bool FP_estVide(FP_FileDePriorite *pfile) {
     return (pfile->tailleActuelle == 0);
 }
 
 
-unsigned int FP_longueur(FileDePriorite *pfile) {
+unsigned int FP_longueur(FP_FileDePriorite *pfile) {
     return pfile->tailleActuelle;
 }

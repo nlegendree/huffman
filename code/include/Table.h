@@ -8,7 +8,7 @@ typedef struct TDC_TableDeCodage
 {
     long int nbElements;
     long int table[255];
-};
+} TDC_TableDeCodage;
 
 typedef struct Donnees
 {

@@ -1,8 +1,8 @@
 #include "octet.h"
 #include "Stats.h"
 
-Statistiques statistiques(){
-    Statistiques stats;
+ST_Statistiques ST_statistiques(){
+    ST_Statistiques stats;
     stats.nbOccurenceTotal=0;
     for (long int i=0;i<256;i++){
         stats.lesStatistiques[i]=0;
@@ -10,17 +10,17 @@ Statistiques statistiques(){
     return stats;
 }
 
-long int obtenirOccurenceOctet(Statistique statistiques,Octet octet){
+long int ST_obtenirOccurenceOctet(ST_Statistiques statistiques, O_Octet octet){
     return statistiques.lesStatistiques[octetToInt(octet)];
 }
 
-void incrementerOccurenceOctet(Octet octet,Statistiques* pstatistiques){
+void ST_incrementerOccurenceOctet(O_Octet octet, ST_Statistiques* pstatistiques){
     *pstatistiques.lesStatistiques[octetToInt(octet)]++;
 }
 
-void fixerOccurenceOctet(Octet octet, long int nbOccurence, Statistiques* pstatistiques){
+void ST_fixerOccurenceOctet(O_Octet octet, long int nbOccurence, ST_Statistiques* pstatistiques){
     *pstatistiques.lesStatistiques[octetToInt(octet)] = nbOccurence;
 }
-long int obtenirTotalOccurence(Statistiques statistiques){
+long int ST_obtenirTotalOccurence(ST_Statistiques statistiques){
     return statistiques.nbOccurenceTotal;
 }

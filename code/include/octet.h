@@ -34,7 +34,7 @@ typedef struct O_Octet O_Octet;
 
  */
 
-O_Octet octet(Naturel8Bits octet);
+O_Octet O_octet(Naturel8Bits octet);
 
 /**
 
@@ -50,7 +50,7 @@ O_Octet octet(Naturel8Bits octet);
 
  */
 
-Bit obtenirIemeBit(O_Octet octet, int i);
+Bit O_obtenirIemeBit(O_Octet octet, int i);
 
 /**
 
@@ -66,14 +66,14 @@ Bit obtenirIemeBit(O_Octet octet, int i);
 
  */
 
-void fixerIemeBit(O_Octet* octet, int i, Bit bit);
+void O_fixerIemeBit(O_Octet* octet, int i, Bit bit);
 
 /**
  * 
  * @param tableau de 8 bits
  * @return Octet 
  */
-O_Octet octet(Naturel8Bits octet);
+O_Octet O_octet(Naturel8Bits octet);
 
 /**
  * @brief permet d'obtenir le ième bit d'un octet
@@ -82,7 +82,7 @@ O_Octet octet(Naturel8Bits octet);
  * @param i indice du bit
  * @return Bit 
  */
-Bit obtenirIemeBit(O_Octet octet, int i);
+Bit O_obtenirIemeBit(O_Octet octet, int i);
 
 /**
  * @brief permet de fixer le ième bit d'un octet
@@ -91,7 +91,7 @@ Bit obtenirIemeBit(O_Octet octet, int i);
  * @param i indice du bit
  * @param bit bit à fixer
  */
-void fixerIemeBit(O_Octet* octet, int i, Bit bit);
+void O_fixerIemeBit(O_Octet* octet, int i, Bit bit);
 
 
 
