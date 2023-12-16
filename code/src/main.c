@@ -107,7 +107,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     // Tronquer le nom
     // ...
 
-    fichierDestination = fopen(strcat(nom, ".zip"), "wb");
+    fichierDestination = fopen(strcat(nom, ".huff"), "wb");
     if (fichierDestination == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
         exit(EXIT_FAILURE);
