@@ -43,7 +43,9 @@ unsigned int ARB_obtenirPonderation(ABR_ArbreDeHuffman arbre) {
 }
 
 // Retourne l'octet de l'arbre
-O_Octet ARB_obtenirOctet(ABR_ArbreDeHuffman arbre) {}
+O_Octet ARB_obtenirOctet(ABR_ArbreDeHuffman arbre) {
+    return arbre->octet;
+}
 
 // Retourne vrai si l'arbre est une feuille
 int ARB_estUneFeuille(ABR_ArbreDeHuffman arbre ) {
