@@ -1,3 +1,4 @@
+#include "table.h"
 #include "octet.h"
 #include "codeBinaire.h"
 #include <assert.h>
