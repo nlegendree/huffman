@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "octet.h"
 #include "stats.h"
 #include "arbre.h"
 #include "table.h"
 #include "fileDePriorite.h"
-#include "CodeBinaire.h"
+#include "codeBinaire.h"
 #include "bit.h"
 
 Bit bit0 = ZERO;
@@ -117,13 +119,14 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     for (int i = 0; i < 256; i++) {
         O_Octet octet = O_octet(i);
         fwrite(&octet, sizeof(octet), 1, fichierDestination);
-        fwrite(&ABR_obtenirOccurenceElement(octet), sizeof(obtenirOccurenceElement(octet)), 1, fichierDestination);
+        fwrite(ST_obtenirOccurenceOctet(stats, octet), sizeof(long), 1, fichierDestination);
     }
 
     // Écrire le code binaire du fichier source
     while (!feof(fichierSource)) {
-        octet = lireOctet(fichierSource);
-        ecrireCodeBinaire(fichierDestination, obtenirCodeElement(table, octet));
+        octet = O_octet((Naturel8Bits)fgetc(fichierSource));
+
+        ecrireCodeBinaire(fichierDestination, TDC_obtenirCodeElement(table, octet));
     }
 
     fclose(fichierSource);
