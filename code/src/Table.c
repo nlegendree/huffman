@@ -14,7 +14,7 @@ int TDC_estVide(TDC_TableDeCodage tableDeCodage) {
 
 int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, O_Octet octet) {
     for (int i=0; i<tableDeCodage.nbElements; i++) {
-        if (tableDeCodage.table[i].octet==octet) {
+        if (tableDeCodage.table[i].octet == octet) {
             return 1;
         } 
     }
@@ -31,11 +31,11 @@ int TDC_codePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire)
 }
 
 void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeBinaire codeBinaire) {
-    assert(!TDC_octetPresent(*pTableDeCodage,octet));
-    assert(*pTableDeCodage.nbElements<255);
-    *pTableDeCodage.nbElements++;
-    *pTableDeCodage.table[*pTableDeCodage.nbElements-1].octet=octet;
-    *pTableDeCodage.table[*pTableDeCodage.nbElements-1].codeBinaire=codeBinaire;
+    assert(!TDC_octetPresent(*pTableDeCodage, octet));
+    assert(pTableDeCodage->nbElements < 255);
+    pTableDeCodage->nbElements++;
+    pTableDeCodage->table[pTableDeCodage->nbElements-1].octet = (long int)octet;
+    pTableDeCodage->table[pTableDeCodage->nbElements-1].codeBinaire = (long int)codeBinaire;
 }
 
 CB_CodeBinaire TDC_obtenireCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet) {

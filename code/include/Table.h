@@ -4,7 +4,7 @@
 #include "octet.h"
 #include "codeBinaire.h"
 
-typedef struct TDC_TableDeCodage
+typedef struct
 {
     long int nbElements;
     long int table[255];
