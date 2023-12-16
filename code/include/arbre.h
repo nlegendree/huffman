@@ -13,7 +13,7 @@ typedef struct
 typedef Noeud* ABR_ArbreDeHuffman;
 
 // Constructeur 
-ABR_ArbreDeHuffman* ARB_arbreDeHuffman(O_Octet octet, unsigned int ponderation);
+ABR_ArbreDeHuffman ARB_arbreDeHuffman(O_Octet octet, unsigned int ponderation);
 // Destructeur
 void ARB_detruireArbre(ABR_ArbreDeHuffman arbre);
 // Copie l'arbre 
