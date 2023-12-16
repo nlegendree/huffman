@@ -59,7 +59,7 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
         ABR_ArbreDeHuffman arbreDroit = FP_obtenirDernier(&file);
         FP_supprimerDernier(&file);
 
-        FP_ajouterElement(&file, ABR_combiner(arbreGauche, arbreDroit));
+        FP_ajouterElement(&file, ABR_combiner(arbreGauche, arbreDroit)  );
     }
 
     return FP_obtenirDernier(&file);

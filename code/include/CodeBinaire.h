@@ -1,9 +1,10 @@
 #ifndef  __CODEBINAIRE__
 #define __CODEBINAIRE__
 
+#include "bit.h"
+
 #define CB_NBMAXBIT 7
 
-typedef enum {bitA0 = 0, bitA1 = 1} Bit; /*ça sera aussi dans le main je suppose*/
 
 typedef struct CB_CodeBinaire
 {

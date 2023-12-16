@@ -10,13 +10,13 @@ typedef struct TDC_TableDeCodage
     long int table[255];
 } TDC_TableDeCodage;
 
-typedef struct Donnees
+typedef struct 
 {
     O_Octet octet;
     CB_CodeBinaire code;
-};
+} Donnees;
 
-TDC_TableDeCodage TDC_tableDeCodage();
+TDC_TableDeCodage TDC_tableDeCodage(void);
 
 int TDC_estVide(TDC_TableDeCodage tableDeCodage);
 

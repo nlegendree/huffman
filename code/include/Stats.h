@@ -11,7 +11,7 @@ typedef struct ST_Statistiques
     long int lesStatistiques[MAX];
 } ST_Statistiques;
 
-ST_Statistiques ST_statistiques();
+ST_Statistiques ST_statistiquescl(void);
 
 long int ST_obtenirOccurenceOctet(ST_Statistiques statistiques,O_Octet octet);
 
