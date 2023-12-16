@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "fileDePriorite.h"
-#include "arbre.h"
 
 
 FP_FileDePriorite FP_fileDePriorite() {
@@ -11,15 +10,15 @@ FP_FileDePriorite FP_fileDePriorite() {
 }
 
 
-void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre) {
+void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre, unsigned int priorite) {
     unsigned int i;
     pfile->tailleActuelle++;
     i = pfile->tailleActuelle;
     while (i > 1 && ARB_obtenirPonderation(&arbre[i]) <= priorite) {
-        pfile->arbre[i] = pfile->arbre[i - 1];
+        pfile->arbres[i] = pfile->arbres[i - 1];
         i--;
     }
-    pfile->tab[i].arbre = arbre;
+    pfile->arbres[i] = arbre;
 }
 
 
@@ -32,7 +31,7 @@ void FP_supprimerDernier(FP_FileDePriorite *pfile) {
 
 ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite *pfile) {
     if (!FP_estVide(*pfile)) {
-        return pfile->arbre[pfile->tailleActuelle];
+        return pfile->arbres[pfile->tailleActuelle];
     }
 }
 
