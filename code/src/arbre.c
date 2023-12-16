@@ -1,5 +1,6 @@
 #include "arbre.h"
 #include <stdio.h> 
+#include <stdlib.h>
 
 // Créer un arbre vide de manière dynamique
 ABR_ArbreDeHuffman ARB_arbreDeHuffman(O_Octet octet, unsigned int ponderation) {
@@ -15,15 +16,15 @@ ABR_ArbreDeHuffman ARB_arbreDeHuffman(O_Octet octet, unsigned int ponderation) {
 // Destructeur de tout l'arbre de manière récursive
 void ARB_detruireArbre(ABR_ArbreDeHuffman arbre) {
     if (arbre != NULL) {
-        ARB_detruireArbre(arbre->gauche);
-        ARB_detruireArbre(arbre->droite);
+        ARB_detruireArbre((ABR_ArbreDeHuffman)arbre->gauche);
+        ARB_detruireArbre((ABR_ArbreDeHuffman)arbre->droite);
         free(arbre);
     }
 }
 // Copie l'arbre 
 ABR_ArbreDeHuffman ARB_copierArbre(ABR_ArbreDeHuffman arbre) {
     ABR_ArbreDeHuffman arbreCopie;
-    arbreCopie = memcpy(malloc(sizeof (Noeud)), arbre, sizeof (Noeud));
+    arbreCopie = malloc(sizeof (Noeud)), arbre, sizeof (Noeud);
     return arbreCopie;
 }
 // Combine les deux arbres et retourne le nouvel arbre
@@ -51,10 +52,10 @@ int ARB_estUneFeuille(ABR_ArbreDeHuffman arbre ) {
 
 // Retourne le fils gauche de l'arbre
 ABR_ArbreDeHuffman ARB_obtenirFilsGauche(ABR_ArbreDeHuffman arbre) {
-    return arbre->gauche;
+    return (ABR_ArbreDeHuffman)arbre->gauche;
 }
 
 // Retourne le fils droit de l'arbre
 ABR_ArbreDeHuffman ARB_obtenirFilsDroit(ABR_ArbreDeHuffman arbre) {
-    return arbre->droite;
+    return (ABR_ArbreDeHuffman)arbre->droite;
 }

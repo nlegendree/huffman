@@ -1,6 +1,7 @@
 #ifndef OCTET_H
 #define OCTET_H
 #include "octet.h"
+#include "bit.h"
 
 typedef unsigned char Naturel8Bits;
 

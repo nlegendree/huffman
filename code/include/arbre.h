@@ -3,8 +3,8 @@
 
 typedef struct 
 {
-    struct Noeud *gauche;
-    struct Noeud *droite;
+    struct Noeud* gauche;
+    struct Noeud* droite;
     O_Octet octet;
     unsigned int ponderation;
     
