@@ -17,7 +17,7 @@ FileDePriorite FP_fileDePriorite() {
 }
 
 
-void FP_ajouterElement(ArbreDeHuffman arbre, unsigned int priorite, FileDePriorite *pfile) {
+void FP_ajouterElement(ArbreDeHuffman arbre, FileDePriorite *pfile) {
     unsigned int i;
     pfile->tailleActuelle++;
     i = pfile->tailleActuelle;

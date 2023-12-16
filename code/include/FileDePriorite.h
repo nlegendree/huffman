@@ -3,7 +3,7 @@
 #include "arbre.h"
 
 FileDePriorite FP_fileDePriorite();
-void FP_ajouterElement(ArbreDeHuffman arbre, unsigned int priorite, FileDePriorite *pfile);
+void FP_ajouterElement(ArbreDeHuffman arbre, FileDePriorite *pfile);
 void FP_supprimerDernier(FileDePriorite *pfile);
 ArbreDeHuffman FP_obtenirDernier(FileDePriorite *pfile);
 bool FP_estVide(FileDePriorite *pfile);
