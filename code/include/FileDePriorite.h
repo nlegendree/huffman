@@ -9,7 +9,7 @@ typedef struct FP_FileDePriorite {
 } FP_FileDePriorite;
 
 FP_FileDePriorite FP_fileDePriorite(void);
-void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre, unsigned int priorite);
+void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre);
 void FP_supprimerDernier(FP_FileDePriorite *pfile);
 ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite *pfile);
 bool FP_estVide(FP_FileDePriorite pfile);

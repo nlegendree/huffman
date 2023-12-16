@@ -7,7 +7,6 @@ typedef struct
     struct Noeud* droite;
     O_Octet octet;
     unsigned int ponderation;
-    
 } Noeud;
 
 typedef Noeud* ABR_ArbreDeHuffman;
