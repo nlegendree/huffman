@@ -15,7 +15,7 @@ void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre) {
     unsigned int i;
     pfile->tailleActuelle++;
     i = pfile->tailleActuelle;
-    while (i > 1 && ARB_obtenirPonderation(arbre[i]) <= priorite) {
+    while (i > 1 && ARB_obtenirPonderation(&arbre[i]) <= priorite) {
         pfile->arbre[i] = pfile->arbre[i - 1];
         i--;
     }
