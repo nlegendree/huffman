@@ -26,6 +26,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(BIN_DIR) $(OBJ_DIR):
 	mkdir -p $@
 
+test: $(TARGET)
+	$(CC) $(CFLAGS) -I$(INC_DIR) $(TEST_DIR)/test.c -o $(BIN_DIR)/test
+	$(BIN_DIR)/test
+	
+
 clean:
 	rm -f $(OBJ_DIR)/*.o $(TARGET)
 

@@ -46,7 +46,7 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
 
     for (int i = 0; i < 256; ++i) {
         if (ST_obtenirOccurrenceOctet(stats, O_octet(i)) != 0) {
-            FP_ajouterElement(ABR_creerArbreDeHuffman(O_octet(i), ST_obtenirOccurrenceElement(stats, O_octet(i))), file);
+            FP_ajouterElement(file, ABR_creerArbreDeHuffman(O_octet(i), ST_obtenirOccurrenceElement(stats, O_octet(i))));
         }
     }
 
@@ -57,7 +57,7 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
         ABR_ArbreDeHuffman arbreDroit = FP_obtenirDernier(&file);
         FP_supprimerDernier(&file);
 
-        FP_ajouterElement(file, ABR_combiner(arbreGauche, arbreDroit));
+        FP_ajouterElement(&file, ABR_combiner(arbreGauche, arbreDroit));
     }
 
     return FP_obtenirDernier(&file);
