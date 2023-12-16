@@ -70,7 +70,7 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     TDC_TableDeCodage table = TDC_tableDeCodage();
 
     if (ABR_estUneFeuille(arbre)) {
-        FP_ajouterElement(&table, ABR_obtenirOctet(arbre));
+        FP_ajouterElement(&table, ARB_obtenirOctet(arbre));
         TDC_assignerCodeElement(table, ABR_obtenirOctet(arbre), CB_codeBinaire(bit0)); //n'existe plus ?
     } else {
         descendreArbre(obtenirArbreDroit(arbre), CB_codeBinaire(bit1), &table);
