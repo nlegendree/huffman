@@ -48,7 +48,7 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
 
     for (int i = 0; i < 256; ++i) {
         if (ST_obtenirOccurrenceOctet(stats, O_octet(i)) != 0) {
-            FP_ajouterElement(file, ABR_creerArbreDeHuffman(O_octet(i), ST_obtenirOccurrenceElement(stats, O_octet(i))));
+            FP_ajouterElement(&file, ABR_creerArbreDeHuffman(O_octet(i), ST_obtenirOccurrenceElement(stats, O_octet(i))));
         }
     }
 
@@ -70,7 +70,7 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     TDC_TableDeCodage table = TDC_tableDeCodage();
 
     if (ABR_estUneFeuille(arbre)) {
-        FP_ajouterElement(table, ABR_obtenirOctet(arbre));
+        FP_ajouterElement(&table, ABR_obtenirOctet(arbre));
         TDC_assignerCodeElement(table, ABR_obtenirOctet(arbre), CB_codeBinaire(bit0)); //n'existe plus ?
     } else {
         descendreArbre(obtenirArbreDroit(arbre), CB_codeBinaire(bit1), &table);
