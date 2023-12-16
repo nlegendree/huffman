@@ -1,6 +1,6 @@
 #ifndef __BIT__
 #define __BIT__
 
-typedef enum { UN, ZERO } Bit;
+typedef enum { ZERO, UN } Bit;
 
 #endif // __BIT__
