@@ -5,7 +5,7 @@ typedef struct
 {
     struct Noeud *gauche;
     struct Noeud *droite;
-    Octet octet;
+    O_Octet octet;
     unsigned int ponderation;
     
 } Noeud;
@@ -22,7 +22,7 @@ ABR_ArbreDeHuffman ARB_copierArbre(ABR_ArbreDeHuffman arbre);
 ABR_ArbreDeHuffman ARB_combiner(ABR_ArbreDeHuffman arbreDroit, ABR_ArbreDeHuffman arbreGauche);
 unsigned int ARB_obtenirPonderation(ABR_ArbreDeHuffman arbre);
 O_Octet ARB_obtenirOctet(ABR_ArbreDeHuffman arbre);
-bool ARB_estUneFeuille(ABR_ArbreDeHuffman arbre);
+int ARB_estUneFeuille(ABR_ArbreDeHuffman arbre);
 ABR_ArbreDeHuffman ARB_obtenirFilsGauche(ABR_ArbreDeHuffman arbre);
 ABR_ArbreDeHuffman ARB_obtenirFilsDroit(ABR_ArbreDeHuffman arbre);
 
