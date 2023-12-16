@@ -45,8 +45,7 @@
         \affecter{table}{tableDeCodage()}
         \sialorssinon{estUneFeuille(arbre)}%
         {
-            \instruction{ajouterElement(table,obtenirElement(arbre))}
-            \instruction{assignerCodeElement(table,obtenirElement(arbre),codeBinaire(Bit0))}
+            \instruction{ajouterElement(table,obtenirElement(arbre),codeBinaire(Bit0))}
         }%
         {
             \instruction{descendreArbre(obtenirArbreDroit(arbre),codeBinaire(Bit1),table)}
@@ -58,8 +57,7 @@
     {
         \sialorssinon{estUneFeuille(arbre)}%
         {
-            \instruction{ajouterElement(table,obtenirElement(arbre))}
-            \instruction{assignerCodeElement(table,obtenirElement(arbre),code)}
+            \instruction{ajouterElement(table,obtenirElement(arbre),code)}
         }%
         {
             \affecter{codeTemp}{code}
