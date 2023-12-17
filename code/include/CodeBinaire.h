@@ -24,7 +24,7 @@ typedef struct CB_CodeBinaire
 CB_CodeBinaire CB_codeBinaire(Bit bit);
 
 /**
- * @brief permet de fixer le ième bit d'un octet
+ * @brief permet d'ajouter un bit à un code binaire
  * 
  * @param cB code binaire auquel on souhaite ajouter un bit
  * @param bit bit à ajouter
