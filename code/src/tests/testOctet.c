@@ -30,13 +30,13 @@ void test_O_fixerIemeBit(void) {
     O_Octet o1 = O_octet(A);
     O_Octet o2 = O_octet(varTest);
     O_fixerIemeBit(&o2, i, UN);
-    CU_ASSERT_TRUE((o2 == o1));
+    CU_ASSERT_TRUE(o2.octet == o1.octet);
 }
 
 void test_O_obtenirNaturel8bits(void) {
     Naturel8Bits A = 0x41; // 'A' en ASCII
     O_Octet o = O_octet(A);
-    CU_ASSERT_TRUE(O_obtenirNaturel8bits(o) == int(A));
+    CU_ASSERT_TRUE(O_obtenirNaturel8bits(o) == (int)A);
 }
 
 int main(int argc, char** argv){
