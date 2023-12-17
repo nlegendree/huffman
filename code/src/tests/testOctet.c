@@ -55,9 +55,9 @@ int main(int argc, char** argv){
 
   /* Ajout des tests à la suite de tests boite noire */
   if ((NULL == CU_add_test(pSuite, "O_octet", test_O_octet))
-      || (NULL == CU_add_test(pSuite, "", test_O_obtenirIemeBit))
-      || (NULL == CU_add_test(pSuite, "", test_O_fixerIemeBit))
-      || (NULL == CU_add_test(pSuite, "", test_O_obtenirNaturel8bits))
+      || (NULL == CU_add_test(pSuite, "O_obtenirIemeBit", test_O_obtenirIemeBit))
+      || (NULL == CU_add_test(pSuite, "O_fixerIemeBit", test_O_fixerIemeBit))
+      || (NULL == CU_add_test(pSuite, "O_obtenirNaturel8bits", test_O_obtenirNaturel8bits))
       ) 
     {
       CU_cleanup_registry();
