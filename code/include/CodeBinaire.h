@@ -48,4 +48,13 @@ short int CB_obtenirLongueur(CB_CodeBinaire cB);
  */
 Bit CB_obtenirIemeBit(CB_CodeBinaire cB, short int ind);
 
+/**
+ * @brief permet de comparer 2 codes binaires
+ * 
+ * @param cB1 
+ * @param cB2 
+ * @return int 
+ */
+int CB_egale(CB_CodeBinaire cB1, CB_CodeBinaire cB2);
+
 #endif
