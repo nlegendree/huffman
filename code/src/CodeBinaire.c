@@ -19,3 +19,15 @@ short int CB_obtenirLongueur(CB_CodeBinaire cB){
 Bit CB_obtenirIemeBit(CB_CodeBinaire cB, short int ind){
     return cB.bits[ind];
 }
+
+int CB_egale(CB_CodeBinaire cB1, CB_CodeBinaire cB2){
+    if (cB1.nbBits != cB2.nbBits) {
+        return 0;
+    }
+    for (int i=0; i<cB1.nbBits; i++) {
+        if (cB1.bits[i] != cB2.bits[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
