@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "fileDePriorite.h"
+#include "FileDePriorite.h"
 
 
 FP_FileDePriorite FP_fileDePriorite() {
