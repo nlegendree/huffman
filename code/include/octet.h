@@ -74,4 +74,16 @@ void O_fixerIemeBit(O_Octet* octet, int i, Bit bit);
  */
 int O_obtenirNaturel8bits(O_Octet octet);
 
+/**
+ * @brief Permet de comparer l'instance de 2 octets
+ * 
+ * @param o1 
+ * @param o2 
+ * @return int 
+ */
+int O_egale(O_Octet o1, O_Octet o2)
+{
+    return o1.octet == o2.octet;
+}
+
 #endif
