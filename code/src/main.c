@@ -33,7 +33,7 @@ ST_Statistiques calculerStatistiques(char *nom) {
     ST_Statistiques stats = ST_statistiques();
 
     while (!feof(fichier)) {
-        ST_incrementerOccurrenceOctet(fread(fichier), stats);
+        ST_incrementerOccurrenceOctet(fread(, sizeof(O_Octet), ), stats);
     }
 
     fclose(fichier);
@@ -101,7 +101,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
         exit(EXIT_FAILURE);
     }
 
-    // Tronquer le nom
+    // Ajouter une fonction pour retirer l'extension du fichier exemple "file.txt" -> "file"
 
     fichierDestination = fopen(strcat(nom, ".huff"), "wb");
     if (fichierDestination == NULL) {
@@ -110,20 +110,19 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     }
 
     // Écrire la clé et le nombre d'éléments
-    fwrite(CLE, sizeof(unsigned long), 1, fichierDestination);
-    fwrite(&nbElement(stats), sizeof(nbElement(stats)), 1, fichierDestination);
+    fwrite(cle, sizeof(unsigned long), 1, fichierDestination);
+    fwrite(ST_obtenirTotalOccurence(stats), sizeof(ST_obtenirTotalOccurence(stats)), 1, fichierDestination);
 
     // Écrire les statistiques
     for (int i = 0; i < 256; i++) {
         O_Octet octet = O_octet(i);
-        fwrite(&octet, sizeof(octet), 1, fichierDestination);
+        fwrite(&octet, sizeof(O_Octet), 1, fichierDestination);
         fwrite(ST_obtenirOccurenceOctet(stats, octet), sizeof(long), 1, fichierDestination);
     }
 
     // Écrire le code binaire du fichier source
     while (!feof(fichierSource)) {
         octet = O_octet((Naturel8Bits)fgetc(fichierSource));
-
         ecrireCodeBinaire(fichierDestination, TDC_obtenireCodeOctet(table, octet));
     }
 
