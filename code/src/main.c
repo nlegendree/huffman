@@ -32,9 +32,8 @@ ST_Statistiques calculerStatistiques(char *nom) {
 
     ST_Statistiques stats = ST_statistiques();
 
-    O_Octet octetLu;
-    while (fread(&octetLu, sizeof(O_Octet), 1, fichier) == 1) { //à modifier
-        ST_incrementerOccurrenceOctet(stats, octetLu);
+    while () {
+        ST_incrementerOccurrenceOctet(stats, );
     }
 
     fclose(fichier);
@@ -70,11 +69,10 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     TDC_TableDeCodage table = TDC_tableDeCodage();
 
     if (ABR_estUneFeuille(arbre)) {
-        FP_ajouterElement(&table, ARB_obtenirOctet(arbre));
-        TDC_assignerCodeElement(table, ABR_obtenirOctet(arbre), CB_codeBinaire(bit0)); //n'existe plus ?
+        TDC_ajouterOctet(&table, ABR_obtenirOctet(arbre), CB_codeBinaire(bit0));
     } else {
-        descendreArbre(obtenirArbreDroit(arbre), CB_codeBinaire(bit1), &table);
-        descendreArbre(obtenirArbreGauche(arbre), CB_codeBinaire(bit0), &table);
+        descendreArbre(ABR_obtenirFilsDroit(arbre), CB_codeBinaire(bit1), &table);
+        descendreArbre(ABR_obtenirFilsGauche(arbre), CB_codeBinaire(bit0), &table);
     }
     return table;
 }
@@ -82,8 +80,7 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
 
 void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table) {
     if (ABR_estUneFeuille(arbre)) {
-        FP_ajouterOctet(*table, ABR_obtenirOctet(arbre));
-        TDC_assignerCodeElement(*table, ABR_obtenirOctet(arbre), code);
+        TDC_ajouterOctet(table, ABR_obtenirOctet(arbre), code);
     } else {
         CB_CodeBinaire codeTemp = code;
         CB_ajouterBit(&code, bit1);
