@@ -1,0 +1,87 @@
+\begin{algorithme}
+    \fonction{decompresser}{nom:\chaine}{}{}{stats:Statistiques$<$Octet$>$,arbre:ArbreDeHuffman$<$Octet$>$}%
+    {
+        sialors{estUnFichierCompresse(nom)}
+        {
+            \affecter{stats}{obtenirStatistiques(nom)}
+            \affecter{arbre}{creerArbre(stats)}
+            \affecter{table}{codage(arbre)}%à ajouter dans l'analyse, on en a besoin en fait je pense
+            \instruction{decompresserFichier(source,table,stats)}
+        }
+    }
+
+    \fonction{estUnFichierCompresse}{nom:\chaine}{\booleen}{}{}
+    {
+        %vérifie le code d'authentification
+    }
+
+    \fonction{obtenirStatistiques}{nom:\chaine}{Statistiques$<$Octet$>$}{}{fichier:FichierBinaire,stats:Statistiques$<$Octet$>$}%
+    {
+        \affecter{fichier}{fichierBinaire(nom)}  
+        \instruction{ouvrir(fichier,lecture)}
+        \affecter{stats}{statistiques()}
+        \tantque{}%à décider selon comment sont les stats dans la destination
+        %à décider si on code les 256 dans l'ordre (opti bcp de carac différent), ou uniquement un octet et son incrémentation à chaque fois (opti peu de carac diff)
+        %pas besoin de tant que si 256 codés car taille fixe, plus facile à implémenter
+        {
+            %repérer l'octet, ou octet suivant selon comment c'est codé
+            \instruction{incrementerOccurenceElement(stats,lireOctet(fichier))}
+        }
+        \instruction{fermer(fichier)}
+        \retourner{stats}
+    }
+
+    \fonction{creerArbre}{stats:Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}{i:\naturel , file:FileDePriorité$<$ArbreDeHuffmann$>$}
+    {
+        \affecter{file}{fileDePrioriteVide()}
+        \pour{i}{0}{255}{}%sommes nous obligé de mettre les occurences 0 ?
+        {
+            \sialorssinon{obtenirOccurenceElement(octet(i))$\ne$0}
+            {
+                \instruction{ajouterElement(file,arbreDeHuffmann(octet(i),obtenirOccurenceElement(octet(i))))}
+            }{}
+        }
+        \tantque{longueur(file)$>$1}
+        {
+            \affecter{arbreGauche}{obtenirDernier(file)}
+            \instruction{supprimerDernier(file)}
+            \affecter{arbreDroit}{obtenirDernier(file)}
+            \instruction{supprimerDernier(file)}
+            \instruction{ajouterElement(file,combiner(arbreGauche,arbreDroit))}
+        }
+        \retourner{obtenirDernier(file)}
+    }  
+
+    \fonction{codage}{arbre:ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}{}{table:TableDeCodage$<$Octet$>$}%table de codage contient des octets et des codes binaires, pas sur de comprendre où en venir avec cette désignation.
+    {
+        \affecter{table}{tableDeCodage()}
+        \sialorssinon{estUneFeuille(arbre)}%
+        {
+            \instruction{ajouterElement(table,obtenirElement(arbre),codeBinaire(Bit0))}
+        }%
+        {
+            \instruction{descendreArbre(obtenirArbreDroit(arbre),codeBinaire(Bit1),table)}
+            \instruction{descendreArbre(obtenirArbreGauche(arbre),codeBinaire(Bit0),table)}
+        }
+        \retourner{table}
+    }
+    \procedure{descendreArbre}{\paramEntree{arbre:ArbreDeHuffman$<$Octet$>$,code:CodeBinaire},\paramEntreeSortie{table:TableDeCodage$<$Octet$>$}}{}{codeTemp:codeBinaire}%
+    {
+        \sialorssinon{estUneFeuille(arbre)}%
+        {
+            \instruction{ajouterElement(table,obtenirElement(arbre),code)}
+        }%
+        {
+            \affecter{codeTemp}{code}
+            \instruction{ajouterBit(code,Bit1)}
+            \instruction{ajouterBit(codeTemp,Bit0)}
+            \instruction{descendreArbre(obtenirArbreDroit(arbre),code,table)}
+            \instruction{descendreArbre(obtenirArbreGauche(arbre),codeTemp,table)}
+        }
+    }
+    \procedure{decompresserFichier}{\paramEntree{nom:\chaine,table:tableDeCodage$<$Octet$>$,stats:Statistiques$<$Octets$>$}}{}{}%
+    {
+        %à voir selon comment c'est fait, surement juste decendre l'arbre en décrémentant au fur et à mesure, et en fonction de la table de codage, à discuter
+    }
+
+\end{algorithme}
