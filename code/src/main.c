@@ -32,8 +32,8 @@ ST_Statistiques calculerStatistiques(char *nom) {
 
     ST_Statistiques stats = ST_statistiques();
 
-    while () {
-        ST_incrementerOccurrenceOctet(stats, );
+    while (!feof(fichier)) {
+        ST_incrementerOccurrenceOctet(fread(fichier), stats);
     }
 
     fclose(fichier);
