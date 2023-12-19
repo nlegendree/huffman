@@ -11,7 +11,7 @@ int clean_suite_success(void) {
 }
 
 void test_AH_obtenirElement(void) {
-    ABR_ArbreDeHuffman arbre = ARB_arbreDeHuffman('A', 5);
+    ABR_ArbreDeHuffman arbre = ABR_arbreDeHuffman('A', 5);
     CU_ASSERT_TRUE(AH_obtenirElement(arbre) == 'A');
 }
 
