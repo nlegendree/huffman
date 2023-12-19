@@ -40,5 +40,5 @@ int O_obtenirNaturel8bits(O_Octet octet) {
 
 int O_egale(O_Octet octet1, O_Octet octet2)
 {
-    return o1.octet == o2.octet;
+    return octet1.octet == octet2.octet;
 }
