@@ -78,7 +78,7 @@
         \instruction{ecrireNaturel(fichierDestination,nbElement(stats))}
         \pour{i}{0}{255}{}
         {
-            \instruction{ecrireOctet(fichierDestination,octet(i))}
+            \instruction{ecrireOctet(fichierDestination,octet(i))}%inutile
             \instruction{ecrireNaturel(fichierDestination,obtenirOccurenceElement(octet(i)))}
         }
         \tantque{non finFichier(fichierSource)}%

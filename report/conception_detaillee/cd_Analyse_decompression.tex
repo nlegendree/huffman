@@ -5,7 +5,6 @@
         {
             \affecter{stats}{obtenirStatistiques(nom)}
             \affecter{arbre}{creerArbre(stats)}
-            \affecter{table}{codage(arbre)}%à ajouter dans l'analyse, on en a besoin en fait je pense
             \instruction{decompresserFichier(source,table,stats)}
         }
     }
@@ -31,10 +30,10 @@
         \retourner{stats}
     }
 
-    \fonction{creerArbre}{stats:Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}{i:\naturel , file:FileDePriorité$<$ArbreDeHuffmann$>$}
+    \fonction{creerArbre}{stats:Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}{i:\naturel , file:FileDePriorité$<$ArbreDeHuffmann$>$}%a adapter
     {
         \affecter{file}{fileDePrioriteVide()}
-        \pour{i}{0}{255}{}%sommes nous obligé de mettre les occurences 0 ?
+        \pour{i}{0}{255}{}%
         {
             \sialorssinon{obtenirOccurenceElement(octet(i))$\ne$0}
             {
@@ -52,20 +51,7 @@
         \retourner{obtenirDernier(file)}
     }  
 
-    \fonction{codage}{arbre:ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}{}{table:TableDeCodage$<$Octet$>$}%table de codage contient des octets et des codes binaires, pas sur de comprendre où en venir avec cette désignation.
-    {
-        \affecter{table}{tableDeCodage()}
-        \sialorssinon{estUneFeuille(arbre)}%
-        {
-            \instruction{ajouterElement(table,obtenirElement(arbre),codeBinaire(Bit0))}
-        }%
-        {
-            \instruction{descendreArbre(obtenirArbreDroit(arbre),codeBinaire(Bit1),table)}
-            \instruction{descendreArbre(obtenirArbreGauche(arbre),codeBinaire(Bit0),table)}
-        }
-        \retourner{table}
-    }
-    \procedure{descendreArbre}{\paramEntree{arbre:ArbreDeHuffman$<$Octet$>$,code:CodeBinaire},\paramEntreeSortie{table:TableDeCodage$<$Octet$>$}}{}{codeTemp:codeBinaire}%
+    \procedure{descendreArbre}{\paramEntree{arbre:ArbreDeHuffman$<$Octet$>$,code:CodeBinaire},\paramEntreeSortie{table:TableDeCodage$<$Octet$>$}}{}{codeTemp:codeBinaire}%à adapter
     {
         \sialorssinon{estUneFeuille(arbre)}%
         {
