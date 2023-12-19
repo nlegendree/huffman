@@ -14,13 +14,6 @@
 Bit bit0 = ZERO;
 Bit bit1 = UN;
 
-void compresser(char *nom) {
-    ST_Statistiques stats = calculerStatistiques(nom);
-    ABR_ArbreDeHuffman arbre = creerArbre(stats);
-    TDC_TableDeCodage table = codage(arbre);
-    compresserFichier(nom, table, stats);
-}
-
 ST_Statistiques calculerStatistiques(char *nom) {
     FILE *fichier;
 
@@ -64,6 +57,17 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
     return FP_obtenirDernier(&file);
 }
 
+void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table) {
+    if (ABR_estUneFeuille(arbre)) {
+        TDC_ajouterOctet(table, ABR_obtenirOctet(arbre), code);
+    } else {
+        CB_CodeBinaire codeTemp = code;
+        CB_ajouterBit(&code, bit1);
+        CB_ajouterBit(&codeTemp, bit0);
+        descendreArbre(ABR_obtenirArbreDroit(arbre), code, table);
+        descendreArbre(ABR_obtenirArbreGauche(arbre), codeTemp, table);
+    }
+}
 
 TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     TDC_TableDeCodage table = TDC_tableDeCodage();
@@ -77,19 +81,15 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     return table;
 }
 
-
-void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table) {
-    if (ABR_estUneFeuille(arbre)) {
-        TDC_ajouterOctet(table, ABR_obtenirOctet(arbre), code);
-    } else {
-        CB_CodeBinaire codeTemp = code;
-        CB_ajouterBit(&code, bit1);
-        CB_ajouterBit(&codeTemp, bit0);
-        descendreArbre(ABR_obtenirArbreDroit(arbre), code, table);
-        descendreArbre(ABR_obtenirArbreGauche(arbre), codeTemp, table);
+void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
+    for (int i = 0; i < CB_obtenirLongueur(codeBinaire); i++) {
+        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
+            fputc('0', fichier);
+        } else {
+            fputc('1', fichier);
+        }
     }
 }
-
 
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
@@ -107,7 +107,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
         exit(EXIT_FAILURE);
     }
 
-    fwrite(cle, sizeof(unsigned long), 1, fichierDestination);
+    fwrite(CLE, sizeof(unsigned long), 1, fichierDestination);
     fwrite(ST_obtenirTotalOccurence(stats), sizeof(ST_obtenirTotalOccurence(stats)), 1, fichierDestination);
 
     for (int i = 0; i < 256; i++) {
@@ -127,12 +127,10 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
 }
 
 
-void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
-    for (int i = 0; i < obtenirLongueur(codeBinaire); i++) {
-        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
-            fputc('0', fichier);
-        } else {
-            fputc('1', fichier);
-        }
-    }
+
+void compresser(char *nom) {
+    ST_Statistiques stats = calculerStatistiques(nom);
+    ABR_ArbreDeHuffman arbre = creerArbre(stats);
+    TDC_TableDeCodage table = codage(arbre);
+    compresserFichier(nom, table, stats);
 }
