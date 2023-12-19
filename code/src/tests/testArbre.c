@@ -10,33 +10,43 @@ int clean_suite_success(void) {
   return 0; 
 }
 
-ABR_ArbreDeHuffman arbre = ARB_arbreDeHuffman('A', 5);
-ABR_ArbreDeHuffman arbreGauche = ARB_arbreDeHuffman('B', 3);
-ABR_ArbreDeHuffman arbreDroit = ARB_arbreDeHuffman('C', 2);
-ABR_ArbreDeHuffman combinaison = ARB_combiner(arbreGauche, arbreDroit);
-
 void test_AH_obtenirElement(void) {
-    CU_ASSERT_TRUE(AH_obtenirElement(arbre)=='A');
+    ABR_ArbreDeHuffman arbre = ARB_arbreDeHuffman('A', 5);
+    CU_ASSERT_TRUE(AH_obtenirElement(arbre) == 'A');
 }
 
 void test_AH_combiner(void) {
+    ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman('B', 3);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman('C', 2);
+    ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
     CU_ASSERT_TRUE(AH_obtenirPondération(combinaison) == (AH_obtenirPondération(arbreGauche) + AH_obtenirPondération(arbreDroit)));
 }
 
 void test_AH_obtenirPondération(void) {
-    CU_ASSERT_TRUE(AH_obtenirPondération(arbre), 5);
+    ABR_ArbreDeHuffman arbre = ABR_arbreDeHuffman('A', 5);
+    CU_ASSERT_TRUE(AH_obtenirPondération(arbre) == 5);
 }
 
 void test_AH_estUneFeuille(void) {
+    ABR_ArbreDeHuffman arbre = ABR_arbreDeHuffman('A', 5);
+    ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman('B', 3);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman('C', 2);
+    ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
     CU_ASSERT_TRUE(AH_estUneFeuille(arbre));
     CU_ASSERT_FALSE(AH_estUneFeuille(combinaison));
 }
 
 void test_AH_obtenirArbreGauche(void) {
+    ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman('B', 3);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman('C', 2);
+    ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
     CU_ASSERT_TRUE(AH_obtenirArbreGauche(combinaison) == arbreGauche);
 }
 
 void test_AH_obtenirArbreDroit(void) {
+    ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman('B', 3);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman('C', 2);
+    ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
     CU_ASSERT_TRUE(AH_obtenirArbreDroit(combinaison) == arbreDroit);
 }
 
