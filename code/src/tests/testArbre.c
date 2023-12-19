@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <CUnit/Basic.h>
 #include "arbre.h"
+#include "octet.h"
 
 int init_suite_success(void) { 
   return 0; 
@@ -10,44 +11,44 @@ int clean_suite_success(void) {
   return 0; 
 }
 
-void test_AH_obtenirElement(void) {
+void test_ABR_obtenirOctet(void) {
     ABR_ArbreDeHuffman arbre = ABR_arbreDeHuffman(O_octet(42), 5);
-    CU_ASSERT_TRUE(AH_obtenirElement(arbre) == 'A');
+    CU_ASSERT_TRUE(ABR_obtenirOctet(arbre).octet == O_octet(42).octet);
 }
 
-void test_AH_combiner(void) {
-    ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
-    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(10), 2);
-    ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
-    CU_ASSERT_TRUE(AH_obtenirPondération(combinaison) == (AH_obtenirPondération(arbreGauche) + AH_obtenirPondération(arbreDroit)));
-}
-
-void test_AH_obtenirPonderation(void) {
+void test_ABR_obtenirPonderation(void) {
     ABR_ArbreDeHuffman arbre = ABR_arbreDeHuffman(O_octet(42), 5);
-    CU_ASSERT_TRUE(AH_obtenirPondération(arbre) == 5);
+    CU_ASSERT_TRUE(ABR_obtenirPonderation(arbre) == 5);
 }
 
-void test_AH_estUneFeuille(void) {
+void test_ABR_combiner(void) {
+    ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
+    ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
+    CU_ASSERT_TRUE(ABR_obtenirPonderation(combinaison) == (ABR_obtenirPonderation(arbreGauche) + ABR_obtenirPonderation(arbreDroit)));
+}
+
+void test_ABR_estUneFeuille(void) {
     ABR_ArbreDeHuffman arbre = ABR_arbreDeHuffman(O_octet(42), 5);
     ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
-    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(10), 2);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
     ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
-    CU_ASSERT_TRUE(AH_estUneFeuille(arbre));
-    CU_ASSERT_FALSE(AH_estUneFeuille(combinaison));
+    CU_ASSERT_TRUE(ABR_estUneFeuille(arbre));
+    CU_ASSERT_FALSE(ABR_estUneFeuille(combinaison));
 }
 
-void test_AH_obtenirArbreGauche(void) {
+void test_ABR_obtenirFilsGauche(void) {
     ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
-    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(10), 2);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
     ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
-    CU_ASSERT_TRUE(AH_obtenirArbreGauche(combinaison) == arbreGauche);
+    CU_ASSERT_TRUE(ABR_obtenirFilsGauche(combinaison) == arbreGauche);
 }
 
-void test_AH_obtenirArbreDroit(void) {
+void test_ABR_obtenirFilsDroit(void) {
     ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
-    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(10), 2);
+    ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
     ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
-    CU_ASSERT_TRUE(AH_obtenirArbreDroit(combinaison) == arbreDroit);
+    CU_ASSERT_TRUE(ABR_obtenirFilsDroit(combinaison) == arbreDroit);
 }
 
 
@@ -66,12 +67,12 @@ int main(int argc, char** argv){
   }
 
   /* Ajout des tests à la suite de tests boite noire */
-  if ((NULL == CU_add_test(pSuite, "AH_obtenirElement", test_AH_obtenirElement))
-      || (NULL == CU_add_test(pSuite, "AH_combiner", test_AH_combiner))
-      || (NULL == CU_add_test(pSuite, "AH_obtenirPonderation", test_AH_obtenirPonderation))
-      || (NULL == CU_add_test(pSuite, "AH_estUneFeuille", test_AH_estUneFeuille))
-      || (NULL == CU_add_test(pSuite, "AH_obtenirArbreGauche", test_AH_obtenirArbreGauche))
-      || (NULL == CU_add_test(pSuite, "AH_obtenirArbreDroit", test_AH_obtenirArbreDroit))
+  if ((NULL == CU_add_test(pSuite, "ABR_obtenirOctet", test_ABR_obtenirOctet))
+      || (NULL == CU_add_test(pSuite, "ABR_obtenirPonderation", test_ABR_obtenirPonderation))
+      || (NULL == CU_add_test(pSuite, "ABR_combiner", test_ABR_combiner))
+      || (NULL == CU_add_test(pSuite, "ABR_estUneFeuille", test_ABR_estUneFeuille))
+      || (NULL == CU_add_test(pSuite, "ABR_obtenirFilsGauche", test_ABR_obtenirFilsGauche))
+      || (NULL == CU_add_test(pSuite, "ABR_obtenirFilsDroit", test_ABR_obtenirFilsDroit))
       ) 
     {
       CU_cleanup_registry();

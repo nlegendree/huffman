@@ -26,7 +26,8 @@ ST_Statistiques calculerStatistiques(char *nom) {
     ST_Statistiques stats = ST_statistiques();
 
     while (!feof(fichier)) {
-        ST_incrementerOccurrenceOctet(fread(, sizeof(O_Octet), , fichier), stats);
+        O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichier));
+        ST_incrementerOccurrenceOctet(fread(&octetLu, sizeof(O_Octet), 1, fichier), stats);
     }
 
     fclose(fichier);
@@ -81,15 +82,17 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     return table;
 }
 
-void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
-    for (int i = 0; i < CB_obtenirLongueur(codeBinaire); i++) {
-        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
-            fputc('0', fichier);
-        } else {
-            fputc('1', fichier);
-        }
-    }
-}
+// Sera modifié par Dimitri
+
+//void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
+//    for (int i = 0; i < CB_obtenirLongueur(codeBinaire); i++) {
+//        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
+//            fputc('0', fichier);
+//        } else {
+//            fputc('1', fichier);
+//        }
+//    }
+//}
 
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
@@ -107,19 +110,18 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
         exit(EXIT_FAILURE);
     }
 
-    fwrite(CLE, sizeof(unsigned long), 1, fichierDestination);
+    fwrite(CLE, sizeof(long), 1, fichierDestination);
     fwrite(ST_obtenirTotalOccurence(stats), sizeof(ST_obtenirTotalOccurence(stats)), 1, fichierDestination);
 
     for (int i = 0; i < 256; i++) {
-        O_Octet octet = O_octet(i);
-        fwrite(&octet, sizeof(O_Octet), 1, fichierDestination);
+        O_Octet octetEcris = O_octet(i);
+        fwrite(&octetEcris, sizeof(O_Octet), 1, fichierDestination);
         fwrite(ST_obtenirOccurenceOctet(stats, octet), sizeof(long), 1, fichierDestination);
     }
 
-    // Écrire le code binaire du fichier source
     while (!feof(fichierSource)) {
-        octet = O_octet((Naturel8Bits)fgetc(fichierSource));
-        ecrireCodeBinaire(fichierDestination, TDC_obtenireCodeOctet(table, octet));
+        O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichierSource));
+        ecrireCodeBinaire(fichierDestination, TDC_obtenireCodeOctet(table, octetLu));
     }
 
     fclose(fichierSource);
