@@ -33,7 +33,7 @@ ST_Statistiques calculerStatistiques(char *nom) {
     ST_Statistiques stats = ST_statistiques();
 
     while (!feof(fichier)) {
-        ST_incrementerOccurrenceOctet(fread(, sizeof(O_Octet), ), stats);
+        ST_incrementerOccurrenceOctet(fread(, sizeof(O_Octet), , fichier), stats);
     }
 
     fclose(fichier);
@@ -101,19 +101,15 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
         exit(EXIT_FAILURE);
     }
 
-    // Ajouter une fonction pour retirer l'extension du fichier exemple "file.txt" -> "file"
-
     fichierDestination = fopen(strcat(nom, ".huff"), "wb");
     if (fichierDestination == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
         exit(EXIT_FAILURE);
     }
 
-    // Écrire la clé et le nombre d'éléments
     fwrite(cle, sizeof(unsigned long), 1, fichierDestination);
     fwrite(ST_obtenirTotalOccurence(stats), sizeof(ST_obtenirTotalOccurence(stats)), 1, fichierDestination);
 
-    // Écrire les statistiques
     for (int i = 0; i < 256; i++) {
         O_Octet octet = O_octet(i);
         fwrite(&octet, sizeof(O_Octet), 1, fichierDestination);
