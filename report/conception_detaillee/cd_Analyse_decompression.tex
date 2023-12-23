@@ -5,7 +5,7 @@
         {
             \affecter{stats}{obtenirStatistiques(nom)}
             \affecter{arbre}{creerArbre(stats)}
-            \instruction{decompresserFichier(source,table,stats)}
+            \instruction{decompresserFichier(source,arbre)}
         }
     }
 
@@ -24,13 +24,13 @@
         %pas besoin de tant que si 256 codés car taille fixe, plus facile à implémenter
         {
             %repérer l'octet, ou octet suivant selon comment c'est codé
-            \instruction{incrementerOccurenceElement(stats,lireOctet(fichier))}
+            \instruction{fixerOccurenceElement(octet, nbOccurence, stats)}
         }
         \instruction{fermer(fichier)}
         \retourner{stats}
     }
 
-    \fonction{creerArbre}{stats:Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}{i:\naturel , file:FileDePriorité$<$ArbreDeHuffmann$>$}%a adapter
+    \fonction{creerArbre}{stats:Statistiques$<$Octet$>$}{ArbreDeHuffman$<$Octet$>$}{}{i:\naturel , file:FileDePriorité$<$ArbreDeHuffmann$>$}
     {
         \affecter{file}{fileDePrioriteVide()}
         \pour{i}{0}{255}{}%
@@ -51,23 +51,59 @@
         \retourner{obtenirDernier(file)}
     }  
 
-    \procedure{descendreArbre}{\paramEntree{arbre:ArbreDeHuffman$<$Octet$>$,code:CodeBinaire},\paramEntreeSortie{table:TableDeCodage$<$Octet$>$}}{}{codeTemp:codeBinaire}%à adapter
+    \fonction{descendreArbre}{arbre:ArbreDeHuffman$<$Octet$>$,lesBits:\tableau{1..MAX}{de}{Bit},iDebut:\naturel}{Octet,\naturel}{i:\naturel}{noeudActuel:ArbreDeHuffman}
     {
-        \sialorssinon{estUneFeuille(arbre)}%
+        \affecter{i}{idébut}
+        \affecter{noeudActuel}{arbre}
+        \tantque{non estUneFeuille(noeudActuel)}
         {
-            \instruction{ajouterElement(table,obtenirElement(arbre),code)}
-        }%
-        {
-            \affecter{codeTemp}{code}
-            \instruction{ajouterBit(code,Bit1)}
-            \instruction{ajouterBit(codeTemp,Bit0)}
-            \instruction{descendreArbre(obtenirArbreDroit(arbre),code,table)}
-            \instruction{descendreArbre(obtenirArbreGauche(arbre),codeTemp,table)}
+            \sialorssinon{lesBits{i} = bitA0}{
+                \affecter{noeudActuel}{obtenirArbreGauche(noeudActuel)}
+            }
+            {
+                \affecter{noeudActuel}{obtenirArbreDroit(noeudActuel)}
+            }
+            \affecter{i}{i+1}
         }
+        \retourner{obtenirElement(noeudActuel),i}
     }
-    \procedure{decompresserFichier}{\paramEntree{nom:\chaine,table:tableDeCodage$<$Octet$>$,stats:Statistiques$<$Octets$>$}}{}{}%
+
+    \fonction{decoderCodeBinaire}{fichier:FichierBinaire,arbre:arbreDeHuffmann$<$Octet$>$}{fichierBinaire}{}{resultat:fichierBinaire,iOctet, iBit, i, k:\naturel,octets:\tableau{1..MAX}{d'}{Octet},octetAEcrire:Octet,lesBits:\tableau{1..MAX}{de}{Bit}}%plus simples à manipuler que les bits ici
     {
-        %à voir selon comment c'est fait, surement juste decendre l'arbre en décrémentant au fur et à mesure, et en fonction de la table de codage, à discuter
+        \affecter{resultat}{fichier}
+        \affecter{iOctet}{0}
+        \affecter{k}{1}
+        %instruction pour se placer au début du code binaire à ajouter
+        \tantque{non finFichier(fichier)}%
+        {
+            \affecter{iOctet}{iOctet+1}
+            \affecter{Octets[iOctet]}{lireOctet(fichier)}
+        }
+        \pour{iBit}{1}{iOctet}{}
+        {
+            \pour{i}{1}{8}{}
+            {
+                \affecter{lesBits[i]}{obtenirIemeBit(octets[iBit],i)}
+                \affecter{k}{k+1}
+            }
+        }
+        \affecter{i}{1}
+        \tantque{i<=k}
+        {
+            \affecter{octetAEcrire, i}{descendreArbre(arbre,lesBits,i)}
+            \instruction{ecrireOctet(fichier,octetAEcrire)}
+        }
+        \retourner{fichier}
+    }
+
+    \fonction{decompresserFichier}{\paramEntree{nom:\chaine,arbre:arbreDeHuffmann$<$Octet$>$,stats:Statistiques$<$Octets$>$}}{}{}%
+    {
+        \affecter{fichierSource}{fichierBinaire(nom)}
+        \instruction{tronquer(nom)}%virer le .zip
+        \affecter{fichierDestination}{fichierBinaire(nom)}
+        \affecter{fichierDestination}{decoderCodeBinaire(fichierSource,arbre)}
+        \instruction{fermer(fichierSource)}
+        \instruction{fermer(fichierDestination)}
     }
 
 \end{algorithme}
