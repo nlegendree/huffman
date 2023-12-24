@@ -4,33 +4,77 @@
 #include "octet.h"
 #include "codeBinaire.h"
 
-typedef struct
-{
-    long int nbElements;
-    long int table[255];
-} TDC_TableDeCodage;
-
 typedef struct 
 {
     O_Octet octet;
     CB_CodeBinaire code;
 } Donnees;
 
+typedef struct
+{
+    long int nbElements;
+    Donnees table[255];
+} TDC_TableDeCodage;
+
+
+/**
+ * @brief Permet de créer une table de codage vide
+ * 
+ * @return TDC_TableDeCodage 
+ */
 TDC_TableDeCodage TDC_tableDeCodage(void);
 
+/**
+ * @brief Permet de savoir si une table de codage est vide
+ * 
+ * @param tableDeCodage 
+ * @return int 
+ */
 int TDC_estVide(TDC_TableDeCodage tableDeCodage);
 
+/**
+ * @brief Permet de savoir si un octet est présent dans une table de codage
+ * 
+ * @param tableDeCodage 
+ * @param octet 
+ * @return int 
+ */
 int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
+/**
+ * @brief Permet de savoir si un code binaire est présent dans une table de codage
+ * 
+ * @param tableDeCodage 
+ * @param codeBinaire 
+ * @return int 
+ */
 int TDC_codePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
-int TDC_octetPossedeCode(TDC_TableDeCodage tableDeCodage, O_Octet octet);
-
+/**
+ * @brief Permet d'ajouter un octet et son code binaire dans une table de codage
+ * 
+ * @param pTableDeCodage 
+ * @param octet 
+ * @param codeBinaire 
+ */
 void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeBinaire codeBinaire);
 
+/**
+ * @brief Permet d'obtenir le code binaire d'un octet dans une table de codage
+ * 
+ * @param tableDeCodage 
+ * @param octet 
+ * @return CB_CodeBinaire 
+ */
 CB_CodeBinaire TDC_obtenireCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
+/**
+ * @brief Permet d'obtenir l'octet d'un code binaire dans une table de codage
+ * 
+ * @param tableDeCodage 
+ * @param codeBinaire 
+ * @return O_Octet 
+ */
 O_Octet TDC_obtenirOctetCode(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
 #endif
-
