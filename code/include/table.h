@@ -41,14 +41,6 @@ int TDC_estVide(TDC_TableDeCodage tableDeCodage);
  */
 int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
-/**
- * @brief Permet de savoir si un code binaire est présent dans une table de codage
- * 
- * @param tableDeCodage 
- * @param codeBinaire 
- * @return int 
- */
-int TDC_codePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
 /**
  * @brief Permet d'ajouter un octet et son code binaire dans une table de codage
@@ -66,7 +58,7 @@ void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeB
  * @param octet 
  * @return CB_CodeBinaire 
  */
-CB_CodeBinaire TDC_obtenireCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
+CB_CodeBinaire TDC_obtenirCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
 /**
  * @brief Permet d'obtenir l'octet d'un code binaire dans une table de codage
