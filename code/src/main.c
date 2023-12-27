@@ -121,7 +121,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
 
     while (!feof(fichierSource)) {
         O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichierSource));
-        ecrireCodeBinaire(fichierDestination, TDC_obtenireCodeOctet(table, octetLu));
+        ecrireCodeBinaire(fichierDestination, TDC_obtenirCodeOctet(table, octetLu));
     }
 
     fclose(fichierSource);
