@@ -136,6 +136,7 @@ void compresser(char *nom) {
     ST_Statistiques stats = calculerStatistiques(nom);
     ABR_ArbreDeHuffman arbre = creerArbre(stats);
     TDC_TableDeCodage table = codage(arbre);
+    ABR_detruireArbre(arbre);
     compresserFichier(nom, table, stats);
 }
 
