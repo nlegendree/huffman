@@ -140,4 +140,5 @@ void compresser(char *nom) {
 
 int main() {
     compresser("test.txt");
+    return 0;
 }
