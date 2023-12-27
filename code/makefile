@@ -18,7 +18,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/%.h
 
 # Compilation des tests
 $(BINDIR)/testArbre: $(SRCDIR)/tests/testArbre.c $(OBJS)
-	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $^
+	$(CC) $(CFLAGS) -I/opt/homebrew/opt/cunit -I$(INCDIR) -o $@ $^
 
 $(BINDIR)/testCodeBinaire: $(SRCDIR)/tests/testCodeBinaire.c $(OBJS)
 	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $^

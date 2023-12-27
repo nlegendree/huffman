@@ -13,7 +13,7 @@ typedef struct
 typedef struct
 {
     long int nbElements;
-    Donnees table[255];
+    Donnees table[256];
 } TDC_TableDeCodage;
 
 
@@ -59,6 +59,9 @@ void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeB
  * @return CB_CodeBinaire 
  */
 CB_CodeBinaire TDC_obtenirCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
+
+// TODO: mettre à jour le TAD
+int TDC_codeBinairePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
 /**
  * @brief Permet d'obtenir l'octet d'un code binaire dans une table de codage

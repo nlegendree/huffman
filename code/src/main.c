@@ -98,7 +98,6 @@ void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
     O_Octet octet;
-
     fichierSource = fopen(nom, "rb");
     if (fichierSource == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
@@ -133,8 +132,6 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     fclose(fichierDestination);
 }
 
-
-
 void compresser(char *nom) {
     ST_Statistiques stats = calculerStatistiques(nom);
     ABR_ArbreDeHuffman arbre = creerArbre(stats);
@@ -142,7 +139,99 @@ void compresser(char *nom) {
     compresserFichier(nom, table, stats);
 }
 
+ST_Statistiques lireStatistiques(FILE* fichier) {
+    ST_Statistiques stats = ST_statistiques();
+    long buffer;
+    for (int i = 0; i < 256; i++) {
+        fread(&buffer, sizeof(long), 1, fichier);
+        ST_fixerOccurenceOctet(O_octet(i), buffer, &stats);
+        stats.nbOccurenceTotal += buffer; // TODO: modifier TAD Stats
+    }
+    return stats;
+}
+
+int estUnFichierCompresse(char *nom) {
+    FILE *fichier = fopen(nom, "rb");
+    if (fichier == NULL) {
+        fprintf(stderr, "Erreur lors de l'ouverture du fichier. \n");
+        exit(EXIT_FAILURE);
+    }
+
+    long cle;
+    fread(&cle, sizeof(long), 1, fichier);
+    fclose(fichier);
+
+    // Vérifie extension du fichier
+    char *extension = strrchr(nom, '.');
+    if (extension == NULL) {
+        return 0;
+    }
+
+    if (!strcmp(extension, ".huff")) {
+        return 0;
+    }
+
+    return cle == CLE;
+}
+
+void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_TableDeCodage* table) {
+    CB_CodeBinaire code;
+    int resetCode = 1;
+    char bitLu;
+    while ((bitLu = fgetc(fichierSource)) != EOF) {
+        if (TDC_codeBinairePresent(*table, code)) {
+            O_Octet octet = TDC_obtenirOctetCode(*table, code);
+            char buffer = (unsigned char)O_obtenirNaturel8bits(octet);
+            fputc(&buffer, fichierDestination);
+            resetCode = 1;
+        } else {
+            Bit bit = bit0;
+            if (bitLu == '1') {
+                bit = bit1;
+            }
+            code = CB_codeBinaire(bit);
+
+            if (resetCode) {
+                resetCode = 0;
+            } else {
+                CB_ajouterBit(&code, bit);
+            }
+        }
+    }
+}
+
+void decompreser(char *nom) {
+    if (estUnFichierCompresse(nom)) {
+        FILE *fichierSource, *fichierDestination;
+        O_Octet octet;
+
+        fichierSource = fopen(nom, "rb");
+        if (fichierSource == NULL) {
+            fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
+            exit(EXIT_FAILURE);
+        }
+
+        fichierDestination = fopen("decompresse.txt", "wb");
+
+        // Lire les statistiques
+        ST_Statistiques stats = lireStatistiques(fichierSource);
+        
+        // Créer la table de codage
+        ABR_ArbreDeHuffman arbre = creerArbre(stats);
+        TDC_TableDeCodage table = codage(arbre);
+        ABR_detruireArbre(arbre);
+        decompreserFichier(fichierSource, fichierDestination, &table);
+
+        fclose(fichierSource);
+        fclose(fichierDestination);
+    } else {
+        fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 int main() {
     compresser("test.txt");
+    decompreser("test.txt.huff");
     return 0;
 }
