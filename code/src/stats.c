@@ -11,15 +11,15 @@ ST_Statistiques ST_statistiques(){
 }
 
 long int ST_obtenirOccurenceOctet(ST_Statistiques statistiques, O_Octet octet){
-    return statistiques.lesStatistiques[octetToInt(octet)];
+    return statistiques.lesStatistiques[O_obtenirNaturel8bits(octet)];
 }
 
 void ST_incrementerOccurenceOctet(O_Octet octet, ST_Statistiques* pstatistiques){
-    *pstatistiques.lesStatistiques[octetToInt(octet)]++;
+    pstatistiques->lesStatistiques[O_obtenirNaturel8bits(octet)]++;
 }
 
 void ST_fixerOccurenceOctet(O_Octet octet, long int nbOccurence, ST_Statistiques* pstatistiques){
-    *pstatistiques.lesStatistiques[octetToInt(octet)] = nbOccurence;
+    pstatistiques->lesStatistiques[O_obtenirNaturel8bits(octet)] = nbOccurence;
 }
 long int ST_obtenirTotalOccurence(ST_Statistiques statistiques){
     return statistiques.nbOccurenceTotal;
