@@ -1,15 +1,17 @@
 #include "octet.h"
 #ifndef __ARBRE__
+#define __ARBRE__
 
-typedef struct 
-{
-    struct Noeud* gauche;
-    struct Noeud* droite;
-    O_Octet octet;
-    unsigned int ponderation;
-} Noeud;
+typedef struct Noeud Noeud;
 
-typedef Noeud* ABR_ArbreDeHuffman;
+struct Noeud {
+    Noeud* gauche;          // Left child
+    Noeud* droite;          // Right child
+    O_Octet octet;          // Data (assuming O_Octet is defined elsewhere)
+    unsigned int ponderation; // Weight
+};
+
+typedef Noeud* ABR_ArbreDeHuffman; // Pointer to a Huffman Tree node
 
 // Constructeur 
 ABR_ArbreDeHuffman ABR_arbreDeHuffman(O_Octet octet, unsigned int ponderation);

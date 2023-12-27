@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "octet.h"
 #include "stats.h"
@@ -27,7 +28,7 @@ ST_Statistiques calculerStatistiques(char *nom) {
 
     while (!feof(fichier)) {
         O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichier));
-        ST_incrementerOccurrenceOctet(fread(&octetLu, sizeof(O_Octet), 1, fichier), stats);
+        ST_incrementerOccurenceOctet(octetLu, &stats);
     }
 
     fclose(fichier);
@@ -40,22 +41,22 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
     FP_FileDePriorite file = FP_fileDePriorite();
 
     for (int i = 0; i < 256; ++i) {
-        if (ST_obtenirOccurrenceOctet(stats, O_octet(i)) != 0) {
-            FP_ajouterElement(&file, ABR_creerArbreDeHuffman(O_octet(i), ST_obtenirOccurrenceElement(stats, O_octet(i))));
+        if (ST_obtenirOccurenceOctet(stats, O_octet(i)) != 0) {
+            FP_ajouterElement(&file, ABR_arbreDeHuffman(O_octet(i), ST_obtenirOccurenceOctet(stats, O_octet(i))));
         }
     }
 
-    while (longueur(file) > 1) {
-        ABR_ArbreDeHuffman arbreGauche = FP_obtenirDernier(&file);
+    while (FP_longueur(file) > 1) {
+        ABR_ArbreDeHuffman arbreGauche = FP_obtenirDernier(file);
         FP_supprimerDernier(&file);
 
-        ABR_ArbreDeHuffman arbreDroit = FP_obtenirDernier(&file);
+        ABR_ArbreDeHuffman arbreDroit = FP_obtenirDernier(file);
         FP_supprimerDernier(&file);
 
         FP_ajouterElement(&file, ABR_combiner(arbreGauche, arbreDroit));
     }
 
-    return FP_obtenirDernier(&file);
+    return FP_obtenirDernier(file);
 }
 
 void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table) {
@@ -65,8 +66,8 @@ void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCo
         CB_CodeBinaire codeTemp = code;
         CB_ajouterBit(&code, bit1);
         CB_ajouterBit(&codeTemp, bit0);
-        descendreArbre(ABR_obtenirArbreDroit(arbre), code, table);
-        descendreArbre(ABR_obtenirArbreGauche(arbre), codeTemp, table);
+        descendreArbre(ABR_obtenirFilsDroit(arbre), code, table);
+        descendreArbre(ABR_obtenirFilsGauche(arbre), codeTemp, table);
     }
 }
 
@@ -83,16 +84,16 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
 }
 
 // Sera modifié par Dimitri
-
-//void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
-//    for (int i = 0; i < CB_obtenirLongueur(codeBinaire); i++) {
-//        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
-//            fputc('0', fichier);
-//        } else {
-//            fputc('1', fichier);
-//        }
-//    }
-//}
+void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
+    // TODO: fix
+    for (int i = 0; i < CB_obtenirLongueur(codeBinaire); i++) {
+        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
+            fputc('0', fichier);
+        } else {
+            fputc('1', fichier);
+        }
+    }
+}
 
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
@@ -135,4 +136,8 @@ void compresser(char *nom) {
     ABR_ArbreDeHuffman arbre = creerArbre(stats);
     TDC_TableDeCodage table = codage(arbre);
     compresserFichier(nom, table, stats);
+}
+
+int main() {
+    compresser("test.txt");
 }
