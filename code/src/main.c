@@ -105,19 +105,23 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
         exit(EXIT_FAILURE);
     }
 
-    fichierDestination = fopen(strcat(nom, ".huff"), "wb");
+    // Agrandir la taille du buffer du nom du fichier
+    char *nomFichier = malloc(sizeof(char) * (strlen(nom) + 5));
+    strcpy(nomFichier, nom);
+    fichierDestination = fopen(strcat(nomFichier, ".huff"), "wb");
     if (fichierDestination == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
         exit(EXIT_FAILURE);
     }
-
-    fwrite(CLE, sizeof(long), 1, fichierDestination);
-    fwrite(ST_obtenirTotalOccurence(stats), sizeof(ST_obtenirTotalOccurence(stats)), 1, fichierDestination);
-
+    
+    long buffer = CLE;
+    fwrite(&buffer, sizeof(long), 1, fichierDestination);
+    buffer = ST_obtenirTotalOccurence(stats);
+    fwrite(&buffer, sizeof(long), 1, fichierDestination);
+    
     for (int i = 0; i < 256; i++) {
-        O_Octet octetEcris = O_octet(i);
-        fwrite(&octetEcris, sizeof(O_Octet), 1, fichierDestination);
-        fwrite(ST_obtenirOccurenceOctet(stats, octet), sizeof(long), 1, fichierDestination);
+        buffer = ST_obtenirOccurenceOctet(stats, O_octet(i));
+        fwrite(&buffer, sizeof(long), 1, fichierDestination);
     }
 
     while (!feof(fichierSource)) {

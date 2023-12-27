@@ -11,6 +11,11 @@ OBJS = $(OBJDIR)/arbre.o $(OBJDIR)/codeBinaire.o $(OBJDIR)/fileDePriorite.o $(OB
 # Cible par défaut
 all: $(BINDIR)/huffman $(BINDIR)/testArbre $(BINDIR)/testCodeBinaire $(BINDIR)/testFile $(BINDIR)/testOctet
 
+
+# Compilation des fichiers .o
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/%.h
+	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $<
+
 # Compilation des tests
 $(BINDIR)/testArbre: $(SRCDIR)/tests/testArbre.c $(OBJS)
 	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $^
@@ -23,10 +28,6 @@ $(BINDIR)/testFile: $(SRCDIR)/tests/testFile.c $(OBJS)
 
 $(BINDIR)/testOctet: $(SRCDIR)/tests/testOctet.c $(OBJS)
 	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $^
-
-# Compilation des fichiers .o
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/%.h
-	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $<
 
 # Compilation du programme principal
 $(BINDIR)/huffman: $(SRCDIR)/main.c $(OBJS)
