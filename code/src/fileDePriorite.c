@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <assert.h>
 #include "fileDePriorite.h"
 
 
@@ -24,16 +25,14 @@ void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre) {
 
 
 void FP_supprimerDernier(FP_FileDePriorite *pfile) {
-    if (!FP_estVide(*pfile)) {
-        pfile->tailleActuelle--;
-    }
+    assert(!FP_estVide(*pfile));
+    pfile->tailleActuelle--;
 }
 
 
 ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite file) {
-    if (!FP_estVide(file)) {
-        return (file.arbres[file.tailleActuelle]);
-    }
+    assert(!FP_estVide(file));
+    return (file.arbres[file.tailleActuelle]);
 }
 
 
