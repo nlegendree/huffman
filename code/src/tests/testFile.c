@@ -23,8 +23,8 @@ void test_FP_ajouterElement(void) {
     ABR_ArbreDeHuffman arbreDeHuffman = ABR_arbreDeHuffman(O_octet(42),5);
     FP_ajouterElement(&fileDePriorite,arbreDeHuffman);
     CU_ASSERT_FALSE(FP_estVide(fileDePriorite));
-    CU_ASSERT_TRUE(ABR_obtenirPonderation(FP_obtenirDernier(&fileDePriorite))==5);
-    CU_ASSERT_TRUE(ABR_obtenirElement(FP_obtenirDernier(&fileDePriorite))==O_octet(42).octet)
+    CU_ASSERT_TRUE(ABR_obtenirPonderation(FP_obtenirDernier(fileDePriorite))==5);
+    CU_ASSERT_TRUE(ABR_obtenirOctet(FP_obtenirDernier(fileDePriorite)).octet==O_octet(42).octet)
 }
 
 void test_FP_longueur(void) {
