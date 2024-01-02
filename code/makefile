@@ -66,7 +66,7 @@ $(DOC) :
 	$(DOXYGEN)
 	cd $(DOCDIR)/latex;make;cd ../..
 
-tests : $(TESTDIR)/testArbre $(TESTDIR)/testCodeBinaire $(TESTDIR)/testOctet $(TESTDIR)/testTable
+tests : $(TESTDIR)/testArbre $(TESTDIR)/testCodeBinaire $(TESTDIR)/testFile $(TESTDIR)/testOctet $(TESTDIR)/testTable $(TESTDIR)/testStats
 
 $(TESTDIR)/testArbre : $(SRCDIR)/$(TESTDIR)/testArbre.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
@@ -81,6 +81,9 @@ $(TESTDIR)/testOctet : $(SRCDIR)/$(TESTDIR)/testOctet.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
 
 $(TESTDIR)/testTable : $(SRCDIR)/$(TESTDIR)/testTable.c $(OBJS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
+
+$(TESTDIR)/testStats : $(SRCDIR)/$(TESTDIR)/testTable.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
