@@ -41,14 +41,14 @@ void test_ABR_obtenirFilsGauche(void) {
     ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
     ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
     ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
-    CU_ASSERT_TRUE(ABR_obtenirFilsGauche(combinaison) == arbreGauche);
+    CU_ASSERT_TRUE(O_egale(ABR_obtenirOctet(ABR_obtenirFilsGauche(combinaison)), ABR_obtenirOctet(arbreGauche)));
 }
 
 void test_ABR_obtenirFilsDroit(void) {
     ABR_ArbreDeHuffman arbreGauche = ABR_arbreDeHuffman(O_octet(10), 3);
     ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
     ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
-    CU_ASSERT_TRUE(ABR_obtenirFilsDroit(combinaison) == arbreDroit);
+    CU_ASSERT_TRUE(O_egale(ABR_obtenirOctet(ABR_obtenirFilsDroit(combinaison)), ABR_obtenirOctet(arbreDroit)));
 }
 
 
