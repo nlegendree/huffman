@@ -13,7 +13,7 @@ int clean_suite_success(void) {
 
 void test_CB_codeBinaire(void) {
     CB_CodeBinaire codeBinaire = CB_codeBinaire(UN);
-    CU_ASSERT_TRUE(codeBinaire.nbBits == UN);
+    CU_ASSERT_TRUE(codeBinaire.nbBits == 1);
     CU_ASSERT_TRUE(codeBinaire.bits[0] == UN);
 }
 
@@ -36,9 +36,7 @@ void test_CB_obtenirIemeBit(void) {
     CB_CodeBinaire codeBinaire = CB_codeBinaire(UN);
     CB_ajouterBit(&codeBinaire, ZERO);
     CU_ASSERT_TRUE(CB_obtenirIemeBit(codeBinaire, 0) == UN);
-
-    CB_ajouterBit(&codeBinaire, ZERO);
-    CU_ASSERT_TRUE(CB_obtenirIemeBit(codeBinaire, 1) == UN);
+    CU_ASSERT_TRUE(CB_obtenirIemeBit(codeBinaire, 1) == ZERO);
 }
 
 int main(int argc, char** argv){
