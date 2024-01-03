@@ -17,14 +17,14 @@ void test_O_octet(void) {
 }
 
 void test_O_obtenirIemeBit(void) {
-    int i = 7;
+    int i = 0;
     Naturel8Bits A = 0x41; // 'A' en ASCII^
     O_Octet o = O_octet(A);
     CU_ASSERT_TRUE(O_obtenirIemeBit(o, i) == UN); //le dernier bit de 41 (A) est 1
 }
 
 void test_O_fixerIemeBit(void) {
-    int i = 7;
+    int i = 0;
     Naturel8Bits A = 0x41; // 'A' en ASCII
     Naturel8Bits varTest = 0x40;
     O_Octet o1 = O_octet(A);
