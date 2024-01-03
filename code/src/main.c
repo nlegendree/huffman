@@ -168,7 +168,7 @@ int estUnFichierCompresse(char *nom) {
         return 0;
     }
 
-    if (!strcmp(extension, ".huff")) {
+    if (strcmp(extension, ".huff")) {
         return 0;
     }
 
