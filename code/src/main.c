@@ -10,6 +10,12 @@
 #include "codeBinaire.h"
 #include "bit.h"
 
+// couleurs pour le terminal
+#define couleur_verte   "\x1b[32m" 
+#define couleur_rouge    "\x1b[31m"
+#define couleur_bleu    "\x1b[34m"
+#define couleur_jaune   "\x1b[33m"
+
 #define CLE 0x0B1213D2ul
 
 Bit bit0 = ZERO;
@@ -266,3 +272,46 @@ int main(void) {
     decompreser(fichier);
     return 0;
 }
+
+/*int main(int argc, char *argv[]) {
+
+    printf("bienvenue !!!\n");
+    printf("pour compiler, veuillez taper : ./huffman c nom_du_fichier\n");
+    printf("pour decompiler, veuillez taper : ./huffman d nom_du_fichier\n");
+
+    if (argc != 3) {
+        printf("commande incorrect, nombre d'argument, pas respecté \n");
+       
+        return 1;  
+    }
+
+    // recupère le choix de l'utilisateur entre c et d
+    char choix = argv[1][0];  
+    char *nom_fichier = argv[2];
+
+    FILE *fichier = fopen(nom_fichier, "rb");
+
+    if (fichier == NULL) {
+        perror("erreur de l'ouverture du fichier");
+        return 1; 
+    }
+
+    switch (choix) {
+        case 'c':
+            printf("compression du fichier %s.\n", nom_fichier);
+            compresser(nom_fichier);
+            break;
+        case 'd':
+            printf("decompression du fichier %s.\n", nom_fichier);
+            decompreser(fichier);
+            break;
+        default:
+            printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
+            fclose(fichier);
+            return 1; 
+    }
+
+    fclose(fichier); 
+
+    return 0;
+}*/
