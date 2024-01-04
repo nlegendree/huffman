@@ -1,12 +1,21 @@
 \begin{algorithme}
         
-    \signatureFonction{octet}{nombre : Naturel8Bits}{Octet}{}
+    \signatureFonction{octet}
+        {nombre : Naturel8Bits}{Octet}
+        {}
 
-    \signatureFonction{obtenirIemeBit}{oct : Octet, pos : 0..7}{Bit}{}
+    \signatureFonction{obtenirIemeBit}
+        {octet : Octet, pos : \naturelNonNul}{Bit}
+        {pos $>$ 0 et pos $<$ 7}
     
-    \signatureProcedure{fixerIemeBit}{\paramEntreeSortie{oct : Octet} \paramEntree{pos : 0..7, bit : Bit}}{}
+    \signatureProcedure{fixerIemeBit}
+        {\paramEntree{pos : \naturelNonNul, bit : Bit}
+        \paramEntreeSortie{octet : Octet}}
+        {pos $>$ 0 et pos $<$ 7}
     
-    \signatureFonction{octetEnNaturel}{oct : Octet, pos : 0..7, Bit}{\naturel}{}
+    \signatureFonction{octetEnNaturel}
+        {octet : Octet}{\naturel}
+        {}
 
 \end{algorithme}
  
