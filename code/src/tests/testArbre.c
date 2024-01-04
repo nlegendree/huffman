@@ -26,6 +26,8 @@ void test_ABR_combiner(void) {
     ABR_ArbreDeHuffman arbreDroit = ABR_arbreDeHuffman(O_octet(20), 2);
     ABR_ArbreDeHuffman combinaison = ABR_combiner(arbreGauche, arbreDroit);
     CU_ASSERT_TRUE(ABR_obtenirPonderation(combinaison) == (ABR_obtenirPonderation(arbreGauche) + ABR_obtenirPonderation(arbreDroit)));
+    CU_ASSERT_TRUE(combinaison->gauche == arbreGauche);
+    CU_ASSERT_TRUE(combinaison->droite == arbreDroit);
 }
 
 void test_ABR_estUneFeuille(void) {
