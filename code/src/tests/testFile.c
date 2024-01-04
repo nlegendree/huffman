@@ -20,11 +20,23 @@ void test_FP_fileDePriorite(void) {
 void test_FP_ajouterElement(void) {
     FP_FileDePriorite fileDePriorite;
     fileDePriorite = FP_fileDePriorite();
-    ABR_ArbreDeHuffman arbreDeHuffman = ABR_arbreDeHuffman(O_octet(42),5);
-    FP_ajouterElement(&fileDePriorite,arbreDeHuffman);
+    ABR_ArbreDeHuffman arbreDeHuffman1 = ABR_arbreDeHuffman(O_octet(42),5);
+    ABR_ArbreDeHuffman arbreDeHuffman2 = ABR_arbreDeHuffman(O_octet(41),7);
+    ABR_ArbreDeHuffman arbreDeHuffman3 = ABR_arbreDeHuffman(O_octet(58),9);
+    FP_ajouterElement(&fileDePriorite,arbreDeHuffman3);
+    FP_ajouterElement(&fileDePriorite,arbreDeHuffman1);
+    FP_ajouterElement(&fileDePriorite,arbreDeHuffman2);
     CU_ASSERT_FALSE(FP_estVide(fileDePriorite));
+    CU_ASSERT_TRUE(FP_longueur(fileDePriorite)==3);
     CU_ASSERT_TRUE(ABR_obtenirPonderation(FP_obtenirDernier(fileDePriorite))==5);
     CU_ASSERT_TRUE(ABR_obtenirOctet(FP_obtenirDernier(fileDePriorite)).octet==O_octet(42).octet);
+    FP_supprimerDernier(&fileDePriorite);
+    CU_ASSERT_TRUE(ABR_obtenirPonderation(FP_obtenirDernier(fileDePriorite))==7);
+    CU_ASSERT_TRUE(ABR_obtenirOctet(FP_obtenirDernier(fileDePriorite)).octet==O_octet(41).octet);
+    FP_supprimerDernier(&fileDePriorite);
+    CU_ASSERT_TRUE(ABR_obtenirPonderation(FP_obtenirDernier(fileDePriorite))==9);
+    CU_ASSERT_TRUE(ABR_obtenirOctet(FP_obtenirDernier(fileDePriorite)).octet==O_octet(58).octet);
+    FP_supprimerDernier(&fileDePriorite);
 }
 
 void test_FP_longueur(void) {
