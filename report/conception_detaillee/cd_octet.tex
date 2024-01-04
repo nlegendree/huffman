@@ -4,42 +4,40 @@
 }
 \end{enregistrement}
 
-\fonction{octet}{\paramEntree{nombre: Naturel8Bits}}{Octet}{}{
-    sortie: Octet
-}{
+\fonction{octet}
+    {nombre : Naturel8Bits}{Octet}
+    {}{sortie : Octet}
+{
     \affecter{sortie.octet}{nombre}
     \retourner{sortie}
 }
 
-\procedure{obtenirIemeBit}{\paramEntree{octet: Octet, i: \naturelNonNul, bit: Bit}}
-{}
+\fonction{obtenirIemeBit}
+    {octet : Octet, pos : \naturelNonNul}{bit: Bit}
+    {pos $>$ 0 et pos $<$ 7}{}
 {
-     estUn: boolean
-}{
-    \affecter{estUn}{(\champ{octet}{octet} \& (1 \textless \textless (i-1)))$>$ 0}
-    \retourner{bit(estUn)}
+    % \affecter{estUn}{(\champ{octet}{octet} \& (1 \textless \textless (i-1)))$>$ 0}
+    % \retourner{bit(estUn)}
 }
 
-\procedure{fixerIemeBit}{\paramEntreeSortie{octet: Octet}\paramEntree{i: \naturelNonNul, bit: Bit}}
-{}
-{}
+\procedure{fixerIemeBit}{
+    \paramEntree{pos : \naturelNonNul, bit: Bit}
+    \paramEntreeSortie{octet : Octet}}
+    {pos $>$ 0 et pos $<$ 7}{}
 {
-    \sialorssinon{estUn(bit)}{
-        \affecter{\champ{octet}{octet}}{\champ{octet}{octet} | (1 \textless \textless (i-1))}
-    }
-    {
-        \affecter{\champ{octet}{octet}}{\champ{octet}{octet} \& non({obtenirIemeBit(octet, i)})}
-    }
+    % \sialorssinon{estUn(bit)}{
+    %     \affecter{\champ{octet}{octet}}{\champ{octet}{octet} | (1 \textless \textless (i-1))}
+    % }
+    % {
+    %     \affecter{\champ{octet}{octet}}{\champ{octet}{octet} \& non({obtenirIemeBit(octet, i)})}
+    % }
 }
 
-\remarque{Attention aux décalages d'indices lors de l'implémentation en c, ici une erreur dessus entraine une sortie fausse}
-
-\fonction{octetEnNaturel} %nom de la fonction
-    {octet : Octet}{\naturel} %param entree, param sortie
-    {} %precond
-    {} %var locales
+\fonction{octetEnNaturel}
+    {octet : Octet}{\naturel}
+    {}{}
 {   
     \retourner{\champ{octet}{octet}}
-} %contenue
+}
 
 \end{algorithme}
