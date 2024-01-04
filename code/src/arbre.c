@@ -28,7 +28,7 @@ ABR_ArbreDeHuffman ABR_copierArbre(ABR_ArbreDeHuffman arbre) {
     return arbreCopie;
 }
 // Combine les deux arbres et retourne le nouvel arbre
-ABR_ArbreDeHuffman ABR_combiner(ABR_ArbreDeHuffman arbreDroit, ABR_ArbreDeHuffman arbreGauche) {
+ABR_ArbreDeHuffman ABR_combiner(ABR_ArbreDeHuffman arbreGauche, ABR_ArbreDeHuffman arbreDroit) {
     ABR_ArbreDeHuffman arbre;
     arbre = malloc(sizeof (Noeud));
     arbre->gauche = arbreGauche;
