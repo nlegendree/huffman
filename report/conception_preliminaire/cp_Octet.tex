@@ -6,12 +6,12 @@
 
     \signatureFonction{obtenirIemeBit}
         {octet : Octet, pos : \naturelNonNul}{Bit}
-        {pos $>$ 0 et pos $<$ 7}
+        {pos $\geq$ 0 et pos $\leq$ 7}
     
     \signatureProcedure{fixerIemeBit}
-        {\paramEntree{pos : \naturelNonNul, bit : Bit}
-        \paramEntreeSortie{octet : Octet}}
-        {pos $>$ 0 et pos $<$ 7}
+        {\paramEntreeSortie{octet : Octet}
+        \paramEntree{pos : \naturelNonNul, bit : Bit}}
+        {pos $\geq$ 0 et pos $\leq$ 7}
     
     \signatureFonction{octetEnNaturel}
         {octet : Octet}{\naturel}
