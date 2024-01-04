@@ -39,6 +39,17 @@ void afficherStats(ST_Statistiques stats) {
     }
 }
 
+void CB_afficherCodeBinaire(CB_CodeBinaire code) {
+    for (int i = 0; i < CB_obtenirLongueur(code); i++) {
+        if (CB_obtenirIemeBit(code, i) == bit0) {
+            printf("0");
+        } else {
+            printf("1");
+        }
+    }
+    printf("\n");
+}
+
 ST_Statistiques calculerStatistiques(char *nom) {
     FILE *fichier;
 
@@ -194,24 +205,27 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_Table
     int resetCode = 1;
     char bitLu;
     while ((bitLu = fgetc(fichierSource)) != EOF) {
+        Bit bit = bit0;
+        if (bitLu == '1') {
+            bit = bit1;
+        }
+
+        if (resetCode) {
+            code = CB_codeBinaire(bit);
+            resetCode = 0;
+        } else {
+            CB_ajouterBit(&code, bit);
+        }
+
         if (TDC_codeBinairePresent(*table, code)) {
+            printf("Code trouvé : ");
+            CB_afficherCodeBinaire(code);
             O_Octet octet = TDC_obtenirOctetCode(*table, code);
-            char buffer = (unsigned char)O_obtenirNaturel8bits(octet);
+            char buffer = (char)O_obtenirNaturel8bits(octet);
+            printf("%c\n", buffer);
             fputc(&buffer, fichierDestination);
             resetCode = 1;
-        } else {
-            Bit bit = bit0;
-            if (bitLu == '1') {
-                bit = bit1;
-            }
-            code = CB_codeBinaire(bit);
-
-            if (resetCode) {
-                resetCode = 0;
-            } else {
-                CB_ajouterBit(&code, bit);
-            }
-        }
+        }  
     }
 }
 
