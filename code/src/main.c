@@ -15,6 +15,30 @@
 Bit bit0 = ZERO;
 Bit bit1 = UN;
 
+void afficherTable(TDC_TableDeCodage table) {
+    printf("Table de codage : \n");
+    for (int i = 0; i < table.nbElements; i++) {
+        printf("%c : ", O_obtenirNaturel8bits(table.table[i].octet));
+        for (int j = 0; j < CB_obtenirLongueur(table.table[i].code); j++) {
+            if (CB_obtenirIemeBit(table.table[i].code, j) == bit0) {
+                printf("0");
+            } else {
+                printf("1");
+            }
+        }
+        printf("\n");
+    }
+}
+
+void afficherStats(ST_Statistiques stats) {
+    printf("Statistiques : \n");
+    for (int i = 0; i < 256; i++) {
+        if (ST_obtenirOccurenceOctet(stats, O_octet(i)) != 0) {
+            printf("%c : %ld\n", i, ST_obtenirOccurenceOctet(stats, O_octet(i)));
+        }
+    }
+}
+
 ST_Statistiques calculerStatistiques(char *nom) {
     FILE *fichier;
 
@@ -97,7 +121,6 @@ void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
 
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
-    O_Octet octet;
     fichierSource = fopen(nom, "rb");
     if (fichierSource == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
@@ -136,6 +159,8 @@ void compresser(char *nom) {
     ST_Statistiques stats = calculerStatistiques(nom);
     ABR_ArbreDeHuffman arbre = creerArbre(stats);
     TDC_TableDeCodage table = codage(arbre);
+    afficherStats(stats);
+    afficherTable(table);
     ABR_detruireArbre(arbre);
     compresserFichier(nom, table, stats);
 }
@@ -143,34 +168,23 @@ void compresser(char *nom) {
 ST_Statistiques lireStatistiques(FILE* fichier) {
     ST_Statistiques stats = ST_statistiques();
     long buffer;
+    fread(&buffer, sizeof(long), 1, fichier);
+    stats.nbOccurenceTotal = buffer;
     for (int i = 0; i < 256; i++) {
         fread(&buffer, sizeof(long), 1, fichier);
         ST_fixerOccurenceOctet(O_octet(i), buffer, &stats);
-        stats.nbOccurenceTotal += buffer; // TODO: modifier TAD Stats
     }
     return stats;
 }
 
-int estUnFichierCompresse(char *nom) {
-    FILE *fichier = fopen(nom, "rb");
+int estUnFichierCompresse(FILE* fichier) {
     if (fichier == NULL) {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier. \n");
+        fprintf(stderr, "Erreur lors de l'ouverture du fichier.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     long cle;
     fread(&cle, sizeof(long), 1, fichier);
-    fclose(fichier);
-
-    // Vérifie extension du fichier
-    char *extension = strrchr(nom, '.');
-    if (extension == NULL) {
-        return 0;
-    }
-
-    if (strcmp(extension, ".huff")) {
-        return 0;
-    }
 
     return cle == CLE;
 }
@@ -201,12 +215,10 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_Table
     }
 }
 
-void decompreser(char *nom) {
-    if (estUnFichierCompresse(nom)) {
-        FILE *fichierSource, *fichierDestination;
-        O_Octet octet;
+void decompreser(FILE* fichierSource) {
+    if (estUnFichierCompresse(fichierSource)) {
+        FILE *fichierDestination;
 
-        fichierSource = fopen(nom, "rb");
         if (fichierSource == NULL) {
             fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
             exit(EXIT_FAILURE);
@@ -220,6 +232,9 @@ void decompreser(char *nom) {
         // Créer la table de codage
         ABR_ArbreDeHuffman arbre = creerArbre(stats);
         TDC_TableDeCodage table = codage(arbre);
+        afficherStats(stats);
+        afficherTable(table);
+
         ABR_detruireArbre(arbre);
         decompreserFichier(fichierSource, fichierDestination, &table);
 
@@ -231,8 +246,9 @@ void decompreser(char *nom) {
     }
 }
 
-int main() {
+int main(void) {
     compresser("test.txt");
-    decompreser("test.txt.huff");
+    FILE* fichier = fopen("test.txt.huff", "rb");
+    decompreser(fichier);
     return 0;
 }

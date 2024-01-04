@@ -10,3 +10,4 @@ bin/
 .gitignore
 report/Rapport.synctex.gz
 code/tests/
+doc/
