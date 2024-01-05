@@ -19,14 +19,12 @@ FP_FileDePriorite FP_fileDePriorite() {
 void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre) {
     unsigned int i;
     unsigned int priorite = ABR_obtenirPonderation(arbre);
-    pfile->tailleActuelle++;
     i = pfile->tailleActuelle;
-    printf("test1");
-    while (i > 1 && ABR_obtenirPonderation(&arbre[i]) <= priorite) {
-        printf("test2");
+    while (i > 1 && ABR_obtenirPonderation(pfile->arbres[i - 1]) <= priorite) {
         pfile->arbres[i] = pfile->arbres[i - 1];
         i--;
     }
+    pfile->tailleActuelle++;
     pfile->arbres[i] = arbre;
 }
 
@@ -41,9 +39,7 @@ void FP_supprimerDernier(FP_FileDePriorite *pfile) {
 
 ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite file) {
     assert(!FP_estVide(file));
-    if (file.tailleActuelle > 0) {
-        return (file.arbres[file.tailleActuelle - 1]);
-    }
+    return (file.arbres[file.tailleActuelle - 1]);
 }
 
 
