@@ -48,7 +48,7 @@ $(TESTDIR)/testOctet : $(SRCDIR)/$(TESTDIR)/testOctet.c $(OBJS)
 $(TESTDIR)/testTable : $(SRCDIR)/$(TESTDIR)/testTable.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
 
-$(TESTDIR)/testStats : $(SRCDIR)/$(TESTDIR)/testTable.c $(OBJS)
+$(TESTDIR)/testStats : $(SRCDIR)/$(TESTDIR)/testStats.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c

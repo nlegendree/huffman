@@ -47,7 +47,7 @@ int main(int argc, char** argv){
     return CU_get_error();
 
   /* ajout d'une suite de test */
-  pSuite = CU_add_suite("Tests boite noire : arbredehuffman", init_suite_success, clean_suite_success);
+  pSuite = CU_add_suite("Tests boite noire : Octet", init_suite_success, clean_suite_success);
   if (NULL == pSuite) {
     CU_cleanup_registry();
     return CU_get_error();
