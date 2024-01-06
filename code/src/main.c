@@ -185,6 +185,9 @@ void compresser(char *nom) {
     compresserFichier(nom, table, stats);
 }
 
+/// @brief Lit les statistiques d'un fichier compressé par le programme
+/// @param fichier fichier à lire
+/// @return les statistiques du fichier
 ST_Statistiques lireStatistiques(FILE* fichier) {
     ST_Statistiques stats = ST_statistiques();
     long buffer;
@@ -197,6 +200,9 @@ ST_Statistiques lireStatistiques(FILE* fichier) {
     return stats;
 }
 
+/// @brief  Vérifie si le fichier est compressé par le programme
+/// @param fichier fichier à vérifier
+/// @return 1 si le fichier est compressé par le programme, 0 sinon
 int estUnFichierCompresse(FILE* fichier) {
     if (fichier == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier.\n");
@@ -209,6 +215,10 @@ int estUnFichierCompresse(FILE* fichier) {
     return cle == CLE;
 }
 
+/// @brief Décompresse un fichier compressé par le programme
+/// @param fichierSource fichier à décompresser
+/// @param fichierDestination fichier décompressé
+/// @param table table de codage
 void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_TableDeCodage* table) {
     CB_CodeBinaire code;
     int resetCode = 1;
