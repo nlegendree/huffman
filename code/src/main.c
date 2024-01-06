@@ -219,10 +219,12 @@ int estUnFichierCompresse(FILE* fichier) {
 /// @param fichierSource fichier à décompresser
 /// @param fichierDestination fichier décompressé
 /// @param table table de codage
-void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_TableDeCodage* table) {
+void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_ArbreDeHuffman arbre) {
     CB_CodeBinaire code;
     int resetCode = 1;
     char bitLu;
+
+    ABR_ArbreDeHuffman noeudActuel = arbre;
     while ((bitLu = fgetc(fichierSource)) != EOF) {
         for (int i = 0; i < 8; i++) {
             Bit bit = bit0;
@@ -236,11 +238,19 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_Table
                 CB_ajouterBit(&code, bit);
             }
             bitLu = bitLu << 1;
-            if (TDC_codeBinairePresent(*table, code)) {
-                O_Octet octet = TDC_obtenirOctetCode(*table, code);
+
+            if (bit == bit0) {
+                noeudActuel = ABR_obtenirFilsGauche(noeudActuel);
+            } else {
+                noeudActuel = ABR_obtenirFilsDroit(noeudActuel);
+            }
+
+            if (ABR_estUneFeuille(noeudActuel)) {
+                O_Octet octet = ABR_obtenirOctet(noeudActuel);
                 char buffer = (char)O_obtenirNaturel8bits(octet);
                 fputc(buffer, fichierDestination);
                 resetCode = 1;
+                noeudActuel = arbre;
             }  
         }
     }
@@ -266,11 +276,10 @@ void decompreser(char* nomFichier) {
         
         // Créer la table de codage
         ABR_ArbreDeHuffman arbre = creerArbre(stats);
-        TDC_TableDeCodage table = codage(arbre);
+
+        decompreserFichier(fichierSource, fichierDestination, arbre);
 
         ABR_detruireArbre(arbre);
-        decompreserFichier(fichierSource, fichierDestination, &table);
-
         fclose(fichierSource);
         fclose(fichierDestination);
     } else {
