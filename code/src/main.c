@@ -124,17 +124,6 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     return table;
 }
 
-// Sera modifié par Dimitri
-void ecrireCodeBinaire(FILE *fichier, CB_CodeBinaire codeBinaire) {
-    // TODO: fix
-    for (int i = 0; i < CB_obtenirLongueur(codeBinaire); i++) {
-        if (CB_obtenirIemeBit(codeBinaire, i) == bit0) {
-            fputc('0', fichier);
-        } else {
-            fputc('1', fichier);
-        }
-    }
-}
 
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
@@ -162,10 +151,25 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
         buffer = ST_obtenirOccurenceOctet(stats, O_octet(i));
         fwrite(&buffer, sizeof(long), 1, fichierDestination);
     }
-
+    char codeBuffer = 0;
+    char codeBufferSize = 8;
     while (!feof(fichierSource)) {
         O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichierSource));
-        ecrireCodeBinaire(fichierDestination, TDC_obtenirCodeOctet(table, octetLu));
+        CB_CodeBinaire code = TDC_obtenirCodeOctet(table, octetLu);
+        for (int i = 0; i < CB_obtenirLongueur(code); i++) {
+            if (CB_obtenirIemeBit(code, i) == bit0) {
+                codeBuffer = codeBuffer << 1;
+            } else {
+                codeBuffer = (codeBuffer << 1) | 1;
+            }
+            codeBufferSize--;
+            if (codeBufferSize <= 0) {
+                fputc(codeBuffer, fichierDestination);
+                codeBuffer = 0;
+                codeBufferSize = 8;
+            }
+        }
+
     }
 
     fclose(fichierSource);
@@ -176,8 +180,7 @@ void compresser(char *nom) {
     ST_Statistiques stats = calculerStatistiques(nom);
     ABR_ArbreDeHuffman arbre = creerArbre(stats);
     TDC_TableDeCodage table = codage(arbre);
-    afficherStats(stats);
-    afficherTable(table);
+
     ABR_detruireArbre(arbre);
     compresserFichier(nom, table, stats);
 }
@@ -211,31 +214,30 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_Table
     int resetCode = 1;
     char bitLu;
     while ((bitLu = fgetc(fichierSource)) != EOF) {
-        Bit bit = bit0;
-        if (bitLu == '1') {
-            bit = bit1;
+        for (int i = 0; i < 8; i++) {
+            Bit bit = bit0;
+            if (bitLu & 0x80) {
+                bit = bit1;
+            }
+            if (resetCode) {
+                code = CB_codeBinaire(bit);
+                resetCode = 0;
+            } else {
+                CB_ajouterBit(&code, bit);
+            }
+            bitLu = bitLu << 1;
+            if (TDC_codeBinairePresent(*table, code)) {
+                O_Octet octet = TDC_obtenirOctetCode(*table, code);
+                char buffer = (char)O_obtenirNaturel8bits(octet);
+                fputc(buffer, fichierDestination);
+                resetCode = 1;
+            }  
         }
-
-        if (resetCode) {
-            code = CB_codeBinaire(bit);
-            resetCode = 0;
-        } else {
-            CB_ajouterBit(&code, bit);
-        }
-
-        if (TDC_codeBinairePresent(*table, code)) {
-            printf("Code trouvé : ");
-            CB_afficherCodeBinaire(code);
-            O_Octet octet = TDC_obtenirOctetCode(*table, code);
-            char buffer = (char)O_obtenirNaturel8bits(octet);
-            printf("%c\n", buffer);
-            fputc(buffer, fichierDestination);
-            resetCode = 1;
-        }  
     }
 }
 
-void decompreser(FILE* fichierSource) {
+void decompreser(char* nomFichier) {
+    FILE *fichierSource = fopen(nomFichier, "rb");
     if (estUnFichierCompresse(fichierSource)) {
         FILE *fichierDestination;
 
@@ -244,7 +246,10 @@ void decompreser(FILE* fichierSource) {
             exit(EXIT_FAILURE);
         }
 
-        fichierDestination = fopen("decompresse.txt", "wb");
+        // On retire les 5 derniers caractères du nom du fichier
+        char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 5));
+        strncpy(nomFichierSansExtension, nomFichier, strlen(nomFichier) - 5);
+        fichierDestination = fopen(nomFichierSansExtension, "wb");
 
         // Lire les statistiques
         ST_Statistiques stats = lireStatistiques(fichierSource);
@@ -252,8 +257,6 @@ void decompreser(FILE* fichierSource) {
         // Créer la table de codage
         ABR_ArbreDeHuffman arbre = creerArbre(stats);
         TDC_TableDeCodage table = codage(arbre);
-        afficherStats(stats);
-        afficherTable(table);
 
         ABR_detruireArbre(arbre);
         decompreserFichier(fichierSource, fichierDestination, &table);
@@ -266,15 +269,7 @@ void decompreser(FILE* fichierSource) {
     }
 }
 
-int main(void) {
-    compresser("test.txt");
-    FILE* fichier = fopen("test.txt.huff", "rb");
-    decompreser(fichier);
-    return 0;
-}
-
-/*int main(int argc, char *argv[]) {
-
+int main(int argc, char *argv[]) {
     printf("bienvenue !!!\n");
     printf("pour compiler, veuillez taper : ./huffman c nom_du_fichier\n");
     printf("pour decompiler, veuillez taper : ./huffman d nom_du_fichier\n");
@@ -289,13 +284,6 @@ int main(void) {
     char choix = argv[1][0];  
     char *nom_fichier = argv[2];
 
-    FILE *fichier = fopen(nom_fichier, "rb");
-
-    if (fichier == NULL) {
-        perror("erreur de l'ouverture du fichier");
-        return 1; 
-    }
-
     switch (choix) {
         case 'c':
             printf("compression du fichier %s.\n", nom_fichier);
@@ -303,15 +291,12 @@ int main(void) {
             break;
         case 'd':
             printf("decompression du fichier %s.\n", nom_fichier);
-            decompreser(fichier);
+            decompreser(nom_fichier);
             break;
         default:
             printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
-            fclose(fichier);
             return 1; 
     }
 
-    fclose(fichier); 
-
     return 0;
-}*/
+}
