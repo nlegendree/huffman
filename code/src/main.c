@@ -229,7 +229,7 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, TDC_Table
             O_Octet octet = TDC_obtenirOctetCode(*table, code);
             char buffer = (char)O_obtenirNaturel8bits(octet);
             printf("%c\n", buffer);
-            fputc(&buffer, fichierDestination);
+            fputc(buffer, fichierDestination);
             resetCode = 1;
         }  
     }
