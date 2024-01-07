@@ -47,7 +47,7 @@ void O_fixerIemeBit(O_Octet* octet, int i, Bit bit);
  * @param octet octet dont on veut obtenir la valeur décimale
  * @return int 
  */
-int O_obtenirNaturel8bits(O_Octet octet);
+Naturel8Bits O_obtenirNaturel8bits(O_Octet octet);
 
 /**
  * @brief Permet de comparer l'instance de 2 octets
