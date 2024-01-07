@@ -11,14 +11,45 @@ typedef struct ST_Statistiques
     long int lesStatistiques[MAX];
 } ST_Statistiques;
 
+/**
+ * @brief Permet de créer des statistiques vides
+ * 
+ * @return ST_Statistiques
+ */
 ST_Statistiques ST_statistiques(void);
 
+/**
+ * @brief Permet d'obtenir le nombre d'occurences d'un octet
+ * 
+ * @param statistiques 
+ * @param octet
+ * @return long int 
+ */
 long int ST_obtenirOccurenceOctet(ST_Statistiques statistiques,O_Octet octet);
 
+/**
+ * @brief Permet d'incrémenter le nombre d'occurences d'un octet
+ * 
+ * @param octet
+ * @param pstatistiques
+ */
 void ST_incrementerOccurenceOctet(O_Octet octet, ST_Statistiques* pstatistiques);
 
+/**
+ * @brief Permet de fixer le nombre d'occurences d'un octet
+ * 
+ * @param octet
+ * @param nbOccurence
+ * @param pstatistiques
+ */
 void ST_fixerOccurenceOctet(O_Octet octet, long int nbOccurence, ST_Statistiques* pstatistiques);
 
+/**
+ * @brief Permet d'obtenir le nombre total d'occurences (tout octet compris)
+ * 
+ * @param statistiques
+ * @return long int
+ */
 long int ST_obtenirTotalOccurence(ST_Statistiques statistiques);
 
 #endif
