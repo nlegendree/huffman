@@ -86,7 +86,7 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
             FP_ajouterElement(&file, ABR_arbreDeHuffman(O_octet(i), ST_obtenirOccurenceOctet(stats, O_octet(i))));
         }
     }
-
+    
     while (FP_longueur(file) > 1) {
         ABR_ArbreDeHuffman arbreGauche = FP_obtenirDernier(file);
         FP_supprimerDernier(&file);
@@ -244,11 +244,13 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_Arbre
             } else {
                 noeudActuel = ABR_obtenirFilsDroit(noeudActuel);
             }
-
+            printf("est une feuille : %d\n", ABR_estUneFeuille(noeudActuel));
             if (ABR_estUneFeuille(noeudActuel)) {
                 O_Octet octet = ABR_obtenirOctet(noeudActuel);
                 char buffer = (char)O_obtenirNaturel8bits(octet);
+                printf("octet : %d\n", buffer);
                 fputc(buffer, fichierDestination);
+                printf("writed\n");
                 resetCode = 1;
                 noeudActuel = arbre;
             }  
@@ -259,7 +261,7 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_Arbre
 void decompreser(char* nomFichier) {
     FILE *fichierSource = fopen(nomFichier, "rb");
     if (estUnFichierCompresse(fichierSource)) {
-        FILE *fichierDestination;
+        FILE *fichierDestination = NULL;
 
         if (fichierSource == NULL) {
             fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
@@ -267,25 +269,32 @@ void decompreser(char* nomFichier) {
         }
 
         // On retire les 5 derniers caractères du nom du fichier
-        char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 5));
+        char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 4));
         strncpy(nomFichierSansExtension, nomFichier, strlen(nomFichier) - 5);
+        nomFichierSansExtension[strlen(nomFichier) - 5] = '\0'; // On ajoute le caractère de fin de chaine
+
         fichierDestination = fopen(nomFichierSansExtension, "wb");
+        if (fichierDestination == NULL) {
+            fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
+            fclose(fichierSource);
+            free(nomFichierSansExtension);
+            exit(EXIT_FAILURE);
+        }
 
         // Lire les statistiques
         ST_Statistiques stats = lireStatistiques(fichierSource);
-        
-        // Créer la table de codage
         ABR_ArbreDeHuffman arbre = creerArbre(stats);
 
         decompreserFichier(fichierSource, fichierDestination, arbre);
 
         ABR_detruireArbre(arbre);
-        fclose(fichierSource);
         fclose(fichierDestination);
+        free(nomFichierSansExtension);
     } else {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
         exit(EXIT_FAILURE);
     }
+    fclose(fichierSource);
 }
 
 int main(int argc, char *argv[]) {
