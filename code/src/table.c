@@ -38,7 +38,7 @@ int TDC_codeBinairePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeB
 
 CB_CodeBinaire TDC_obtenirCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet o) {
     assert(TDC_octetPresent(tableDeCodage,o));
-    for (int i=0; i<tableDeCodage.nbElements; i++) {
+    for (int i = 0; i < tableDeCodage.nbElements; i++) {
         if (O_egale(tableDeCodage.table[i].octet, o)) {
             return tableDeCodage.table[i].code;
         }
