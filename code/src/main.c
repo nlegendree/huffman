@@ -244,13 +244,10 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_Arbre
             } else {
                 noeudActuel = ABR_obtenirFilsDroit(noeudActuel);
             }
-            printf("est une feuille : %d\n", ABR_estUneFeuille(noeudActuel));
             if (ABR_estUneFeuille(noeudActuel)) {
                 O_Octet octet = ABR_obtenirOctet(noeudActuel);
                 char buffer = (char)O_obtenirNaturel8bits(octet);
-                printf("octet : %d\n", buffer);
                 fputc(buffer, fichierDestination);
-                printf("writed\n");
                 resetCode = 1;
                 noeudActuel = arbre;
             }  
