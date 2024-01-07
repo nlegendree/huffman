@@ -13,9 +13,6 @@
         \tadOperation{combiner}%
             {\tadParams{ArbreDeHuffman, ArbreDeHuffman}}%
             {\tadParams{ArbreDeHuffman}}
-        \tadOperation{fixerPonderation}%s
-            {\tadParams{ArbreDeHuffman, \naturel}}%
-            {\tadParams{ArbreDeHuffman}}
         \tadOperation{obtenirPondération}%
             {\tadParams{ArbreDeHuffman}}%
             {\tadParams{\naturel}}
@@ -36,7 +33,6 @@
     \begin{tadAxiomes}
         \tadAxiome{\textsf{obtenirElement(arbreDeHuffman(élément,pondération))} = \textsf{élément}}
         \tadAxiome{\textsf{obtenirPondération(arbreDeHuffman(élément,pondération))} = \textsf{pondération}}
-        \tadAxiome{\textsf{obtenirPondération(fixerPondération(arbre, pondération))} = \textsf{pondération}}
         \tadAxiome{\textsf{obtenirPondération(combiner(arbreGauche,arbreDroit))} = \textsf{obtenirPondération(arbreGauche)+obtenirPondération(arbreDroit)}}
         \tadAxiome{\textsf{estUneFeuille(arbreDeHuffman(élément,pondération))}}
         \tadAxiome{\textsf{non estUneFeuille(combiner(arbreGauche,arbreDroit))}}
