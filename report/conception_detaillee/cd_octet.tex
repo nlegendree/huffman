@@ -16,7 +16,7 @@
     {octet : Octet, pos : \naturelNonNul}{bit: Bit}
     {pos $\geq$ 0 et pos $\leq$ 7}{estUn : \booleen}
 {
-    \affecter{estUn}{(\champ{octet}{octet} \& (1 \textless \textless (i-1)))$>$ 0}
+    \affecter{estUn}{(\champ{octet}{octet} >> i - 1) \& 1}
     \retourner{bit(estUn)}
 }
 
@@ -38,6 +38,13 @@
     {}{}
 {   
     \retourner{\champ{octet}{octet}}
+}
+
+\fonction{egale} 
+    {octet1, octet2 : Octet}{\booleen}
+    {}{}
+{
+    \retourner{\champ{octet1}{octet} = \champ{octet2}{octet}}
 }
 
 \end{algorithme}
