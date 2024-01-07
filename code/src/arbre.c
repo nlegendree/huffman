@@ -21,12 +21,7 @@ void ABR_detruireArbre(ABR_ArbreDeHuffman arbre) {
         free(arbre);
     }
 }
-// Copie l'arbre 
-ABR_ArbreDeHuffman ABR_copierArbre(ABR_ArbreDeHuffman arbre) {
-    ABR_ArbreDeHuffman arbreCopie;
-    arbreCopie = malloc(sizeof (Noeud)), arbre, sizeof (Noeud);
-    return arbreCopie;
-}
+
 // Combine les deux arbres et retourne le nouvel arbre
 ABR_ArbreDeHuffman ABR_combiner(ABR_ArbreDeHuffman arbreGauche, ABR_ArbreDeHuffman arbreDroit) {
     ABR_ArbreDeHuffman arbre;
