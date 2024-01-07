@@ -18,7 +18,7 @@
  */
 
 typedef struct FP_FileDePriorite {
-    ABR_ArbreDeHuffman arbres[255];
+    ABR_ArbreDeHuffman arbres[256];
     unsigned int tailleActuelle;
 } FP_FileDePriorite;
 
