@@ -15,41 +15,33 @@
         \tadOperation{elementPresent}%
             {\tadDeuxParams{TableDeCodage}{Element}}%
             {\tadUnParam{\booleen}}
-        \tadOperation{codePresent}%
-            {\tadDeuxParams{TableDeCodage}{Code}}%
-            {\tadUnParam{\booleen}}
         \tadOperationAvecPreconditions{ajouterElement}%
-            {\tadDeuxParams{TableDeCodage}{Element}}%
-            {\tadUnParam{TableDeCodage}}
-        \tadOperationAvecPreconditions{elementPossedeCode}% 
-            {\tadDeuxParams{TableDeCodage}{Element}}%
-            {\tadUnParam{\booleen}}
-        \tadOperationAvecPreconditions{assignerCodeElement}%
             {\tadTroisParams{TableDeCodage}{Element}{Code}}%
             {\tadUnParam{TableDeCodage}}
         \tadOperationAvecPreconditions{obtenirCodeElement}%
             {\tadDeuxParams{TableDeCodage}{Element}}%
             {\tadUnParam{Code}}
+        \tadOperation{codeBinairePresent}% 
+            {\tadDeuxParams{TableDeCodage}{Code}}%
+            {\tadUnParam{\booleen}}
         \tadOperationAvecPreconditions{obtenirElementCode}%
             {\tadDeuxParams{TableDeCodage}{Code}}%
             {\tadUnParam{Element}}
     \end{tadOperations}
 
     \begin{tadAxiomes}
-        \tadAxiome{non(estVide(ajouterElement(table, elem)))}
-        \tadAxiome{estPresent(ajouterElement(table, elem), elem)}
-        \tadAxiome{elementPresent(ajouterElement(stat, elem), elem)}
-        \tadAxiome{codePresent(assignerCodeElement(table, elem, code), code)}
-        \tadAxiome{obtenirElemCode(assignerCodeElement(table, elem, code), code) = elem}
-        \tadAxiome{obtenirCodeElem(assignerCodeElement(table, elem, code), elem) = code}
-        \tadAxiome{non(codePresent(table, code)) \Rightarrow obtenirElementCode(table, code) = NIL}
+        \tadAxiome{non(estVide(ajouterElement(table, elem, code)))}
+        \tadAxiome{estPresent(ajouterElement(table, elem, code), elem)}
+        \tadAxiome{elementPresent(ajouterElement(stat, elem, code), elem)}
+        \tadAxiome{codeBinairePresent(ajouterElement(table, elem, code), code)}
+        \tadAxiome{obtenirElemCode(ajouterElement(table, elem, code), code) = elem}
+        \tadAxiome{obtenirCodeElem(ajouterElement(table, elem, code), elem) = code}
     \end{tadAxiomes}
 
     \begin{tadPreconditions}{}
-        \tadPrecondition{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
-        \tadPrecondition{elementPossedeCode(table, elem)}{elementPresent(table, elem)}
-        \tadPrecondition{assignerCodeElement(table, elem, code)}{non(codePresent(table, code)) ET elementPresent(table, elem)}
-        \tadPrecondition{obtenirCodeElement(table, elem)}{elementPossedeCode(table, elem) ET elementPresent(table, elem)}
+        \tadPrecondition{ajouterElement(table, elem, code)}{non codeBinairePresent(table, code) ET non elementPresent(table, elem)}
+        \tadPrecondition{obtenirCodeElement(table, elem)}{elementPresent(table, elem)}
+        \tadPrecondition{obtenirElementCode(table, code)}{codeBinairePresent(table, code)}
     \end{tadPreconditions}
 
 \end{tad}

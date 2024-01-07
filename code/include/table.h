@@ -60,7 +60,13 @@ void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeB
  */
 CB_CodeBinaire TDC_obtenirCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
 
-// TODO: mettre à jour le TAD
+/**
+ * @brief Permet de savoir si un code binaire est présent dans une table de codage
+ * 
+ * @param tableDeCodage 
+ * @param codeBinaire 
+ * @return int 
+ */
 int TDC_codeBinairePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
 
 /**

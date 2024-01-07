@@ -1,12 +1,12 @@
 \begin{algorithme}
 \begin{enregistrement}{FileDePriorite} %nom du type
-    \champEnregistrement{\tableauUneDimension{1..256}{d'}{{arbre}{ArbreDeHuffman}}} %contenu %en C attention aux indices qui commencent à 0
+    \champEnregistrement{arbres}{\tableauUneDimension{1..256}{d'}{{arbre}{ArbreDeHuffman}}} %contenu %en C attention aux indices qui commencent à 0
     \champEnregistrement{tailleActuelle}{\naturel}
 \end{enregistrement}
 \end{algorithme}
 
 \begin{algorithme}
-\fonction{fileDePrioriteVide} %nom de la fonction
+\fonction{fileDePriorite} %nom de la fonction
     {}{FileDePriorite} %param entree, param sortie
     {} %precond
     {temp : FileDePriorite} %var locales
@@ -16,11 +16,12 @@
 
 \begin{algorithme}
 \procedure{ajouterElement}{
-    \paramEntree{arbre : ArbreDeHuffman, prio : \naturelNonNul}
+    \paramEntree{arbre : ArbreDeHuffman}
     \paramEntreeSortie{file : FileDePriorite}}
 {} %precond
-{i : \naturelNonNul} %var locales
-{   \affecter{\champ{file}{tailleActuelle}}{\champ{file}{tailleActuelle} + 1}
+{i : \naturelNonNul, prio : \naturelNonNul} %var locales
+{   \affecter{prio}{obtenirPondération(arbre)}
+    \affecter{\champ{file}{tailleActuelle}}{\champ{file}{tailleActuelle} + 1}
     \affecter{i}{\champ{file}{tailleActuelle}}
     \tantque{obtenirPondération(\champ{file}{arbre}[i]) $\leq$ prio}{
         \affecter{\champ{file}{arbre}[i]}{\champ{file}{arbre}[i-1]}}
@@ -29,7 +30,7 @@
 \end{algorithme}
 
 \begin{algorithme}
-\procedure{supprimerdDernier}{
+\procedure{supprimerDernier}{
     \paramEntreeSortie{file : FileDePriorite}}
 {non(estVide(file))} %precond
 {} %var locales

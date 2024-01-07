@@ -1,33 +1,21 @@
 \begin{algorithme}
 
-    \remarque{Cette présentation est générique, dans le cadre du problème les éléments de l'ensemble sont des octets, or un octet va être associé à un caractère mais peut aussi coder un entier. Ainsi, lors de l'implémentation, plutôt que de placer à un indice i dans le tableau, il est plus pertinent dans le cadre du projet de placer (dans un tableau) un octet à l'indice de l'entier lui correspondant, l'octet devient donc à la fois une partie de l'élément mais aussi la clé (en voyant les choses comme un dictionnaire) lui correspondant. Cela permet une complexité de certaines fonctions en O(1) plutôt qu'en O(n). Des commentaires sur ce pseudo code indiqueront des modifications pertinentes à l'implémentation sur ce sujet}
-    \remarque{selon les type existants en c, il faut donc peut-être coder une foction de transtypage pour passer d'un octet à l'entier lui correspondant}
-
-
-    \begin{enregistrement}{UneStatistique}
-        \champEnregistrement{occurence}{\naturel}
-        \champEnregistrement{element}{Octet}
-    \end{enregistrement}
-
 
     \begin{enregistrement}{Statistiques}
         \champEnregistrement{nbOccurenceTotale}{\naturel}
-        \champEnregistrement{lesStatistiques}{\tableau{1..MAX}{de}{UneStatistique}}
+        \champEnregistrement{lesStatistiques}{\tableau{1..MAX}{de}{\naturel}}
     \end{enregistrement}
 
 
     \fonction{statistiques}
-        {ensemble : ensemble$<$Octet$>$}{Statistiques}
+        {}{Statistiques}
         {}
         {resultat : Statistiques
-        elem : Octet
         i : \naturel}
     {
         \affecter{resultat.nbOccurenceTotale}{0}
-        \pourChaque{elem}{ensemble}{
-            \affecter{i}{octetEnNaturel(elem)}
+        \pour{i}{1}{256}{}{
             \affecter{resultat.lesStatistiques[i].occurence}{0}
-            \affecter{resultat.lesStatistiques[i].element}{elem}
         }
         \retourner{resultat}
     }
@@ -38,7 +26,7 @@
         {}
         {}
     {
-        \retourner{statistiques.lesStatistiques[octetEnNaturel(elem)].occurences}
+        \retourner{statistiques.lesStatistiques[obtenirNaturel8bits(elem)]}
     }
 
 
@@ -46,10 +34,9 @@
         \paramEntree{elem : Octet}
         \paramEntreeSortie{statistiques : Statistiques}}
     {}
-    {i : \naturel}
+    {}
     {
-        \affecter{i}{octetEnNaturel(elem)}
-        \affecter{statistiques.lesStatistiques[i].occurences}{statistiques.lesStatistiques[i].occurences + 1}
+        \affecter{statistiques.lesStatistiques[obtenirNaturel8bits(elem)]}{statistiques.lesStatistiques[obtenirNaturel8bits(octet)] + 1}
         \affecter{statistiques.nbOccurenceTotale}{statistiques.nbOccurenceTotale + 1}
     }
 
@@ -59,8 +46,7 @@
     {}
     {}
     {
-        \affecter{statistiques.lesStatistiques[octetEnNaturel(elem)].occurences}{nbOccurence}
-        \affecter{statistiques.nbOccurenceTotale}{statistiques.nbOccurenceTotale + nbOccurence}
+        \affecter{statistiques.lesStatistiques[obtenirNaturel8bits(elem)]}{nbOccurence}
     }
 
     \fonction{obtenirTotalOccurence}

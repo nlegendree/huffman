@@ -1,3 +1,12 @@
+/**
+ * \file codeBinaire.h
+ * \brief Implantation du TAD CodeBinaire
+ * \author A. Bressac
+ * \version 1.0
+ * \date 19/12/2023
+ *
+ */
+
 #ifndef  __CODEBINAIRE__
 #define __CODEBINAIRE__
 
