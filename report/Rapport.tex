@@ -3,12 +3,24 @@
 \usepackage{librairies}
 
 \title{Compresseur de Huffman}
-\author{Bressac Augustin, Janneau Lou-Anne, Legendre Nathan, Sentchev Vassili, Timoz Dimitri}
+\author{Bressac Augustin, Janneau Lou-Anne, Legendre Nathan,\\ Sentchev Vassili, Timoz Dimitri}
 \date{07/01/2024}
 
+\makeatletter         
+\def\@maketitle{
+\raggedright
+\includegraphics[width = 0.3\textwidth]{Logo_INSA_RN.jpg}\\[8ex]
+\begin{center}
+{\Huge \bfseries \sffamily \@title }\\[4ex] 
+{\Large  \@author}\\[4ex] 
+\@date\\[8ex]
+\end{center}}
+\makeatother
+
 \begin{document}
-\includegraphics[width=0.3\textwidth]{Logo_INSA_RN.jpg}
+
 \maketitle
+
 \newpage
 \tableofcontents
 
