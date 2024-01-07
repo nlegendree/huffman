@@ -1,18 +1,32 @@
+/**
+ * @file arbre.h
+ * @brief Header de la structure arbre de Huffman
+ * @author Dimitri Timoz
+*/
+
 #include "octet.h"
 #ifndef __ARBRE__
 #define __ARBRE__
 
 typedef struct Noeud Noeud;
 
-struct Noeud {
-    Noeud* gauche;          // Left child
-    Noeud* droite;          // Right child
-    O_Octet octet;          // Data (assuming O_Octet is defined elsewhere)
+/**
+ * @brief structure arbre de Huffman
+*/
+struct Noeud
+{
+    Noeud *gauche;            // Left child
+    Noeud *droite;            // Right child
+    O_Octet octet;            // Data (assuming O_Octet is defined elsewhere)
     unsigned int ponderation; // Weight
 };
 
-typedef Noeud* ABR_ArbreDeHuffman; // Pointer to a Huffman Tree node
+/**
+ * @brief structure arbre de Huffman
+*/
+typedef Noeud *ABR_ArbreDeHuffman; // Pointer to a Huffman Tree node
 
+/// @fn ABR_ArbreDeHuffman ABR_arbreDeHuffman(O_Octet octet, unsigned int ponderation)
 /// @brief Crée un arbre de Huffman à partir d'un octet et d'une pondération
 /// @param octet élement de l'arbre
 /// @param ponderation pondération de l'élément
@@ -26,7 +40,7 @@ void ABR_detruireArbre(ABR_ArbreDeHuffman arbre);
 /// @brief Combine deux arbres et retourne le nouvel arbre
 /// @param arbreGauche l'arbre de gauche
 /// @param arbreDroit l'arbre de droite
-/// @return ABR_ArbreDeHuffman 
+/// @return ABR_ArbreDeHuffman
 ABR_ArbreDeHuffman ABR_combiner(ABR_ArbreDeHuffman arbreGauche, ABR_ArbreDeHuffman arbreDroit);
 
 /// @brief Retourne la pondération de l'arbre
