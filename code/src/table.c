@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-TDC_TableDeCodage TDC_tableDeCodage(){
+TDC_TableDeCodage TDC_tableDeCodage(void){
     TDC_TableDeCodage tableDeCodage;
     tableDeCodage.nbElements = 0;
 

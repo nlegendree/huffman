@@ -1,7 +1,7 @@
 #include "octet.h"
 #include "stats.h"
 
-ST_Statistiques ST_statistiques(){
+ST_Statistiques ST_statistiques(void){
     ST_Statistiques stats;
     stats.nbOccurenceTotal=0;
     for (long int i=0;i<256;i++){
