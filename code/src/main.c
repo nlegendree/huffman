@@ -222,7 +222,7 @@ int estUnFichierCompresse(FILE* fichier) {
 void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_ArbreDeHuffman arbre) {
     CB_CodeBinaire code;
     int resetCode = 1;
-    char bitLu;
+    int bitLu;
 
     ABR_ArbreDeHuffman noeudActuel = arbre;
     while ((bitLu = fgetc(fichierSource)) != EOF) {
