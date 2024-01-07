@@ -3,7 +3,7 @@
 
 #include "bit.h"
 
-#define CB_NBMAXBIT 16
+#define CB_NBMAXBIT 128
 
 /**
  * @brief structure code binaire
