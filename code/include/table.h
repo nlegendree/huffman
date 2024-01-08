@@ -1,3 +1,12 @@
+/**
+ * \file table.h
+ * \brief Implantation du TAD TableDeCodage
+ * \author L. Janneau
+ * \version 1.0
+ * \date 19/12/2023
+ *
+ */
+
 #ifndef  __TABLE__
 #define __TABLE__
 

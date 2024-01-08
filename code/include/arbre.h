@@ -1,8 +1,11 @@
 /**
- * @file arbre.h
- * @brief Header de la structure arbre de Huffman
- * @author Dimitri Timoz
-*/
+ * \file arbre.h
+ * \brief Implantation du TAD ArbreDeHuffman
+ * \author D. Timoz
+ * \version 1.0
+ * \date 19/12/2023
+ *
+ */
 
 #include "octet.h"
 #ifndef __ARBRE__

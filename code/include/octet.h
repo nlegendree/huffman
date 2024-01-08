@@ -1,5 +1,14 @@
-#ifndef OCTET_H
-#define OCTET_H
+/**
+ * \file octet.h
+ * \brief Implantation du TAD Octet
+ * \author V. Sentchev
+ * \version 1.0
+ * \date 19/12/2023
+ *
+ */
+
+#ifndef __OCTET__
+#define __OCTET__
 #include "octet.h"
 #include "bit.h"
 
