@@ -318,94 +318,44 @@ void decompreserFichier(FILE *fichierSource, FILE *fichierDestination, ABR_Arbre
     }
 }
 
-/// @brief Décompresse un fichier compressé par le programme
-/// @param nomFichier nom du fichier à décompresser
-/// @pre le fichier doit exister 
-void decompreser(char *nomFichier)
-{
-    FILE *fichierSource = fopen(nomFichier, "rb");
-    if (estUnFichierCompresse(fichierSource))
-    {
-        FILE *fichierDestination = NULL;
-
-        if (fichierSource == NULL)
-        {
-            fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
-            exit(EXIT_FAILURE);
-        }
-
-        // On retire les 5 derniers caractères du nom du fichier
-        char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 4));
-        strncpy(nomFichierSansExtension, nomFichier, strlen(nomFichier) - 5);
-        nomFichierSansExtension[strlen(nomFichier) - 5] = '\0'; // On ajoute le caractère de fin de chaine
-
-        fichierDestination = fopen(nomFichierSansExtension, "wb");
-        if (fichierDestination == NULL)
-        {
-            fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
-            fclose(fichierSource);
-            free(nomFichierSansExtension);
-            exit(EXIT_FAILURE);
-        }
-
-        // Lire les statistiques
-        ST_Statistiques stats = lireStatistiques(fichierSource);
-        ABR_ArbreDeHuffman arbre = creerArbre(stats);
-
-        decompreserFichier(fichierSource, fichierDestination, arbre);
-
-        ABR_detruireArbre(arbre);
-        fclose(fichierDestination);
-        free(nomFichierSansExtension);
-    }
-    else
-    {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
-    }
-    fclose(fichierSource);
-}
-
-/// @brief Procedure qui affiche l'interface homme machine, avec les instructions à faire.
-/// @param argc argument compteur
-/// @param argv argument pour le terminal pour le fichier a selectionner et le choix entre compresser et decompresser.
-void afficherIHM(int argc, char *argv[])
+/// @brief Procédure qui affiche un message d'aide, lors de l'éxécution du programme
+void afficherAide()
 {
     printf("bienvenue !!!\n");
     printf("pour compiler, veuillez taper : ./huffman c nom_du_fichier\n");
     printf("pour decompiler, veuillez taper : ./huffman d nom_du_fichier\n");
 
-    if (argc != 3) {
-        printf("commande incorrect, nombre d'argument, pas respecté \n");
-        exit(EXIT_FAILURE);
-       
-        
-    }
-
-    // recupère le choix de l'utilisateur entre c et d
-    char choix = argv[1][0];  
-    char *nom_fichier = argv[2];
-
-    switch (choix) {
-        case 'c':
-            printf("compression du fichier %s.\n", nom_fichier);
-            compresser(nom_fichier);
-            break;
-        case 'd':
-            printf("decompression du fichier %s.\n", nom_fichier);
-            decompreser(nom_fichier);
-            break;
-        default:
-            printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
-            exit(EXIT_FAILURE);
-    }
 }
-
-
-
 
 int main(int argc, char *argv[])
 {
-    afficherIHM(argc,argv);
+    afficherAide();
+    if (argc != 3)
+    {
+        printf("commande incorrect, nombre d'argument, pas respecté \n");
+        afficherAide();
+        return 1;
+    }
+
+    // recupère le choix de l'utilisateur entre c et d
+    char choix = argv[1][0];
+    char *nom_fichier = argv[2];
+
+    switch (choix)
+    {
+    case 'c':
+        printf("compression du fichier %s.\n", nom_fichier);
+        compresser(nom_fichier);
+        break;
+    case 'd':
+        printf("decompression du fichier %s.\n", nom_fichier);
+        decompreser(nom_fichier);
+        break;
+    default:
+        printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
+        afficherAide();
+        break;
+    }
 
     return 0;
 }
