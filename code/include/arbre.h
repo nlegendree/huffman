@@ -43,31 +43,37 @@ void ABR_detruireArbre(ABR_ArbreDeHuffman arbre);
 /// @brief Combine deux arbres et retourne le nouvel arbre
 /// @param arbreGauche l'arbre de gauche
 /// @param arbreDroit l'arbre de droite
+/// @pre Les arbres doivent être différents de NULL
 /// @return ABR_ArbreDeHuffman
 ABR_ArbreDeHuffman ABR_combiner(ABR_ArbreDeHuffman arbreGauche, ABR_ArbreDeHuffman arbreDroit);
 
 /// @brief Retourne la pondération de l'arbre
 /// @param arbre arbre dont on souhaite obtenir la pondération
+/// @pre L'arbre doit être différent de NULL
 /// @return unsigned int
 unsigned int ABR_obtenirPonderation(ABR_ArbreDeHuffman arbre);
 
 /// @brief Retourne l'octet de l'arbre
 /// @param arbre arbre dont on souhaite obtenir l'octet
+/// @pre L'arbre doit être différent de NULL
 /// @return O_Octet
 O_Octet ABR_obtenirOctet(ABR_ArbreDeHuffman arbre);
 
 /// @brief Retourne vrai si l'arbre est une feuille
 /// @param arbre arbre dont on souhaite savoir si c'est une feuille
+/// @pre L'arbre doit être différent de NULL
 /// @return int
 int ABR_estUneFeuille(ABR_ArbreDeHuffman arbre);
 
 /// @brief Retourne le fils gauche de l'arbre
 /// @param arbre arbre dont on souhaite obtenir le fils gauche
+/// @pre L'arbre doit être différent de NULL et doit avoir un fils gauche
 /// @return ABR_ArbreDeHuffman
 ABR_ArbreDeHuffman ABR_obtenirFilsGauche(ABR_ArbreDeHuffman arbre);
 
 /// @brief Retourne le fils droit de l'arbre
 /// @param arbre arbre dont on souhaite obtenir le fils droit
+/// @pre L'arbre doit être différent de NULL et doit avoir un fils droit
 /// @return ABR_ArbreDeHuffman
 ABR_ArbreDeHuffman ABR_obtenirFilsDroit(ABR_ArbreDeHuffman arbre);
 

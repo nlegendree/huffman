@@ -28,76 +28,9 @@ Bit bit0 = ZERO;
 Bit bit1 = UN;
 
 /**
- * \fn void afficherTable(TDC_TableDeCodage table)
- * \brief Procédure qui affiche la table de codage correspondant au fichier
- *
- * \param table : table de codage à afficher
- */
-void afficherTable(TDC_TableDeCodage table)
-{
-    printf("Table de codage : \n");
-    for (int i = 0; i < table.nbElements; i++)
-    {
-        printf("%c : ", O_obtenirNaturel8bits(table.table[i].octet));
-        for (int j = 0; j < CB_obtenirLongueur(table.table[i].code); j++)
-        {
-            if (CB_obtenirIemeBit(table.table[i].code, j) == bit0)
-            {
-                printf("0");
-            }
-            else
-            {
-                printf("1");
-            }
-        }
-        printf("\n");
-    }
-}
-
-/**
- * \fn void afficherStats(ST_Statistiques stats)
- * \brief Procédure qui affiche les statistiques correspondantes au fichier
- *
- * \param stats : statistiques à afficher
- */
-void afficherStats(ST_Statistiques stats)
-{
-    printf("Statistiques : \n");
-    for (int i = 0; i < 256; i++)
-    {
-        if (ST_obtenirOccurenceOctet(stats, O_octet(i)) != 0)
-        {
-            printf("%c : %ld\n", i, ST_obtenirOccurenceOctet(stats, O_octet(i)));
-        }
-    }
-}
-
-/**
- * \fn void CB_afficherCodeBinaire(CB_CodeBinaire code)
- * \brief Procédure qui affiche les codes binaires correspondants au fichier
- *
- * \param code : codes binaires à afficher
- */
-void CB_afficherCodeBinaire(CB_CodeBinaire code)
-{
-    for (int i = 0; i < CB_obtenirLongueur(code); i++)
-    {
-        if (CB_obtenirIemeBit(code, i) == bit0)
-        {
-            printf("0");
-        }
-        else
-        {
-            printf("1");
-        }
-    }
-    printf("\n");
-}
-
-/**
  * \fn ST_Statistiques calculerStatistiques(char *nom)
  * \brief Fonction qui calcule les statistiques du fichier
- *
+ * \pre le fichier doit exister
  * \param nom : nom du fichier
  * \return ST_Statistiques
  */
@@ -129,6 +62,7 @@ ST_Statistiques calculerStatistiques(char *nom)
  * \fn ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats)
  * \brief Fonction qui crée un arbre de Huffman à partir des statistiques
  *
+ * \pre les statistiques doivent exister
  * \param stats : statistiques pour créer l'arbre d'Huffman
  * \return ABR_ArbreDeHuffman
  */
@@ -162,6 +96,7 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats)
  * \fn void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table)
  * \brief Procédure qui descend un arbre de Huffman
  *
+ * \pre l'arbre doit exister
  * \param arbre : arbre de Huffman à descendre
  * \param code :
  * \param table :
@@ -187,6 +122,7 @@ void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCo
  * \fn TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre)
  * \brief Fonction qui crée la table de codage d'un arbre de Huffman
  *
+ * \pre l'arbre ne doit pas être un pointeur NULL
  * \param arbre : arbre dont on veut la table de codage
  * \return TDC_TableDeCodage
  */
@@ -210,6 +146,7 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre)
  * \fn void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats)
  * \brief Procédure qui compresse le fichier
  *
+ * \pre le fichier doit exister
  * \param nom : nom du fichier à compresser
  * \param table : table de codage pour la compression
  * \param stats : statistiques pour la compression
@@ -279,6 +216,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
  * \fn void compresser(char *nom)
  * \brief Procédure qui compresse le fichier
  *
+ * \pre le fichier doit exister
  * \param nom : nom du fichier à compresser
  * \return FILE
  */
@@ -294,6 +232,7 @@ void compresser(char *nom)
 
 /// @brief Lit les statistiques d'un fichier compressé par le programme
 /// @param fichier fichier à lire
+/// @pre le fichier doit être ouvert en lecture binaire et être un fichier compressé par le programme
 /// @return les statistiques du fichier
 ST_Statistiques lireStatistiques(FILE *fichier)
 {
@@ -311,6 +250,7 @@ ST_Statistiques lireStatistiques(FILE *fichier)
 
 /// @brief  Vérifie si le fichier est compressé par le programme
 /// @param fichier fichier à vérifier
+/// @pre le fichier doit être ouvert en lecture binaire
 /// @return 1 si le fichier est compressé par le programme, 0 sinon
 int estUnFichierCompresse(FILE *fichier)
 {
@@ -329,6 +269,7 @@ int estUnFichierCompresse(FILE *fichier)
 /// @brief Décompresse un fichier compressé par le programme
 /// @param fichierSource fichier à décompresser
 /// @param fichierDestination fichier décompressé
+/// @pre le fichier source doit être ouvert en lecture binaire et être un fichier compressé par le programme, l'en-tête du fichier doit avoir été lu
 /// @param table table de codage
 void decompreserFichier(FILE *fichierSource, FILE *fichierDestination, ABR_ArbreDeHuffman arbre)
 {
@@ -377,6 +318,9 @@ void decompreserFichier(FILE *fichierSource, FILE *fichierDestination, ABR_Arbre
     }
 }
 
+/// @brief Décompresse un fichier compressé par le programme
+/// @param nomFichier nom du fichier à décompresser
+/// @pre le fichier doit exister 
 void decompreser(char *nomFichier)
 {
     FILE *fichierSource = fopen(nomFichier, "rb");
@@ -417,7 +361,6 @@ void decompreser(char *nomFichier)
     else
     {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
-        exit(EXIT_FAILURE);
     }
     fclose(fichierSource);
 }
