@@ -11,3 +11,4 @@ bin/
 report/Rapport.synctex.gz
 code/tests/
 doc/
+report/_minted-rapport/
