@@ -27,6 +27,12 @@
 Bit bit0 = ZERO;
 Bit bit1 = UN;
 
+/**
+ * \fn void afficherTable(TDC_TableDeCodage table)
+ * \brief Procédure qui affiche la table de codage correspondant au fichier
+ * 
+ * \param table : table de codage à afficher
+ */
 void afficherTable(TDC_TableDeCodage table) {
     printf("Table de codage : \n");
     for (int i = 0; i < table.nbElements; i++) {
@@ -42,6 +48,12 @@ void afficherTable(TDC_TableDeCodage table) {
     }
 }
 
+/**
+ * \fn void afficherStats(ST_Statistiques stats)
+ * \brief Procédure qui affiche les statistiques correspondantes au fichier
+ * 
+ * \param stats : statistiques à afficher
+ */
 void afficherStats(ST_Statistiques stats) {
     printf("Statistiques : \n");
     for (int i = 0; i < 256; i++) {
@@ -51,6 +63,12 @@ void afficherStats(ST_Statistiques stats) {
     }
 }
 
+/**
+ * \fn void CB_afficherCodeBinaire(CB_CodeBinaire code)
+ * \brief Procédure qui affiche les codes binaires correspondants au fichier
+ * 
+ * \param code : codes binaires à afficher
+ */
 void CB_afficherCodeBinaire(CB_CodeBinaire code) {
     for (int i = 0; i < CB_obtenirLongueur(code); i++) {
         if (CB_obtenirIemeBit(code, i) == bit0) {
@@ -62,6 +80,13 @@ void CB_afficherCodeBinaire(CB_CodeBinaire code) {
     printf("\n");
 }
 
+/**
+ * \fn ST_Statistiques calculerStatistiques(char *nom)
+ * \brief Fonction qui calcule les statistiques du fichier
+ * 
+ * \param nom : nom du fichier
+ * \return ST_Statistiques
+ */
 ST_Statistiques calculerStatistiques(char *nom) {
     FILE *fichier;
 
@@ -83,7 +108,13 @@ ST_Statistiques calculerStatistiques(char *nom) {
     return stats;
 }
 
-
+/**
+ * \fn ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats)
+ * \brief Fonction qui crée un arbre de Huffman à partir des statistiques
+ * 
+ * \param stats : statistiques pour créer l'arbre d'Huffman
+ * \return ABR_ArbreDeHuffman
+ */
 ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
     FP_FileDePriorite file = FP_fileDePriorite();
 
@@ -106,6 +137,15 @@ ABR_ArbreDeHuffman creerArbre(ST_Statistiques stats) {
     return FP_obtenirDernier(file);
 }
 
+/**
+ * \fn void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table)
+ * \brief Procédure qui descend un arbre de Huffman
+ * 
+ * \param arbre : arbre de Huffman à descendre
+ * \param code :
+ * \param table :
+ * \return ABR_ArbreDeHuffman
+ */
 void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCodage *table) {
     if (ABR_estUneFeuille(arbre)) {
         TDC_ajouterOctet(table, ABR_obtenirOctet(arbre), code);
@@ -118,6 +158,13 @@ void descendreArbre(ABR_ArbreDeHuffman arbre, CB_CodeBinaire code, TDC_TableDeCo
     }
 }
 
+/**
+ * \fn TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre)
+ * \brief Fonction qui crée la table de codage d'un arbre de Huffman
+ * 
+ * \param arbre : arbre dont on veut la table de codage
+ * \return TDC_TableDeCodage
+ */
 TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     TDC_TableDeCodage table = TDC_tableDeCodage();
 
@@ -130,7 +177,15 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre) {
     return table;
 }
 
-
+/**
+ * \fn void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats)
+ * \brief Procédure qui compresse le fichier
+ * 
+ * \param nom : nom du fichier à compresser
+ * \param table : table de codage pour la compression
+ * \param stats : statistiques pour la compression
+ * \return FILE
+ */
 void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats) {
     FILE *fichierSource, *fichierDestination;
     fichierSource = fopen(nom, "rb");
@@ -182,6 +237,13 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     fclose(fichierDestination);
 }
 
+/**
+ * \fn void compresser(char *nom)
+ * \brief Procédure qui compresse le fichier
+ * 
+ * \param nom : nom du fichier à compresser
+ * \return FILE
+ */
 void compresser(char *nom) {
     ST_Statistiques stats = calculerStatistiques(nom);
     ABR_ArbreDeHuffman arbre = creerArbre(stats);

@@ -14,25 +14,25 @@
 
     \fonction{tableDeCodage}
         {}{TableDeCodage}
-        {}{resultat : TableDeCodage}
+        {}{tableDeCodage : TableDeCodage}
     {
-        \affecter{resultat.nbElements}{0}
-        \retourner{resultat}
+        \affecter{\champ{tableDeCodage}{nbElements}}{0}
+        \retourner{tableDeCodage}
     }
 
 
     \fonction{estVide}
-        {table : TableDeCodage}{\booleen}
+        {tableDeCodage : TableDeCodage}{\booleen}
         {}{}
-    {\retourner{table.nbElements = 0}}
+    {\retourner{\champ{tableDeCodage}{nbElements} = 0}}
 
 
     \fonction{elementPresent}
-        {table : TableDeCodage, octet : Octet}{\booleen}
-        {}{i:\naturelNonNul}
+        {tableDeCodage : TableDeCodage, o : Octet}{\booleen}
+        {}{i : \naturelNonNul}
     {
-        \pour{i}{1}{table.nbElements}{}{
-            \sialors{octet = table.table[i].octet}{
+        \pour{i}{1}{tableDeCodage.nbElements}{}{
+            \sialors{o = \champ{tableDeCodage}{table[i]}.octet}{
                 {\retourner{vrai}}
             }
         }
@@ -40,12 +40,12 @@
     }
 
 
-    \fonction{codePresent}
-        {table : TableDeCodage, code : CodeBinaire}{\booleen}
+    \fonction{codeBinairePresent}
+        {tableDeCodage : TableDeCodage, codeBinaire : CodeBinaire}{\booleen}
         {}{i:\naturelNonNul}
     {
-        \pour{i}{1}{table.nbElements}{}{
-            \sialors{code = table.table[i].code}{
+        \pour{i}{1}{tableDeCodage.nbElements}{}{
+            \sialors{codeBinaire = \champ{tableDeCodage}{table[i]}.code}{
                 {\retourner{vrai}}
             }
         }
@@ -54,38 +54,37 @@
 
 
     \procedure{ajouterElement}{
-        \paramEntree{octet : Octet, code : CodeBInaire}
-        \paramEntreeSortie{table : TableDeCodage}}
-        {ajouterElement(table, octet) et non(elementPresent(table, octet))}
+        \paramEntreeSortie{tableDeCodage : \typePointeur{TableDeCodage}}
+        \paramEntree{octet : Octet, codeBinaire : CodeBinaire}}
+        {non(elementPresent(\pointeur{tableDeCodage}, octet)) et (\champPointeur{tableDeCodage}{nbElements} $<$ 255)}
         {}
     {
-        \sialors{non(elementPresent(table, octet))}{
-            \affecter{table.nbElements}{table.nbElements + 1}
-            \affecter{table.table[nbElements]}{octet}
-            \affecter{table.table[nbElements]}{code}
-            }
+        \affecter{\champPointeur{tableDeCodage}{nbElements}}{\champPointeur{tableDeCodage}{nbElements} + 1}
+        \affecter{\champPointeur{tableDeCodage}{table[\champPointeur{tableDeCodage}{nbElements} - 1].octet}}{octet}
+        \affecter{\champPointeur{tableDeCodage}{table[\champPointeur{tableDeCodage}{nbElements} - 1].code}}{codeBinaire}
     }
 
-    \fonction{obtenirCodeOctet}
-        {table : TableDeCodage, octet : Octet}{CodeBinaire}
-        {octetPresent(table, octet)}{i:\naturelNonNul}
+    \fonction{obtenirCodeElement}
+        {tableDeCodage : TableDeCodage, o : Octet}{CodeBinaire}
+        {elementPresent(tableDeCodage, o)}
+        {i : \naturelNonNul}
     {
-        \pour{i}{1}{table.nbElements}{}{
-            \sialors{(table.table[i].octet = octet)}{
-                {\retourner{table.table.codeBinaire}}
+        \pour{i}{1}{\champ{tableDeCodage}{nbElements}}{}{
+            \sialors{(\champ{tableDeCodage}{table[i]}.octet = o)}{
+                {\retourner{\champ{tableDeCodage}{table[i]}.code}}
             }
         }
     }
 
 
     \fonction{obtenirElementCode}
-        {table : TableDeCodage, code : CodeBinaire}{Octet}
-        {elementPresent(table, element)}
-        {i:\naturelNonNul}
+        {tableDeCodage : TableDeCodage, codeBinaire : CodeBinaire}{Octet}
+        {codeBinairePresent(tableDeCodage, codeBinaire)}
+        {i : \naturelNonNul}
     {
-        \pour{i}{1}{table.nbElements}{}{
-            \sialors{(table.table[i].code = code)}{
-            {\retourner{table.table[i].octet}}
+        \pour{i}{1}{\champ{tableDeCodage}{nbElements}}{}{
+            \sialors{(\champ{tableDeCodage}{table[i]}.code = codeBinaire)}{
+            {\retourner{\champ{tableDeCodage}{table[i]}.octet}}
             }
         }
     }

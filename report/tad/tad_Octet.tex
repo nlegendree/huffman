@@ -2,24 +2,27 @@
 
     \tadNom{Octet}
 
-    %\tadParametres{}
-
     \tadDependances{\booleen, Bit, \naturel}
 
     \begin{tadOperations}{Octet}
         \tadOperation{octet}%
             {\tadParams{}}%
             {\tadParams{Octet}}
-        \tadOperation{obtenirIemeBit}%
-            {\tadParams{Octet, 0..7}}%
+        \tadOperationAvecPreconditions{obtenirIemeBit}%
+            {\tadParams{Octet, \naturelNonNul}}%
             {\tadParams{Bit}}
-        \tadOperation{fixerIemeBit}%
-            {\tadParams{Octet, 0..7, Bit}}%
+        \tadOperationAvecPreconditions{fixerIemeBit}%
+            {\tadParams{Octet, \naturelNonNul, Bit}}%
             {\tadParams{Octet}}
         \tadOperation{octetEnNaturel}%
             {\tadParams{Octet}}%
             {\tadParams{\naturel}}
     \end{tadOperations}
+
+    \begin{tadPreconditions}{}
+        \tadPrecondition{obtenirIemeBit(o, pos)}{pos $\geq$ 0 et pos $\leq$ 7}
+        \tadPrecondition{fixerIemeBit(o, pos, bit)}{pos $\geq$ 0 et pos $\leq$ 7}
+    \end{tadPreconditions}
 
     \begin{tadAxiomes}
         \tadAxiome{obtenirIemeBit(fixerIemeBit(octet(), i, bit), i) = bit}
