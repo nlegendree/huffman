@@ -422,37 +422,43 @@ void decompreser(char *nomFichier)
     fclose(fichierSource);
 }
 
-int main(int argc, char *argv[])
+void afficherIHM(int argc, char *argv[])
 {
     printf("bienvenue !!!\n");
     printf("pour compiler, veuillez taper : ./huffman c nom_du_fichier\n");
     printf("pour decompiler, veuillez taper : ./huffman d nom_du_fichier\n");
 
-    if (argc != 3)
-    {
+    if (argc != 3) {
         printf("commande incorrect, nombre d'argument, pas respecté \n");
-
-        return 1;
+       
+        
     }
 
     // recupère le choix de l'utilisateur entre c et d
-    char choix = argv[1][0];
+    char choix = argv[1][0];  
     char *nom_fichier = argv[2];
 
-    switch (choix)
-    {
-    case 'c':
-        printf("compression du fichier %s.\n", nom_fichier);
-        compresser(nom_fichier);
-        break;
-    case 'd':
-        printf("decompression du fichier %s.\n", nom_fichier);
-        decompreser(nom_fichier);
-        break;
-    default:
-        printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
-        return 1;
+    switch (choix) {
+        case 'c':
+            printf("compression du fichier %s.\n", nom_fichier);
+            compresser(nom_fichier);
+            break;
+        case 'd':
+            printf("decompression du fichier %s.\n", nom_fichier);
+            decompreser(nom_fichier);
+            break;
+        default:
+            printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
+            break;
     }
+}
+
+
+
+
+int main(int argc, char *argv[])
+{
+    afficherIHM(argc,argv);
 
     return 0;
 }
