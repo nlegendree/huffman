@@ -19,13 +19,13 @@
             {\tadParams{\naturel}}
     \end{tadOperations}
 
+    \begin{tadAxiomes}
+        \tadAxiome{obtenirIemeBit(fixerIemeBit(octet(), i, bit), i) = bit}
+    \end{tadAxiomes}
+
     \begin{tadPreconditions}{}
         \tadPrecondition{obtenirIemeBit(o, pos)}{pos $\geq$ 0 et pos $\leq$ 7}
         \tadPrecondition{fixerIemeBit(o, pos, bit)}{pos $\geq$ 0 et pos $\leq$ 7}
     \end{tadPreconditions}
-
-    \begin{tadAxiomes}
-        \tadAxiome{obtenirIemeBit(fixerIemeBit(octet(), i, bit), i) = bit}
-    \end{tadAxiomes}
 
 \end{tad}

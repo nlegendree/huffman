@@ -87,49 +87,50 @@
 \input{conception_detaillee/cd_Stats.tex}
 \subsubsection{Table de codage}
 \input{conception_detaillee/cd_Table.tex}
-\subsection{Compression}
+\subsection{Analyse descendante}
 \input{conception_detaillee/cd_compresser.tex}
-\subsection{Décompression}
 \input{conception_detaillee/cd_decompresser.tex}
 
 \newpage
 
-\section{Développemeent en C}
-\subsection{Programme principal}
-    \inputminted[breaklines]{c}{../code/src/main.c}
-\subsection{Arbre de Huffman}
+\section{Développement en C}
+\subsection{TAD}
+\subsubsection{Arbre de Huffman}
     \inputminted[breaklines, linenos, firstline = 16, lastline = 22]{c}{../code/include/arbre.h}
     \inputminted[breaklines]{c}{../code/src/arbre.c}
-\subsection{File de Priorité}
+\subsubsection{File de Priorité}
     \inputminted[breaklines, linenos, firstline = 20, lastline = 23]{c}{../code/include/fileDePriorite.h}
     \inputminted[breaklines]{c}{../code/src/fileDePriorite.c}
-\subsection{Octet}
+\subsubsection{Octet}
     \inputminted[breaklines, linenos, firstline = 12, lastline = 15]{c}{../code/include/octet.h}
     \inputminted[breaklines]{c}{../code/src/octet.c}
-\subsection{Code binaire}
+\subsubsection{Code binaire}
     \inputminted[breaklines, linenos, firstline = 21, lastline = 25]{c}{../code/include/codeBinaire.h}
     \inputminted[breaklines]{c}{../code/src/codeBinaire.c}
-\subsection{Statistiques}
+\subsubsection{Statistiques}
     \inputminted[breaklines, linenos, firstline = 21, lastline = 25]{c}{../code/include/stats.h}   
     \inputminted[breaklines]{c}{../code/src/stats.c}
-\subsection{Table de codage}
+\subsubsection{Table de codage}
     \inputminted[breaklines, linenos, firstline = 7, lastline = 17]{c}{../code/include/stats.h}   
     \inputminted[breaklines]{c}{../code/src/table.c}
+\subsection{Analyse descendante}
+    \inputminted[breaklines]{c}{../code/src/main.c}
 
 \newpage
 
 \section{Tests unitaires}
-\subsection{Arbre de Huffman}
+\subsection{TAD}
+\subsubsection{Arbre de Huffman}
     \inputminted[breaklines]{c}{../code/src/tests/testArbre.c}
-\subsection{File de Priorité}
+\subsubsection{File de Priorité}
     \inputminted[breaklines=true, breakanywhere=true]{c}{../code/src/tests/testFile.c}
-\subsection{Octet}
+\subsubsection{Octet}
     \inputminted[breaklines]{c}{../code/src/tests/testOctet.c}
-\subsection{Code binaire}
+\subsubsection{Code binaire}
     \inputminted[breaklines]{c}{../code/src/tests/testCodeBinaire.c}
-\subsection{Statistiques}
+\subsubsection{Statistiques}
     \inputminted[breaklines]{c}{../code/src/tests/testStats.c}
-\subsection{Table de codage}
+\subsubsection{Table de codage}
     \inputminted[breaklines]{c}{../code/src/tests/testTable.c}
 
 \newpage
