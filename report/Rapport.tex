@@ -2,6 +2,8 @@
 
 \usepackage{librairies}
 
+\sloppy
+
 \title{Compresseur de Huffman}
 \author{Bressac Augustin, Janneau Lou-Anne, Legendre Nathan,\\ Sentchev Vassili, Timoz Dimitri}
 \date{07/01/2024}
@@ -27,7 +29,7 @@
 
 \newpage
 
-\section*{Introduction}
+\section{Introduction}
 \input{introduction.tex}
 
 \newpage
@@ -111,7 +113,7 @@
 \subsection{Arbre de Huffman}
     \inputminted[breaklines]{c}{../code/src/tests/testArbre.c}
 \subsection{File de Priorité}
-    \inputminted[breaklines]{c}{../code/src/tests/testFile.c}
+    \inputminted[breaklines=true, breakanywhere=true]{c}{../code/src/tests/testFile.c}
 \subsection{Octet}
     \inputminted[breaklines]{c}{../code/src/tests/testOctet.c}
 \subsection{Code binaire}
