@@ -46,11 +46,12 @@
     \retourner{\champ{arbre}{element}}
 }
 
-% \fonction{estUneFeuille}
-%     {arbre : ArbreDeHuffman}{\booleen}
-% {
-%     \retourner{(\champ{arbre}{filsGauche} = \pointeurNULL) et (\champ{arbre}{filsGauche} = \pointeurNULL)}
-% }
+\fonction{estUneFeuille}
+    {arbre : ArbreDeHuffman}{\booleen}
+    {}{}
+{
+    \retourner{(\champ{arbre}{filsGauche} = null et \champ{arbre}{filDroit} = null)}
+}
 
 \fonction{obtenirArbreGauche}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
