@@ -12,16 +12,19 @@
 \def\@maketitle{
 \raggedright
 \includegraphics[width = 0.3\textwidth]{Logo_INSA_RN.jpg}\\[8ex]
+\vspace{\stretch{1}}
 \begin{center}
 {\Huge \bfseries \sffamily \@title }\\[4ex] 
 {\Large  \@author}\\[4ex] 
 \@date\\[8ex]
-\end{center}}
+\end{center}
+\vspace{\stretch{1}}}
 \makeatother
 
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 
 \newpage
 
