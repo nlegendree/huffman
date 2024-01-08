@@ -290,13 +290,13 @@ int estUnFichierCompresse(FILE* fichier) {
 void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_ArbreDeHuffman arbre) {
     CB_CodeBinaire code;
     int resetCode = 1;
-    int bitLu;
+    int ocetLu;
 
     ABR_ArbreDeHuffman noeudActuel = arbre;
-    while ((bitLu = fgetc(fichierSource)) != EOF) {
+    while ((ocetLu = fgetc(fichierSource)) != EOF) {
         for (int i = 0; i < 8; i++) {
             Bit bit = bit0;
-            if (bitLu & 0x80) {
+            if (ocetLu & 0x80) {
                 bit = bit1;
             }
             if (resetCode) {
@@ -305,7 +305,7 @@ void decompreserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_Arbre
             } else {
                 CB_ajouterBit(&code, bit);
             }
-            bitLu = bitLu << 1;
+            ocetLu = ocetLu << 1;
 
             if (bit == bit0) {
                 noeudActuel = ABR_obtenirFilsGauche(noeudActuel);
