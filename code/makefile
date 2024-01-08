@@ -15,7 +15,12 @@ DOC = $(DOCDIR)/html
 
 OBJS = $(OBJDIR)/arbre.o $(OBJDIR)/codeBinaire.o $(OBJDIR)/fileDePriorite.o $(OBJDIR)/octet.o $(OBJDIR)/stats.o $(OBJDIR)/table.o
 
-all : debug
+# Rule to create directories
+directories:
+	mkdir -p $(BINDIR) $(DOCDIR) $(INCLUDEDIR) $(LIBDIR) $(OBJDIR) $(SRCDIR) $(TESTDIR)
+
+# Main targets
+all : directories debug
 
 debug: $(BINDIR)/$(EXEC)
 
@@ -25,13 +30,14 @@ release: $(BINDIR)/$(EXEC)
 $(BINDIR)/$(EXEC) : $(SRCDIR)/main.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) -I$(INCLUDEDIR)
 
-doc : $(DOC)
+doc : directories $(DOC)
 
-$(DOC) :	
+$(DOC) :
 	$(DOXYGEN)
-	cd $(DOCDIR)/latex;make;cd ../..
+	cd $(DOCDIR)/latex; make; cd ../..
 
-tests : $(TESTDIR)/testArbre $(TESTDIR)/testCodeBinaire $(TESTDIR)/testFile $(TESTDIR)/testOctet $(TESTDIR)/testTable $(TESTDIR)/testStats
+# Test targets
+tests : directories $(TESTDIR)/testArbre $(TESTDIR)/testCodeBinaire $(TESTDIR)/testFile $(TESTDIR)/testOctet $(TESTDIR)/testTable $(TESTDIR)/testStats
 
 $(TESTDIR)/testArbre : $(SRCDIR)/$(TESTDIR)/testArbre.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
@@ -51,12 +57,14 @@ $(TESTDIR)/testTable : $(SRCDIR)/$(TESTDIR)/testTable.c $(OBJS)
 $(TESTDIR)/testStats : $(SRCDIR)/$(TESTDIR)/testStats.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
 
+# Object file rules
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDEDIR)
 
 $(OBJDIR)/$(TESTDIR)/%.o : $(SRCDIR)/$(TESTDIR)/%.c
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDEDIR)
 
+# Clean rule
 clean :
 	rm -rf $(BINDIR)/*
 	rm -rf $(TESTDIR)/*
