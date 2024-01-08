@@ -422,6 +422,9 @@ void decompreser(char *nomFichier)
     fclose(fichierSource);
 }
 
+/// @brief Procedure qui affiche l'interface homme machine, avec les instructions à faire.
+/// @param argc argument compteur
+/// @param argv argument pour le terminal pour le fichier a selectionner et le choix entre compresser et decompresser.
 void afficherIHM(int argc, char *argv[])
 {
     printf("bienvenue !!!\n");
