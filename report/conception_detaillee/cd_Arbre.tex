@@ -12,62 +12,58 @@
 
 
 \fonction{ArbreDeHuffman}
-    {element : Element ; ponderation : \naturel}{ArbreDeHuffman}
-    {arbre : Noeud}
-    {
-        \affecter{\champ{arbre}{ponderation}}{ponderation}
-        \affecter{\champ{arbre}{element}}{element}
-        \affecter{\champ{arbre}{filsGauche}}{pointeurNULL}
-        \affecter{\champ{arbre}{filsDroit}}{pointeurNULL}
-        {\retourner{arbre}}
-    }
+    {element : Element, ponderation : \naturel}{ArbreDeHuffman}
+    {}{arbre : Noeud}
+{
+    \affecter{\champ{arbre}{ponderation}}{ponderation}
+    \affecter{\champ{arbre}{element}}{element}
+    \affecter{\champ{arbre}{filsGauche}}{\pointeurNULL}
+    \affecter{\champ{arbre}{filsDroit}}{\pointeurNULL}
+    \retourner{arbre}
+}
 
 \fonction{combiner}
     {arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
-    {arbre : ArbreDeHuffman}
-    {
-        \affecter{\champ{arbre}{ponderation}}{\champ{arbreGauche}{ponderation} + \champ{arbreDroit}{ponderation}}
-        \affecter{\champ{arbre}{filsGauche}}{arbreGauche}
-        \affecter{\champ{arbre}{filsDroit}}{arbreDroit}
-        {\retourner{arbre}}
-    }
-
-
+    {}{arbre : ArbreDeHuffman}
+{
+    \affecter{\champ{arbre}{ponderation}}{\champ{arbreGauche}{ponderation} + \champ{arbreDroit}{ponderation}}
+    \affecter{\champ{arbre}{filsGauche}}{arbreGauche}
+    \affecter{\champ{arbre}{filsDroit}}{arbreDroit}
+    \retourner{arbre}
+}
 
 \fonction{obtenirPondération}
     {arbre : ArbreDeHuffman}{\naturel}
-    {
-        {\retourner{\champ{arbre}{ponderation}}}
-    }
+    {}{}
+{
+    \retourner{\champ{arbre}{ponderation}}
+}
 
 \fonction{obtenirElement}
     {arbre : ArbreDeHuffman}{Element}
-    {estUneFeuille(arbre)}
-    {
-        {\retourner{{\champ{arbre}{element}}}}
-    }
+    {estUneFeuille(arbre)}{}
+{
+    \retourner{\champ{arbre}{element}}
+}
 
-\fonction{estUneFeuille}
-    {arbre : ArbreDeHuffman}{\booleen}
-    {
-        {\retourner{{\champ{arbre}{filsGauche} = NULL et {arbre}{filsGauche} = NULL }}}
-    }
+% \fonction{estUneFeuille}
+%     {arbre : ArbreDeHuffman}{\booleen}
+% {
+%     \retourner{(\champ{arbre}{filsGauche} = \pointeurNULL) et (\champ{arbre}{filsGauche} = \pointeurNULL)}
+% }
 
 \fonction{obtenirArbreGauche}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
-    {non estUneFeuille(arbre)}
-    {
-        {\retourner{\champ{arbre}{filsGauche}}}
-    }
+    {non(estUneFeuille(arbre))}{}
+{
+    \retourner{\champ{arbre}{filsGauche}}
+}
 
 \fonction{obtenirArbreDroit}
     {arbre : ArbreDeHuffman}{ArbreDeHuffman}
-    {non estUneFeuille(arbre)}
-    {
-        {\retourner{\champ{arbre}{filsDroit}}}
-    }
+    {non estUneFeuille(arbre)}{}
+{
+    \retourner{\champ{arbre}{filsDroit}}
+}
 
 \end{algorithme}
-
-
-
