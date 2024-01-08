@@ -430,6 +430,7 @@ void afficherIHM(int argc, char *argv[])
 
     if (argc != 3) {
         printf("commande incorrect, nombre d'argument, pas respecté \n");
+        exit(EXIT_FAILURE);
        
         
     }
@@ -449,7 +450,7 @@ void afficherIHM(int argc, char *argv[])
             break;
         default:
             printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");
-            break;
+            exit(EXIT_FAILURE);
     }
 }
 
