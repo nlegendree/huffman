@@ -45,6 +45,7 @@ void FP_ajouterElement(FP_FileDePriorite *pfile, ABR_ArbreDeHuffman arbre);
  * \brief Fonction qui supprime le dernier arbre d'une file de priorité
  * 
  * \param pfile : file de priorité à laquelle on veut supprimer le dernier arbre
+ * \pre La file de priorité doit être non vide
  * \return FP_FileDePriorite
  */
 void FP_supprimerDernier(FP_FileDePriorite *pfile);
@@ -54,6 +55,7 @@ void FP_supprimerDernier(FP_FileDePriorite *pfile);
  * \brief Fonction qui permet d'obtenir le dernier arbre d'une file de priorité
  * 
  * \param file : file de priorité
+ * \pre La file de priorité doit être non vide
  * \return ABR_ArbreDeHuffman 
  */
 ABR_ArbreDeHuffman FP_obtenirDernier(FP_FileDePriorite file);

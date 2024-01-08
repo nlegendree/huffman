@@ -58,7 +58,7 @@ CB_CodeBinaire TDC_obtenirCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet o)
 void TDC_ajouterOctet(TDC_TableDeCodage *pTableDeCodage, O_Octet octet, CB_CodeBinaire codeBinaire)
 {
     assert(!TDC_octetPresent(*pTableDeCodage, octet));
-    assert(pTableDeCodage->nbElements < 255);
+    assert(pTableDeCodage->nbElements <= 255);
     pTableDeCodage->nbElements++;
     pTableDeCodage->table[pTableDeCodage->nbElements - 1].octet = octet;
     pTableDeCodage->table[pTableDeCodage->nbElements - 1].code = codeBinaire;

@@ -56,7 +56,9 @@ int TDC_octetPresent(TDC_TableDeCodage tableDeCodage, O_Octet octet);
  * 
  * @param pTableDeCodage 
  * @param octet 
- * @param codeBinaire 
+ * @param codeBinaire
+ * @pre L'octet ne doit pas être présent dans la table de codage 
+ * @pre Le nombre d'éléments de la table de codage doit être inférieur ou égal à 255
  */
 void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeBinaire codeBinaire);
 
@@ -64,7 +66,8 @@ void TDC_ajouterOctet(TDC_TableDeCodage* pTableDeCodage, O_Octet octet, CB_CodeB
  * @brief Permet d'obtenir le code binaire d'un octet dans une table de codage
  * 
  * @param tableDeCodage 
- * @param octet 
+ * @param octet
+ * @pre L'octet doit être présent dans la table de codage
  * @return CB_CodeBinaire 
  */
 CB_CodeBinaire TDC_obtenirCodeOctet(TDC_TableDeCodage tableDeCodage, O_Octet octet);
@@ -82,7 +85,8 @@ int TDC_codeBinairePresent(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeB
  * @brief Permet d'obtenir l'octet d'un code binaire dans une table de codage
  * 
  * @param tableDeCodage 
- * @param codeBinaire 
+ * @param codeBinaire
+ * @pre Le code binaire doit être présent dans la table de codage
  * @return O_Octet 
  */
 O_Octet TDC_obtenirOctetCode(TDC_TableDeCodage tableDeCodage, CB_CodeBinaire codeBinaire);
