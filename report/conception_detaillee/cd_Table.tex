@@ -56,7 +56,7 @@
     \procedure{ajouterElement}{
         \paramEntreeSortie{tableDeCodage : \typePointeur{TableDeCodage}}
         \paramEntree{octet : Octet, codeBinaire : CodeBinaire}}
-        {non(elementPresent(\pointeur{tableDeCodage}, octet)) et (\champPointeur{tableDeCodage}{nbElements} $<$ 255)}
+        {non(elementPresent(\pointeur{tableDeCodage}, octet)) et (\champPointeur{tableDeCodage}{nbElements} $\leq$ 255)}
         {}
     {
         \affecter{\champPointeur{tableDeCodage}{nbElements}}{\champPointeur{tableDeCodage}{nbElements} + 1}
