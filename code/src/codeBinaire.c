@@ -1,4 +1,5 @@
 #include "codeBinaire.h"
+#include <assert.h>
 
 CB_CodeBinaire CB_codeBinaire(Bit bit)
 {
@@ -21,6 +22,7 @@ short int CB_obtenirLongueur(CB_CodeBinaire cB)
 
 Bit CB_obtenirIemeBit(CB_CodeBinaire cB, short int ind)
 {
+    assert(CB_obtenirLongueur(cB)>=ind && ind>=0);
     return cB.bits[ind];
 }
 
