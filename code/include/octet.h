@@ -34,7 +34,7 @@ O_Octet O_octet(Naturel8Bits octet);
 /**
  * @brief permet d'obtenir le ième bit d'un octet
  * 
- * @param octet octet dont on veut obtenir le ième bit
+ * @param octet octet dont on veut obtenir le ième bit 
  * @param i indice du bit
  * @return Bit 
  */
@@ -45,6 +45,7 @@ Bit O_obtenirIemeBit(O_Octet octet, int i);
  * 
  * @param octet octet dont on veut fixer le ième bit
  * @param i indice du bit
+ * @pre l'indice pour fixer un bit ne doit pas dépasser le nombre de 8 bits et doit etre supérieur ou égale à 0
  * @param bit bit à fixer
  */
 
@@ -54,7 +55,7 @@ void O_fixerIemeBit(O_Octet* octet, int i, Bit bit);
  * @brief permet d'obtenir la valeur décimale d'un octet
  * 
  * @param octet octet dont on veut obtenir la valeur décimale
- * @pre l'indice pour fixer un bit ne doit pas dépasser le nombre de 8 bits
+ * @pre l'indice pour fixer un bit ne doit pas dépasser le nombre de 8 bits  et doit etre supérieur à 0
  * @return int 
  */
 Naturel8Bits O_obtenirNaturel8bits(O_Octet octet);
