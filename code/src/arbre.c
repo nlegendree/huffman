@@ -1,6 +1,7 @@
 #include "arbre.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 // Créer un arbre vide de manière dynamique
 ABR_ArbreDeHuffman ABR_arbreDeHuffman(O_Octet octet, unsigned int ponderation)
@@ -45,6 +46,7 @@ unsigned int ABR_obtenirPonderation(ABR_ArbreDeHuffman arbre)
 // Retourne l'octet de l'arbre
 O_Octet ABR_obtenirOctet(ABR_ArbreDeHuffman arbre)
 {
+    assert(ABR_estUneFeuille(arbre));
     return arbre->octet;
 }
 
@@ -57,11 +59,13 @@ int ABR_estUneFeuille(ABR_ArbreDeHuffman arbre)
 // Retourne le fils gauche de l'arbre
 ABR_ArbreDeHuffman ABR_obtenirFilsGauche(ABR_ArbreDeHuffman arbre)
 {
+    assert(!ABR_estUneFeuille(arbre));
     return (ABR_ArbreDeHuffman)arbre->gauche;
 }
 
 // Retourne le fils droit de l'arbre
 ABR_ArbreDeHuffman ABR_obtenirFilsDroit(ABR_ArbreDeHuffman arbre)
 {
+    assert(!ABR_estUneFeuille(arbre));
     return (ABR_ArbreDeHuffman)arbre->droite;
 }
