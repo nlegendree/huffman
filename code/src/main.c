@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include "octet.h"
 #include "stats.h"
@@ -36,7 +37,7 @@ ST_Statistiques calculerStatistiques(char *nom)
     if (fichier == NULL)
     {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier.\n");
-        exit(EXIT_FAILURE);
+        return ST_statistiques();
     }
 
     ST_Statistiques stats = ST_statistiques();
@@ -153,57 +154,54 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     if (fichierSource == NULL)
     {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
-        exit(EXIT_FAILURE);
+        return;
     }
 
     // Agrandir la taille du buffer du nom du fichier
     char *nomFichier = malloc(sizeof(char) * (strlen(nom) + 5));
     strcpy(nomFichier, nom);
     fichierDestination = fopen(strcat(nomFichier, ".huff"), "wb");
-    if (fichierDestination == NULL)
+    if (fichierDestination != NULL)
     {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    long buffer = CLE;
-    fwrite(&buffer, sizeof(long), 1, fichierDestination);
-    buffer = ST_obtenirTotalOccurence(stats);
-    fwrite(&buffer, sizeof(long), 1, fichierDestination);
-
-    for (int i = 0; i < 256; i++)
-    {
-        buffer = ST_obtenirOccurenceOctet(stats, O_octet(i));
+        long buffer = CLE;
         fwrite(&buffer, sizeof(long), 1, fichierDestination);
-    }
-    char codeBuffer = 0;
-    char codeBufferSize = 8;
-    while (!feof(fichierSource))
-    {
-        O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichierSource));
-        CB_CodeBinaire code = TDC_obtenirCodeOctet(table, octetLu);
-        for (int i = 0; i < CB_obtenirLongueur(code); i++)
+        buffer = ST_obtenirTotalOccurence(stats);
+        fwrite(&buffer, sizeof(long), 1, fichierDestination);
+
+        for (int i = 0; i < 256; i++)
         {
-            if (CB_obtenirIemeBit(code, i) == bit0)
+            buffer = ST_obtenirOccurenceOctet(stats, O_octet(i));
+            fwrite(&buffer, sizeof(long), 1, fichierDestination);
+        }
+        char codeBuffer = 0;
+        char codeBufferSize = 8;
+        while (!feof(fichierSource))
+        {
+            O_Octet octetLu = O_octet((Naturel8Bits)fgetc(fichierSource));
+            CB_CodeBinaire code = TDC_obtenirCodeOctet(table, octetLu);
+            for (int i = 0; i < CB_obtenirLongueur(code); i++)
             {
-                codeBuffer = codeBuffer << 1;
-            }
-            else
-            {
-                codeBuffer = (codeBuffer << 1) | 1;
-            }
-            codeBufferSize--;
-            if (codeBufferSize <= 0)
-            {
-                fputc(codeBuffer, fichierDestination);
-                codeBuffer = 0;
-                codeBufferSize = 8;
+                if (CB_obtenirIemeBit(code, i) == bit0)
+                {
+                    codeBuffer = codeBuffer << 1;
+                }
+                else
+                {
+                    codeBuffer = (codeBuffer << 1) | 1;
+                }
+                codeBufferSize--;
+                if (codeBufferSize <= 0)
+                {
+                    fputc(codeBuffer, fichierDestination);
+                    codeBuffer = 0;
+                    codeBufferSize = 8;
+                }
             }
         }
-    }
 
+        fclose(fichierDestination);
+    }
     fclose(fichierSource);
-    fclose(fichierDestination);
 }
 
 /**
@@ -251,7 +249,7 @@ int estUnFichierCompresse(FILE *fichier)
     if (fichier == NULL)
     {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier.\n");
-        exit(EXIT_FAILURE);
+        return 0;
     }
 
     long cle;
@@ -319,51 +317,76 @@ void decompreser(char *nomFichier)
     {
         FILE *fichierDestination = NULL;
 
-        if (fichierSource == NULL)
+        if (fichierSource != NULL)
         {
-            fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
-            exit(EXIT_FAILURE);
-        }
+            // On retire les 5 derniers caractères du nom du fichier
+            char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 4));
+            strncpy(nomFichierSansExtension, nomFichier, strlen(nomFichier) - 5);
+            nomFichierSansExtension[strlen(nomFichier) - 5] = '\0'; // On ajoute le caractère de fin de chaine
 
-        // On retire les 5 derniers caractères du nom du fichier
-        char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 4));
-        strncpy(nomFichierSansExtension, nomFichier, strlen(nomFichier) - 5);
-        nomFichierSansExtension[strlen(nomFichier) - 5] = '\0'; // On ajoute le caractère de fin de chaine
-
-        fichierDestination = fopen(nomFichierSansExtension, "wb");
-        if (fichierDestination == NULL)
-        {
-            fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
-            fclose(fichierSource);
+            fichierDestination = fopen(nomFichierSansExtension, "wb");
+            if (fichierDestination != NULL)
+            {
+                // Lire les statistiques
+                ST_Statistiques stats = lireStatistiques(fichierSource);
+                if (!errno)
+                {
+                    ABR_ArbreDeHuffman arbre = creerArbre(stats);
+                    if (!errno)
+                    {
+                        decompreserFichier(fichierSource, fichierDestination, arbre);
+                        ABR_detruireArbre(arbre);
+                    }
+                }
+            }
+            fclose(fichierDestination);
             free(nomFichierSansExtension);
-            exit(EXIT_FAILURE);
         }
-
-        // Lire les statistiques
-        ST_Statistiques stats = lireStatistiques(fichierSource);
-        ABR_ArbreDeHuffman arbre = creerArbre(stats);
-
-        decompreserFichier(fichierSource, fichierDestination, arbre);
-
-        ABR_detruireArbre(arbre);
-        fclose(fichierDestination);
-        free(nomFichierSansExtension);
     }
     else
     {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
-        exit(EXIT_FAILURE);
     }
     fclose(fichierSource);
 }
 
 /// @brief Procédure qui affiche un message d'aide, lors de l'éxécution du programme
-void afficherAide()
+void afficherAide(void)
 {
     printf("bienvenue !!!\n");
     printf("pour compiler, veuillez taper : ./huffman c nom_du_fichier\n");
     printf("pour decompiler, veuillez taper : ./huffman d nom_du_fichier\n");
 
+}
+
+/// @brief Procédure qui affiche un message d'erreur, lors de l'éxécution du programme
+void afficherErreur(void)
+{
+    const char *err_info = "erreur inconnue";
+    switch (errno) {
+    case EDOM:
+        err_info = "Erreur de domaine";
+        break;
+    case EILSEQ:
+        err_info = "Erreur de séquence d'octets";
+        break;
+    case ERANGE:
+        err_info = "Résultat trop grand ou trop petit";
+        break;
+    case ENOENT:
+        err_info = "Fichier non trouvé";
+        break;
+    case EFAULT:
+        err_info = "Erreur d'adressage";
+        break;
+    case 0:
+        return;
+    default:
+        printf("errno = %d\n", errno);
+        return;
+    }
+
+    printf("Erreur : %s\n", err_info);
 }
 
 int main(int argc, char *argv[])
@@ -395,6 +418,6 @@ int main(int argc, char *argv[])
         afficherAide();
         break;
     }
-
+    afficherErreur();
     return 0;
 }
