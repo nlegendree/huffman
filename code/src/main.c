@@ -36,7 +36,7 @@ ST_Statistiques calculerStatistiques(char *nom)
     fichier = fopen(nom, "rb");
     if (fichier == NULL)
     {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier.\n");
+        errno = ENOENT;
         return ST_statistiques();
     }
 
@@ -153,7 +153,6 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
     fichierSource = fopen(nom, "rb");
     if (fichierSource == NULL)
     {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
         return;
     }
 
@@ -248,7 +247,6 @@ int estUnFichierCompresse(FILE *fichier)
 {
     if (fichier == NULL)
     {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier.\n");
         return 0;
     }
 
@@ -342,10 +340,6 @@ void decompreser(char *nomFichier)
             fclose(fichierDestination);
             free(nomFichierSansExtension);
         }
-    }
-    else
-    {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
     }
     fclose(fichierSource);
 }
