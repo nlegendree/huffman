@@ -312,6 +312,51 @@ void decompreserFichier(FILE *fichierSource, FILE *fichierDestination, ABR_Arbre
     }
 }
 
+void decompreser(char *nomFichier)
+{
+    FILE *fichierSource = fopen(nomFichier, "rb");
+    if (estUnFichierCompresse(fichierSource))
+    {
+        FILE *fichierDestination = NULL;
+
+        if (fichierSource == NULL)
+        {
+            fprintf(stderr, "Erreur lors de l'ouverture du fichier source.\n");
+            exit(EXIT_FAILURE);
+        }
+
+        // On retire les 5 derniers caractères du nom du fichier
+        char *nomFichierSansExtension = malloc(sizeof(char) * (strlen(nomFichier) - 4));
+        strncpy(nomFichierSansExtension, nomFichier, strlen(nomFichier) - 5);
+        nomFichierSansExtension[strlen(nomFichier) - 5] = '\0'; // On ajoute le caractère de fin de chaine
+
+        fichierDestination = fopen(nomFichierSansExtension, "wb");
+        if (fichierDestination == NULL)
+        {
+            fprintf(stderr, "Erreur lors de l'ouverture du fichier destination.\n");
+            fclose(fichierSource);
+            free(nomFichierSansExtension);
+            exit(EXIT_FAILURE);
+        }
+
+        // Lire les statistiques
+        ST_Statistiques stats = lireStatistiques(fichierSource);
+        ABR_ArbreDeHuffman arbre = creerArbre(stats);
+
+        decompreserFichier(fichierSource, fichierDestination, arbre);
+
+        ABR_detruireArbre(arbre);
+        fclose(fichierDestination);
+        free(nomFichierSansExtension);
+    }
+    else
+    {
+        fprintf(stderr, "Erreur lors de l'ouverture du fichier. Le fichier entré n'a pas été compressé par le même programme.\n");
+        exit(EXIT_FAILURE);
+    }
+    fclose(fichierSource);
+}
+
 /// @brief Procédure qui affiche un message d'aide, lors de l'éxécution du programme
 void afficherAide()
 {
