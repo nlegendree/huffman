@@ -8,10 +8,8 @@
     \begin{tadOperations}{FileDePriorite}
         \tadOperation{fileDePriorite}{}{\tadParams{FileDePriorite}}
         \tadOperation{inserer}{\tadParams{FileDePriorite, Element,  NaturelNonNul}}{\tadParams{FileDePriorite}}
-        \tadOperation{supprimerPremier}{\tadParams{FileDePriorite}}{\tadParams{FileDePriorite}}
-        \tadOperation{supprimerDernier}{\tadParams{FileDePriorite}}{\tadParams{FileDePriorite}}
-        \tadOperation{obtenirPremier}{\tadParams{FileDePriorite}}{\tadParams{Element}}
-        \tadOperation{obtenirDernier}{{FileDePriorite}}{{Element}}
+        \tadOperationAvecPreconditions{supprimerDernier}{\tadParams{FileDePriorite}}{\tadParams{FileDePriorite}}
+        \tadOperationAvecPreconditions{obtenirDernier}{{FileDePriorite}}{{Element}}
         \tadOperation{estVide}{\tadParams{FileDePriorite}}{\tadParams{Boolean}}
         \tadOperation{longueur}{\tadParams{FileDePriorite}}{\tadParams{Naturel}}
     \end{tadOperations}
@@ -19,8 +17,6 @@
     \begin{tadAxiomes}
         \tadAxiome{estVide(fileDePriorite())}
         \tadAxiome{non estVide(inserer(fileDePriorite(), el, 1))}
-        \tadAxiome{obtenirPremier(inserer(fileDePriorite(), el, 1)) = el}
-        \tadAxiome{obtenirDernier(inserer(fileDePriorite(), el, 1)) = el}
         \tadAxiome{longueur(fileDePriorite()) = 0}
         \tadAxiome{longueur(inserer(l, e, p)) = 1 + longueur(l)}
         \tadAxiome{supprimerDernier()}

@@ -2,7 +2,7 @@
 
     \tadNom{Octet}
 
-    \tadDependances{\booleen, Bit, \naturel}
+    \tadDependances{Bit, \naturelNonNul, \naturel}
 
     \begin{tadOperations}{Octet}
         \tadOperation{octet}%
@@ -24,8 +24,8 @@
     \end{tadAxiomes}
 
     \begin{tadPreconditions}{}
-        \tadPrecondition{obtenirIemeBit(o, pos)}{pos $\geq$ 0 et pos $\leq$ 7}
-        \tadPrecondition{fixerIemeBit(o, pos, bit)}{pos $\geq$ 0 et pos $\leq$ 7}
+        \tadPrecondition{obtenirIemeBit(o, pos)}{pos $\geq$ 1 et pos $\leq$ 8}
+        \tadPrecondition{fixerIemeBit(o, pos, bit)}{pos $\geq$ 1 et pos $\leq$ 8}
     \end{tadPreconditions}
 
 \end{tad}

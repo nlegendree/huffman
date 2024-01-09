@@ -51,15 +51,16 @@
 
     \begin{tadAxiomes}
 %        \tadAxiome{estVide(ajouterUnBitDebut(cb,b))==FAUX}
-        \tadAxiome{longueur(cb+ajouterUnBitDebut(b))=longueur(cb)+1}
-        \tadAxiome{obtenirIemeBit(cb + ajouterBit(b),longueur + 1) = b}
-        \tadAxiome{obtenirIemeBit(codeBinaire(b),1)=b}
+        \tadAxiome{obtenirLongueur(ajouterBit(cb, b)) = obtenirLongueur(cb)+1}
+        \tadAxiome{obtenirIemeBit(ajouterBit(cb, b), obtenirLongueur(cb) + 1) = b}
+        \tadAxiome{obtenirIemeBit(codeBinaire(b), 1) = b}
     \end{tadAxiomes}
 
-%    \begin{tadPreconditions}
+    \begin{tadPreconditions}{}
 %       \tadPrecondition{supprimerIemeBit(cb,i)}{i <= longueur(cb)}
 %       \tadPrecondition{modifierIemeBit(cb,i,b)}{i <= longueur(cb)}
-%       \tadPrecondition{obtenirLongueur(cb)}{non(estVide(cb))}
-%    \end{tadPreconditions}
+       \tadPrecondition{obtenirIemeBit(cb, indice)}{ind$\leq$ obtenirLongueur(cb)}
+
+    \end{tadPreconditions}
 
 \end{tad}

@@ -1,7 +1,7 @@
 \begin{algorithme}
 
-    \signatureFonction{compresser}
-    {nom : \chaine}{\naturel}{}
+    \signatureProcedure{compresser}
+    {\paramEntree {nom : \chaine}}{}{}
 
     \signatureFonction{calculerStatistiques}
     {nom : \chaine}{Statistiques$<$Octet$>$}{}
@@ -18,18 +18,24 @@
     {}
 
     \signatureProcedure{compresserFichier}
-    {\paramEntree{nom : \chaine, table : tableDeCodage$<$Octet$>$, stats : Statistiques$<$Octets$>$}}{}
+    {\paramEntree{nom : \chaine, table : tableDeCodage$<$Octet$>$, stats : Statistiques$<$Octet$>$}}{}
 
-    \signatureFonction{decompresser}
-    {nom : \chaine}{\naturel}{}
+    \signatureProcedure{decompresser}
+    {\paramEntree{nom : \chaine}}{}{}
 
     \signatureFonction{estUnFichierCompresse}
-    {nom : \chaine}{\booleen}{}
+    {fichier : FichierBinaire}{\booleen}{}
 
-    \signatureFonction{obtenirStatistiques}
-    {nom : \chaine}{Statistiques$<$Octet$>$}{}
+    \signatureFonction{lireStatistiques}
+    {fichier : FichierBinaire}{Statistiques$<$Octet$>$}{}
 
     \signatureProcedure{decompresserFichier}
-    {\paramEntree{nom : \chaine, arbre : ArbreDeHuffman$<$Octet$>$}}{}
+    {
+        \paramEntree{fichierSource : FichierBinaire, arbre : ArbreDeHuffman$<$Octet$>$}
+        \paramSortie{fichierDestination : FichierBinaire}
+    }{}
 
+    \signatureProcedure{afficherAide}{}{}
+    
+    \signatureProcedure{afficherErreur}{}{}
 \end{algorithme}

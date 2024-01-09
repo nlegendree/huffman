@@ -28,9 +28,9 @@
                 \affecter{bit}{obtenirIemeBit(octetLu,i)}
                 \instruction{ajouterBit(code,bit)}
                 \sialorssinon{bit = bitA0}{
-                    \affecter{noeudActuel}{obtenirArbreGauche(noeudActuel)}
+                    \affecter{noeudActuel}{obtenirFilsGauche(noeudActuel)}
                 }{
-                    \affecter{noeudActuel}{obtenirArbreDroit(noeudActuel)}
+                    \affecter{noeudActuel}{obtenirFilsDroit(noeudActuel)}
                 }
                 \sialorssinon{estUneFeuille(noeudActuel)}{
                     \affecter{octet}{obtenirOctet(noeudActuel)}
@@ -51,7 +51,7 @@
             \instruction{tronquer(nom)}
             \affecter{fichierDestination}{fichierBinaire(nom)}
             \instruction{ouvrir(fichierDestination,ecriture)}
-            \affecter{stats}{obtenirStatistiques(nom)}
+            \affecter{stats}{lireStatistiques(nom)}
             \affecter{arbre}{creerArbre(stats)}
             \instruction{decompresserFichier(source,arbre)}
             \instruction{fermer(fichierDestination)}

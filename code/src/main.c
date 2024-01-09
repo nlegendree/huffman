@@ -29,7 +29,7 @@ Bit bit1 = UN;
  * \param nom : nom du fichier
  * \return ST_Statistiques
  */
-ST_Statistiques calculerStatistiques(char *nom)
+ST_Statistiques calculerStatistiques(char nom[])
 {
     FILE *fichier;
 
@@ -147,7 +147,7 @@ TDC_TableDeCodage codage(ABR_ArbreDeHuffman arbre)
  * \param stats : statistiques pour la compression
  * \return FILE
  */
-void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats)
+void compresserFichier(char nom[], TDC_TableDeCodage table, ST_Statistiques stats)
 {
     FILE *fichierSource, *fichierDestination;
     fichierSource = fopen(nom, "rb");
@@ -211,7 +211,7 @@ void compresserFichier(char *nom, TDC_TableDeCodage table, ST_Statistiques stats
  * \param nom : nom du fichier à compresser
  * \return FILE
  */
-void compresser(char *nom)
+void compresser(char nom[])
 {
     ST_Statistiques stats = calculerStatistiques(nom);
     ABR_ArbreDeHuffman arbre = creerArbre(stats);
@@ -243,7 +243,7 @@ ST_Statistiques lireStatistiques(FILE *fichier)
 /// @param fichier fichier à vérifier
 /// @pre le fichier doit être ouvert en lecture binaire
 /// @return 1 si le fichier est compressé par le programme, 0 sinon
-int estUnFichierCompresse(FILE *fichier)
+int estUnFichierCompresse(FILE* fichier)
 {
     if (fichier == NULL)
     {
@@ -261,7 +261,7 @@ int estUnFichierCompresse(FILE *fichier)
 /// @param fichierDestination fichier décompressé
 /// @pre le fichier source doit être ouvert en lecture binaire et être un fichier compressé par le programme, l'en-tête du fichier doit avoir été lu
 /// @param table table de codage
-void decompreserFichier(FILE *fichierSource, FILE *fichierDestination, ABR_ArbreDeHuffman arbre)
+void decompresserFichier(FILE* fichierSource, FILE* fichierDestination, ABR_ArbreDeHuffman arbre)
 {
     CB_CodeBinaire code;
     int resetCode = 1;
@@ -308,7 +308,7 @@ void decompreserFichier(FILE *fichierSource, FILE *fichierDestination, ABR_Arbre
     }
 }
 
-void decompreser(char *nomFichier)
+void decompresser(char nomFichier[])
 {
     FILE *fichierSource = fopen(nomFichier, "rb");
     if (estUnFichierCompresse(fichierSource))
@@ -332,7 +332,7 @@ void decompreser(char *nomFichier)
                     ABR_ArbreDeHuffman arbre = creerArbre(stats);
                     if (!errno)
                     {
-                        decompreserFichier(fichierSource, fichierDestination, arbre);
+                        decompresserFichier(fichierSource, fichierDestination, arbre);
                         ABR_detruireArbre(arbre);
                     }
                 }
@@ -340,6 +340,10 @@ void decompreser(char *nomFichier)
             fclose(fichierDestination);
             free(nomFichierSansExtension);
         }
+    } 
+    else
+    {
+        printf("Le fichier n'est pas compressé par le programme\n");
     }
     fclose(fichierSource);
 }
@@ -404,7 +408,7 @@ int main(int argc, char *argv[])
         break;
     case 'd':
         printf("decompression du fichier %s.\n", nom_fichier);
-        decompreser(nom_fichier);
+        decompresser(nom_fichier);
         break;
     default:
         printf("commande incorrecte, il faut choisir entre 'c' ou 'd'.\n");

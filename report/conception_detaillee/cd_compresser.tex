@@ -48,8 +48,8 @@
             \instruction{ajouterElement(table,obtenirElement(arbre),codeBinaire(Bit0))}
         }%
         {
-            \instruction{descendreArbre(obtenirArbreDroit(arbre),codeBinaire(Bit1),table)}
-            \instruction{descendreArbre(obtenirArbreGauche(arbre),codeBinaire(Bit0),table)}
+            \instruction{descendreArbre(obtenirFilsDroit(arbre),codeBinaire(Bit1),table)}
+            \instruction{descendreArbre(obtenirFilsGauche(arbre),codeBinaire(Bit0),table)}
         }
         \retourner{table}
     }
@@ -63,8 +63,8 @@
             \affecter{codeTemp}{code}
             \instruction{ajouterBit(code,Bit1)}
             \instruction{ajouterBit(codeTemp,Bit0)}
-            \instruction{descendreArbre(obtenirArbreDroit(arbre),code,table)}
-            \instruction{descendreArbre(obtenirArbreGauche(arbre),codeTemp,table)}
+            \instruction{descendreArbre(obtenirFilsDroit(arbre),code,table)}
+            \instruction{descendreArbre(obtenirFilsGauche(arbre),codeTemp,table)}
         }
     }
     \procedure{compresserFichier}{\paramEntree{nom:\chaine,table:tableDeCodage$<$Octet$>$,stats:Statistiques$<$Octets$>$}}{}{}%

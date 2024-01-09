@@ -12,14 +12,6 @@
 	\signatureFonction{codePresent}
 		{table : TableDeCodage, code: CodeBinaire }{\booleen}{}
 
-	\signatureProcedure{ajouterElement} 
-		{\paramEntreeSortie{table : TableDeCodage, element: Element}}
-		{ajouterElement(table, elem)}{non(elementPresent(table, elem))}
-
-	\signatureFonction{elementPossedeCode} 
-		{table : TableDeCodage, element: Element}{\booleen}
-		{elementPresent(table, elem)}
-
 	\signatureProcedure{ajouterElement}
 		{\paramEntreeSortie{table : TableDeCodage, element: Element, code: CodeBinaire}}
 		{non(codePresent(table, code)) ET elementPresent(table, elem)}

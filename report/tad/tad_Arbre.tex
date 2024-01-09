@@ -22,10 +22,10 @@
         \tadOperation{estUneFeuille}%
             {\tadParams{ArbreDeHuffman}}%
             {\tadParams{\booleen}}
-        \tadOperationAvecPreconditions{obtenirArbreGauche}%
+        \tadOperationAvecPreconditions{obtenirFilsGauche}%
             {\tadParams{ArbreDeHuffman}}%
             {\tadParams{ArbreDeHuffman}}
-        \tadOperationAvecPreconditions{obtenirArbreDroit}%
+        \tadOperationAvecPreconditions{obtenirFilsDroit}%
             {\tadParams{ArbreDeHuffman}}%
             {\tadParams{ArbreDeHuffman}}
     \end{tadOperations}
@@ -36,14 +36,14 @@
         \tadAxiome{obtenirPonderation(combiner(arbreGauche,arbreDroit)) = obtenirPonderation(arbreGauche) + obtenirPonderation(arbreDroit)}
         \tadAxiome{estUneFeuille(arbreDeHuffman(element,ponderation))}
         \tadAxiome{non estUneFeuille(combiner(arbreGauche,arbreDroit))}
-        \tadAxiome{obtenirArbreGauche(combiner(arbreGauche,arbreDroit)) = arbreGauche}
-        \tadAxiome{obtenirArbreDroit(combiner(arbreGauche,arbreDroit)) = arbreDroit}
+        \tadAxiome{obtenirFilsGauche(combiner(arbreGauche,arbreDroit)) = arbreGauche}
+        \tadAxiome{obtenirFilsDroit(combiner(arbreGauche,arbreDroit)) = arbreDroit}
     \end{tadAxiomes}
 
     \begin{tadPreconditions}{}
         \tadPrecondition{obtenirElement(arbre)}{estUneFeuille(arbre)}
-        \tadPrecondition{obtenirArbreGauche(arbre)}{non estUneFeuille(arbre)}
-        \tadPrecondition{obtenirArbreDroit(arbre)}{non estUneFeuille(arbre)}
+        \tadPrecondition{obtenirFilsGauche(arbre)}{non estUneFeuille(arbre)}
+        \tadPrecondition{obtenirFilsDroit(arbre)}{non estUneFeuille(arbre)}
     \end{tadPreconditions}
 
 \end{tad}
