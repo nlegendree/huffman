@@ -26,7 +26,7 @@
         {}
         {}
     {
-        \retourner{statistiques.lesStatistiques[obtenirNaturel8bits(elem)]}
+        \retourner{statistiques.lesStatistiques[obtenirNaturel8bits(elem) + 1]}
     }
 
 
@@ -36,7 +36,7 @@
     {}
     {}
     {
-        \affecter{statistiques.lesStatistiques[obtenirNaturel8bits(elem)]}{statistiques.lesStatistiques[obtenirNaturel8bits(octet)] + 1}
+        \affecter{statistiques.lesStatistiques[obtenirNaturel8bits(elem) + 1]}{statistiques.lesStatistiques[obtenirNaturel8bits(octet)] + 1}
         \affecter{statistiques.nbOccurenceTotale}{statistiques.nbOccurenceTotale + 1}
     }
 
@@ -46,7 +46,7 @@
     {}
     {}
     {
-        \affecter{statistiques.lesStatistiques[obtenirNaturel8bits(elem)]}{nbOccurence}
+        \affecter{statistiques.lesStatistiques[obtenirNaturel8bits(elem) + 1]}{nbOccurence}
     }
 
     \fonction{obtenirTotalOccurence}

@@ -14,25 +14,20 @@
 
 \fonction{obtenirIemeBit}
     {octet : Octet, pos : \naturelNonNul}{bit: Bit}
-    {pos $\geq$ 0 et pos $\leq$ 7}{estUn : \booleen}
+    {pos $\leq$ 8}{estUn : \booleen}
 {
-    \affecter{estUn}{(\champ{octet}{octet} >> i - 1) \& 1}
+    \affecter{estUn}{(\champ{octet}{octet} $>>$ i - 1) \& 1}
     \retourner{bit(estUn)}
 }
 
 \procedure{fixerIemeBit}{
     \paramEntreeSortie{octet : Octet}
     \paramEntree{pos : \naturelNonNul, bit: Bit}}
-    {pos $\geq$ 0 et pos $\leq$ 7}{}
+    {pos $\leq$ 8}{}
 {
-    \sialorssinon{estUn(bit)}{
-        \affecter{\champ{octet}{octet}}{\champ{octet}{octet} | (1 \textless \textless (i-1))}
-    }
-    {
-        \affecter{\champ{octet}{octet}}{\champ{octet}{octet} \& non({obtenirIemeBit(octet, i)})}
-    }
+    \affecter {octet.octet}{(octet \& $~$(1 $<<$ pos) $|$ (bitEnEntier(bit) $<<$ pos))} 
 }
-
+ 
 \fonction{octetEnNaturel}
     {octet : Octet}{\naturel}
     {}{}

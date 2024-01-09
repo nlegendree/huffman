@@ -8,7 +8,7 @@ bin/
 *.aux
 *.o
 .gitignore
-report/Rapport.synctex.gz
-code/tests/
+rapport/Rapport.synctex.gz
+programme/tests/
 doc/
-report/_minted-rapport/
+rapport/_minted-rapport/

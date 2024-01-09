@@ -1,5 +1,5 @@
 \begin{algorithme}
-    \fonction{compresser}{nom:\chaine}{}{}{stats:Statistiques$<$Octet$>$,arbre:ArbreDeHuffman$<$Octet$>$}%
+    \procedure{compresser}{\paramEntree{nom:\chaine}}{}{stats:Statistiques$<$Octet$>$,arbre:ArbreDeHuffman$<$Octet$>$}%
     {
         \affecter{stats}{calculerStatistiques(nom)}
         \affecter{arbre}{creerArbre(stats)}
@@ -40,10 +40,10 @@
         \retourner{obtenirDernier(file)}
     }  
 
-    \fonction{codage}{arbre:ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}{}{table:TableDeCodage$<$Octet$>$}%
+    \fonction{codage}{arbre: ArbreDeHuffman$<$Octet$>$}{TableDeCodage$<$Octet$>$}{}{table:TableDeCodage$<$Octet$>$}%
     {
         \affecter{table}{tableDeCodage()}
-        \sialorssinon{estUneFeuille(arbre)}%
+        \sialorssinon{estUneFeuille(arbre)}
         {
             \instruction{ajouterElement(table,obtenirElement(arbre),codeBinaire(Bit0))}
         }%
@@ -67,39 +67,24 @@
             \instruction{descendreArbre(obtenirFilsGauche(arbre),codeTemp,table)}
         }
     }
-    \procedure{compresserFichier}{\paramEntree{nom:\chaine,table:tableDeCodage$<$Octet$>$,stats:Statistiques$<$Octets$>$}}{}{}%
+    \procedure{compresserFichier}{\paramEntree{nom: \chaine, table: TableDeCodage$<$Octet$>$, stats: Statistiques$<$Octets$>$}}{}{}%
     {
         \affecter{fichierSource}{fichierBinaire(nom)}
-        \instruction{tronquer(nom)}
-        \affecter{fichierDestination}{fichierBinaire(nom + ".zip")}  
+        \affecter{fichierDestination}{fichierBinaire(nom + ".huff")}  
         \instruction{ouvrir(fichierSource,lecture)}
         \instruction{ouvrir(fichierDestination,écriture)}
         \instruction{ecrireNaturel(fichierDestination,CLE)}
         \instruction{ecrireNaturel(fichierDestination,nbElement(stats))}
         \pour{i}{0}{255}{}
         {
-            \instruction{ecrireOctet(fichierDestination,octet(i))}%inutile
             \instruction{ecrireNaturel(fichierDestination,obtenirOccurenceElement(octet(i)))}
         }
         \tantque{non finFichier(fichierSource)}%
         {
-            \instruction{ecrireCodeBinaire(fichierDestination,obtenirCodeElement(table,lireOctet(fichierSource)))}
+            \instruction{concatenerCodeBinaire(fichierDestination,obtenirCodeElement(table,lireOctet(fichierSource)))}
         }
         \instruction{fermer(fichierSource)}
         \instruction{fermer(fichierDestination)}
-    }
-    \procedure{ecrireCodeBinaire}{\paramEntreeSortie{fichier:FichierBinaire},\paramEntree{codeBinaire:CodeBinaire}}{estOuvert(fichier),mode(fichier)=écriture}{}
-    {
-        \pour{i}{1}{obtenirLongueur(codeBinaire)}{}
-        {
-            \sialorssinon{obtenirIemeBit(codeBinaire)=Bit0}
-            {
-                \instruction{ecrireCaractere(fichier,'0')}
-            }
-            {
-                \instruction{ecrireCaractere(fichier,'1')}
-            }
-        }
     }
 
 \end{algorithme}

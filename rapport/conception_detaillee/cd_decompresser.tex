@@ -2,7 +2,7 @@
     \fonction{estUnFichierCompresse}{fichier:FichierBinaire}{\booleen}{}{cle:\naturel}
     {
         \affecter{cle}{lireNaturel(fichier)}
-        \retourner{cle = ValeurCle}
+        \retourner{cle = CLE}
         \commentaire{la valeur et le type (ici définie comme naturel) de la clé sont définis à la compression}
     }
 
@@ -48,7 +48,7 @@
         \instruction{ouvrir(fichierSource,lecture)}
         \sialorssinon{estUnFichierCompresse(fichierSource)}
         {
-            \instruction{tronquer(nom)}
+            \instruction{supprimerExtension(nom)}
             \affecter{fichierDestination}{fichierBinaire(nom)}
             \instruction{ouvrir(fichierDestination,ecriture)}
             \affecter{stats}{lireStatistiques(nom)}

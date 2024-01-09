@@ -54,14 +54,14 @@
 
 
     \procedure{ajouterElement}{
-        \paramEntreeSortie{tableDeCodage : \typePointeur{TableDeCodage}}
+        \paramEntreeSortie{tableDeCodage : TableDeCodage}
         \paramEntree{octet : Octet, codeBinaire : CodeBinaire}}
-        {non(elementPresent(\pointeur{tableDeCodage}, octet)) et (\champPointeur{tableDeCodage}{nbElements} $\leq$ 255)}
+        {non(elementPresent(tableDeCodage, octet)) et (\champ{tableDeCodage}{nbElements} $\leq$ 255)}
         {}
     {
-        \affecter{\champPointeur{tableDeCodage}{nbElements}}{\champPointeur{tableDeCodage}{nbElements} + 1}
-        \affecter{\champPointeur{tableDeCodage}{table[\champPointeur{tableDeCodage}{nbElements} - 1].octet}}{octet}
-        \affecter{\champPointeur{tableDeCodage}{table[\champPointeur{tableDeCodage}{nbElements} - 1].code}}{codeBinaire}
+        \affecter{\champ{tableDeCodage}{nbElements}}{\champ{tableDeCodage}{nbElements} + 1}
+        \affecter{\champ{tableDeCodage}{table[\champ{tableDeCodage}{nbElements} - 1].octet}}{octet}
+        \affecter{\champ{tableDeCodage}{table[\champ{tableDeCodage}{nbElements} - 1].code}}{codeBinaire}
     }
 
     \fonction{obtenirCodeElement}

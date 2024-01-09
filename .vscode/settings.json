@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "codebinaire.h": "c",
-        "assert.h": "c",
-        "arbre.h": "c"
-    }
-}

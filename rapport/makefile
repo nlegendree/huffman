@@ -1,4 +1,4 @@
-all : clean rapport.pdf
+all : rapport.pdf
 
 rapport.pdf : rapport.tex
 	pdflatex --shell-escape rapport.tex

@@ -21,7 +21,7 @@
 }
 
 \fonction{combiner}
-    {arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
+    {arbreGauche, arbreDroit : ArbreDeHuffman}{arbreDeHuffman}
     {}{arbre : ArbreDeHuffman}
 {
     \affecter{\champ{arbre}{gauche}}{arbreGauche}
@@ -48,7 +48,7 @@
     {arbre : ArbreDeHuffman}{\booleen}
     {}{}
 {
-    \retourner{(\champ{arbre}{gauche} = null et \champ{arbre}{filDroit} = null)}
+    \retourner{(\champ{arbre}{gauche} = null et \champ{arbre}{droit} = null)}
 }
 
 \fonction{obtenirFilsGauche}
@@ -116,7 +116,7 @@
     {arbre : ArbreDeHuffman}{\booleen}
     {}{}
 {
-    \retourner{(\champ{arbre}{gauche} = null et \champ{arbre}{filDroit} = null)}
+    \retourner{(\champ{arbre}{gauche} = null et \champ{arbre}{droit} = null)}
 }
 
 \fonction{obtenirFilsGauche}
