@@ -39,6 +39,13 @@ $(DOC) :
 # Test targets
 tests : directories $(TESTDIR)/testArbre $(TESTDIR)/testCodeBinaire $(TESTDIR)/testFile $(TESTDIR)/testOctet $(TESTDIR)/testTable $(TESTDIR)/testStats
 
+	./$(TESTDIR)/testArbre
+	./$(TESTDIR)/testCodeBinaire
+	./$(TESTDIR)/testFile
+	./$(TESTDIR)/testOctet
+	./$(TESTDIR)/testTable
+	./$(TESTDIR)/testStats
+
 $(TESTDIR)/testArbre : $(SRCDIR)/$(TESTDIR)/testArbre.c $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) -I$(INCLUDEDIR)
 
