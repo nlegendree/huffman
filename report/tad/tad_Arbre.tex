@@ -13,7 +13,7 @@
         \tadOperation{combiner}%
             {\tadParams{ArbreDeHuffman, ArbreDeHuffman}}%
             {\tadParams{ArbreDeHuffman}}
-        \tadOperation{obtenirPondération}%
+        \tadOperation{obtenirPonderation}%
             {\tadParams{ArbreDeHuffman}}%
             {\tadParams{\naturel}}
         \tadOperationAvecPreconditions{obtenirElement}%
@@ -31,13 +31,13 @@
     \end{tadOperations}
 
     \begin{tadAxiomes}
-        \tadAxiome{\textsf{obtenirElement(arbreDeHuffman(élément,pondération))} = \textsf{élément}}
-        \tadAxiome{\textsf{obtenirPondération(arbreDeHuffman(élément,pondération))} = \textsf{pondération}}
-        \tadAxiome{\textsf{obtenirPondération(combiner(arbreGauche,arbreDroit))} = \textsf{obtenirPondération(arbreGauche)+obtenirPondération(arbreDroit)}}
-        \tadAxiome{\textsf{estUneFeuille(arbreDeHuffman(élément,pondération))}}
-        \tadAxiome{\textsf{non estUneFeuille(combiner(arbreGauche,arbreDroit))}}
-        \tadAxiome{\textsf{obtenirArbreGauche(combiner(arbreGauche,arbreDroit))} = \textsf{arbreGauche}}
-        \tadAxiome{\textsf{obtenirArbreDroit(combiner(arbreGauche,arbreDroit))} = \textsf{arbreDroit}}
+        \tadAxiome{obtenirElement(arbreDeHuffman(element,ponderation)) = element}
+        \tadAxiome{obtenirPonderation(arbreDeHuffman(element,ponderation)) = ponderation}
+        \tadAxiome{obtenirPonderation(combiner(arbreGauche,arbreDroit)) = obtenirPonderation(arbreGauche) + obtenirPonderation(arbreDroit)}
+        \tadAxiome{estUneFeuille(arbreDeHuffman(element,ponderation))}
+        \tadAxiome{non estUneFeuille(combiner(arbreGauche,arbreDroit))}
+        \tadAxiome{obtenirArbreGauche(combiner(arbreGauche,arbreDroit)) = arbreGauche}
+        \tadAxiome{obtenirArbreDroit(combiner(arbreGauche,arbreDroit)) = arbreDroit}
     \end{tadAxiomes}
 
     \begin{tadPreconditions}{}
