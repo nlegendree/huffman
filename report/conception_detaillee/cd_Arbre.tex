@@ -9,11 +9,77 @@
     \champEnregistrement{droit}{\pointeur{Noeud}}
 \end{enregistrement}
 
+\fonction{ArbreDeHuffman}
+    {octet : Octet, ponderation : \naturel}{ArbreDeHuffman}
+    {}{arbre : ArbreDeHuffman}
+{
+    \affecter{\champ{arbre}{ponderation}}{ponderation}
+    \affecter{\champ{arbre}{octet}}{octet}
+    \affecter{\champ{arbre}{gauche}}{\pointeurNULL}
+    \affecter{\champ{arbre}{droit}}{\pointeurNULL}
+    \retourner{arbre}
+}
 
+\fonction{combiner}
+    {arbreGauche, arbreDroit : ArbreDeHuffman}{ArbreDeHuffman}
+    {}{arbre : ArbreDeHuffman}
+{
+    \affecter{\champ{arbre}{gauche}}{arbreGauche}
+    \affecter{\champ{arbre}{droit}}{arbreDroit}
+    \affecter{\champ{arbre}{ponderation}}{\champ{arbreGauche}{ponderation} + \champ{arbreDroit}{ponderation}}
+    \retourner{arbre}
+}
+
+\fonction{obtenirPondération}
+    {arbre : ArbreDeHuffman}{\naturel}
+    {}{}
+{
+    \retourner{\champ{arbre}{ponderation}}
+}
+
+\fonction{obtenirOctet}
+    {arbre : ArbreDeHuffman}{Octet}
+    {estUneFeuille(arbre)}{}
+{
+    \retourner{\champ{arbre}{octet}}
+}
+
+\fonction{estUneFeuille}
+    {arbre : ArbreDeHuffman}{\booleen}
+    {}{}
+{
+    \retourner{(\champ{arbre}{gauche} = null et \champ{arbre}{filDroit} = null)}
+}
+
+\fonction{obtenirArbreGauche}
+    {arbre : ArbreDeHuffman}{ArbreDeHuffman}
+    {non(estUneFeuille(arbre))}{}
+{
+    \retourner{\champ{arbre}{gauche}}
+}
+
+\fonction{obtenirArbreDroit}
+    {arbre : ArbreDeHuffman}{ArbreDeHuffman}
+    {non estUneFeuille(arbre)}{}
+{
+    \retourner{\champ{arbre}{droit}}
+}
+
+\end{algorithme}
+\begin{algorithme}
+
+\type{ArbreDeHuffman}{\pointeur{Noeud}}
+
+\begin{enregistrement}{Noeud}
+    \champEnregistrement{octet}{Octet}
+    \champEnregistrement{ponderation}{\naturel}
+    \champEnregistrement{gauche}{\pointeur{Noeud}}
+    \champEnregistrement{droit}{\pointeur{Noeud}}
+\end{enregistrement}
 
 \fonction{ArbreDeHuffman}
     {octet : Octet, ponderation : \naturel}{ArbreDeHuffman}
-    {}{arbre : Noeud}
+    {}{arbre : ArbreDeHuffman}
 {
     \affecter{\champ{arbre}{ponderation}}{ponderation}
     \affecter{\champ{arbre}{octet}}{octet}
