@@ -16,12 +16,6 @@
 #include "codeBinaire.h"
 #include "bit.h"
 
-// couleurs pour le terminal
-#define couleur_verte "\x1b[32m"
-#define couleur_rouge "\x1b[31m"
-#define couleur_bleu "\x1b[34m"
-#define couleur_jaune "\x1b[33m"
-
 #define CLE 0x0B1213D2ul
 
 Bit bit0 = ZERO;
