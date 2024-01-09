@@ -391,7 +391,6 @@ void afficherErreur(void)
 
 int main(int argc, char *argv[])
 {
-    afficherAide();
     if (argc != 3)
     {
         printf("commande incorrect, nombre d'argument, pas respecté \n");

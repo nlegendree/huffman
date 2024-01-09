@@ -20,7 +20,7 @@ directories:
 	mkdir -p $(BINDIR) $(DOCDIR) $(INCLUDEDIR) $(LIBDIR) $(OBJDIR) $(SRCDIR) $(TESTDIR)
 
 # Main targets
-all : directories debug
+all : directories debug doc tests
 
 debug: $(BINDIR)/$(EXEC)
 
