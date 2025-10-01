@@ -1,14 +1,23 @@
+# Build artifacts
 bin/
-.DS_Store
+*.o
+programme/tests/
+
+# Documentation
+doc/
+
+# LaTeX artifacts
 *.log
 *.fls
 *.toc
 *.pdf
 *.fdb_latexmk
 *.aux
-*.o
-.gitignore
 rapport/Rapport.synctex.gz
-programme/tests/
-doc/
 rapport/_minted-rapport/
+
+# Academic report (contains personal information)
+rapport/
+
+# macOS
+.DS_Store
