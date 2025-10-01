@@ -1,3 +1,0 @@
-procedure ajouterBit (E/S unCodeBinaire : CodeBinaire, E bit : Bit)
-fonction obtetnirCodeBinaire (unCodeBinaire : CodeBinaire) : CodeBinaire
-fonction obtenirIemeBit(unCodeBinaire : CodeBinaire, i : Bit) : Bit
