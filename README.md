@@ -14,8 +14,6 @@ A file compression and decompression tool implementing the Huffman coding algori
 
 ### Building
 
-From the `programme/` directory:
-
 ```bash
 make release          # Build optimized version
 make debug            # Build with debug symbols
@@ -37,10 +35,8 @@ make tests            # Build and run all tests
 ## Project Structure
 
 ```
-programme/
 ├── src/              # Implementation files
 ├── include/          # Header files
-├── tests/            # CUnit test suites
 ├── bin/              # Compiled executable (generated)
 └── obj/              # Object files (generated)
 ```
@@ -103,13 +99,7 @@ make doc                     # Creates doc/html/index.html
 
 ## Contributors
 
-This project was developed as a team assignment at INSA Rouen Normandie (2023-2024):
-
-- **Augustin Bressac** - Binary code implementation
-- **Lou-Anne Janneau** - Encoding table and statistics
-- **Nathan Legendre** - Main program, file I/O, priority queue
-- **Vassili Sentchev** - Testing and validation
-- **Dimitri Timoz** - Huffman tree implementation
+This project was developed as a team assignment at INSA Rouen Normandie (2023-2024) by a group of 5 students.
 
 *Note: This repository was migrated from our school's GitLab instance. Full commit history has been preserved to maintain transparency of contributions.*
 
