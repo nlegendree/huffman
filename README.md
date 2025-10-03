@@ -117,4 +117,4 @@ Academic project - INSA Rouen Normandie
 
 ---
 
-*Developed as part of the Algorithms and Data Structures course (ITI 3rd year)*
+*Developed as part of the Algorithms course (ITI 3rd year)*
